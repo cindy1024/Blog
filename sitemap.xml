@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://abc.hey-world.xyz/about/index.html</loc>
+    
+    <lastmod>2019-04-23T08:51:41.612Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://abc.hey-world.xyz/tags/index.html</loc>
     
     <lastmod>2018-07-28T09:11:36.161Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://abc.hey-world.xyz/categories/index.html</loc>
     
     <lastmod>2018-07-28T09:11:00.066Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://abc.hey-world.xyz/about/index.html</loc>
-    
-    <lastmod>2018-07-28T09:03:35.663Z</lastmod>
     
   </url>
   
