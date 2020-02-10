@@ -138,16 +138,16 @@
 
 
 
-<meta name="description" content="句">
+<meta name="description" content="c#实现单例模式。">
 <meta property="og:type" content="website">
-<meta property="og:title" content="写啊！少年">
-<meta property="og:url" content="https://abc.hey-world.xyz/mind/index.html">
+<meta property="og:title" content="实现Singleton模式">
+<meta property="og:url" content="https://abc.hey-world.xyz/questions/offer/002_实现Singleton模式.html">
 <meta property="og:site_name" content="安静土">
-<meta property="og:description" content="句">
-<meta property="og:updated_time" content="2019-04-27T08:14:48.231Z">
+<meta property="og:description" content="c#实现单例模式。">
+<meta property="og:updated_time" content="2020-02-10T09:06:29.250Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="写啊！少年">
-<meta name="twitter:description" content="句">
+<meta name="twitter:title" content="实现Singleton模式">
+<meta name="twitter:description" content="c#实现单例模式。">
 
 
 
@@ -177,13 +177,13 @@
 
 
 
-  <link rel="canonical" href="https://abc.hey-world.xyz/mind/"/>
+  <link rel="canonical" href="https://abc.hey-world.xyz/questions/offer/002_实现Singleton模式.html"/>
 
 
 
 
 
-  <title>写啊！少年 | 安静土</title>
+  <title>实现Singleton模式 | 安静土</title>
   
 
 
@@ -377,7 +377,7 @@
     <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">写啊！少年</h1>
+	<h1 class="post-title" itemprop="name headline">实现Singleton模式</h1>
 
 
 
@@ -389,9 +389,87 @@
       <div class="post-body">
         
         
-          <ul>
-<li><a href="./翻完我的简讯我的信-顺便翻翻我的心情.html">句</a></li>
+          <p>c#实现单例模式。<a id="more"></a></p>
+<h1 id="题目-002"><a href="#题目-002" class="headerlink" title="题目 002"></a>题目 002</h1><p>设计一个类，只能生成该类的一个实例。</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>要求只能生成一个实例，构造函数设为私有，其他类不能直接调用该类生成新的对象。“只能生成一个”，想到static的特性。</p>
+<h1 id="几种解法"><a href="#几种解法" class="headerlink" title="几种解法"></a>几种解法</h1><ul>
+<li><p>方法一：判断静态成员变量是否为空，只适用于单线程。</p>
+</li>
+<li><p>方法二：在方法一的基础上，加同步锁再判断，可用于多线程。</p>
+</li>
+<li><p>方法三：修改方法二，加同步锁前后两次判断，减少加锁操作，提高效率。</p>
+</li>
+<li><p><strong>方法四：</strong>静态构造函数，可能会过早地创建实例。</p>
+<blockquote>
+<p>创建第一个类实例或任何静态成员被引用时，.NET将自动调用静态构造函数来初始化类。</p>
+</blockquote>
+<pre class="line-numbers language-c#"><code class="language-c#">public sealed class Singleton4
+{
+    private Singleton4(){}
+    private static Singleton4 instance = new Singleton4();
+    public static Singleton4 Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p><strong>方法五：</strong>按需创建，嵌套类+静态函数。</p>
+<ul>
+<li>父类的方法用static修饰，是为了绕过类的实例化来调用函数。【必须】</li>
+<li>子类的方法和变量用static修饰，是因为静态方法不能<strong>直接</strong>调用非静态成员。</li>
 </ul>
+</li>
+</ul>
+<pre class="line-numbers language-c#"><code class="language-c#">public sealed class Singleton5
+{
+    Singleton5(){}
+    public static Singleton5 Instance
+    {
+        get
+        {
+            return Nested.instance;
+        }
+    }
+
+    class Nested
+    {
+        static Nested(){}
+        internal static readonly Singleton5 instance = new Singleton5();
+    }
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>对方法五做如下修改，使得在Nested类中，不使用静态函数和变量（即方法五中子类不适用static），可达到相同效果：</p>
+<pre class="line-numbers language-c#"><code class="language-c#">public sealed class Singleton5
+{
+    Singleton5(){}
+    public static Singleton5 Instance
+    {
+        get
+        {
+            Nested n = new Nested(); //modified
+            return n.instance;         //modified
+        }
+    }
+
+    public class Nested
+    {
+        internal Nested(){} //modified
+        internal readonly Singleton5 instance = new Singleton5(); //modified
+    }
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><p>什么时候可以<strong>不用实例化对象就可以调用类中成员函数</strong>？</p>
+<ol>
+<li>类的静态成员函数。</li>
+<li>非静态成员函数没有使用类的非静态数据成员，调用的其他非静态成员函数也不能使用类的非静态数据成员。</li>
+<li>非静态成员函数调用类的静态数据成员。</li>
+</ol>
+<p>（后面两种可以概括为【non-static的东西没有调用non-static的东西】）</p>
+<p>来源：<a href="https://blog.csdn.net/dwb1015/article/details/32933349" target="_blank" rel="external">https://blog.csdn.net/dwb1015/article/details/32933349</a></p>
 
         
       </div>
@@ -437,8 +515,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -518,6 +605,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-002"><span class="nav-number">1.</span> <span class="nav-text">题目 002</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#几种解法"><span class="nav-number">3.</span> <span class="nav-text">几种解法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展"><span class="nav-number">4.</span> <span class="nav-text">扩展</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

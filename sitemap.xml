@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://abc.hey-world.xyz/questions/index.html</loc>
+    
+    <lastmod>2020-02-10T09:16:47.557Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://abc.hey-world.xyz/questions/offer/002_%E5%AE%9E%E7%8E%B0Singleton%E6%A8%A1%E5%BC%8F.html</loc>
+    
+    <lastmod>2020-02-10T09:06:29.250Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://abc.hey-world.xyz/questions/Master-Mind-Hints.html</loc>
+    
+    <lastmod>2019-04-27T08:14:53.493Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://abc.hey-world.xyz/mind/index.html</loc>
+    
+    <lastmod>2019-04-27T08:14:48.231Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://abc.hey-world.xyz/2017/03/07/%E8%BF%99%E4%BA%9B%E7%94%B5%E8%84%91%E5%B0%8F%E5%B7%A5%E5%85%B7/</loc>
     
     <lastmod>2019-04-24T14:28:05.941Z</lastmod>
@@ -19,27 +47,6 @@
     <loc>https://abc.hey-world.xyz/2019/04/24/Windows%E4%B8%8B%E9%80%9A%E8%BF%87sublime-text%E6%89%B9%E9%87%8F%E6%9B%BF%E6%8D%A2%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6/</loc>
     
     <lastmod>2019-04-24T13:44:58.104Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://abc.hey-world.xyz/questions/index.html</loc>
-    
-    <lastmod>2019-04-24T12:23:41.346Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://abc.hey-world.xyz/mind/index.html</loc>
-    
-    <lastmod>2019-04-24T12:23:40.468Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://abc.hey-world.xyz/questions/Master-Mind-Hints.html</loc>
-    
-    <lastmod>2019-04-24T12:23:37.634Z</lastmod>
     
   </url>
   
