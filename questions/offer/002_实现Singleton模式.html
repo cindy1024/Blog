@@ -144,7 +144,7 @@
 <meta property="og:url" content="https://abc.hey-world.xyz/questions/offer/002_实现Singleton模式.html">
 <meta property="og:site_name" content="安静土">
 <meta property="og:description" content="c#实现单例模式。">
-<meta property="og:updated_time" content="2020-02-10T09:06:29.250Z">
+<meta property="og:updated_time" content="2020-02-11T03:59:35.920Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="实现Singleton模式">
 <meta name="twitter:description" content="c#实现单例模式。">
@@ -422,46 +422,46 @@
 <li>父类的方法用static修饰，是为了绕过类的实例化来调用函数。【必须】</li>
 <li>子类的方法和变量用static修饰，是因为静态方法不能<strong>直接</strong>调用非静态成员。</li>
 </ul>
-</li>
-</ul>
 <pre class="line-numbers language-c#"><code class="language-c#">public sealed class Singleton5
 {
-    Singleton5(){}
-    public static Singleton5 Instance
-    {
-        get
-        {
-            return Nested.instance;
-        }
-    }
+  Singleton5(){}
+  public static Singleton5 Instance
+  {
+      get
+      {
+          return Nested.instance;
+      }
+  }
 
-    class Nested
-    {
-        static Nested(){}
-        internal static readonly Singleton5 instance = new Singleton5();
-    }
+  class Nested
+  {
+      static Nested(){}
+      internal static readonly Singleton5 instance = new Singleton5();
+  }
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>对方法五做如下修改，使得在Nested类中，不使用静态函数和变量（即方法五中子类不适用static），可达到相同效果：</p>
+<p>  对方法五做如下修改，使得在Nested类中，不使用静态函数和变量（即方法五中子类不适用static），可达到相同效果：</p>
 <pre class="line-numbers language-c#"><code class="language-c#">public sealed class Singleton5
 {
-    Singleton5(){}
-    public static Singleton5 Instance
-    {
-        get
-        {
-            Nested n = new Nested(); //modified
-            return n.instance;         //modified
-        }
-    }
+  Singleton5(){}
+  public static Singleton5 Instance
+  {
+      get
+      {
+          Nested n = new Nested(); //modified
+          return n.instance;         //modified
+      }
+  }
 
-    public class Nested
-    {
-        internal Nested(){} //modified
-        internal readonly Singleton5 instance = new Singleton5(); //modified
-    }
+  public class Nested
+  {
+      internal Nested(){} //modified
+      internal readonly Singleton5 instance = new Singleton5(); //modified
+  }
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
 <h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><p>什么时候可以<strong>不用实例化对象就可以调用类中成员函数</strong>？</p>
 <ol>
 <li>类的静态成员函数。</li>
