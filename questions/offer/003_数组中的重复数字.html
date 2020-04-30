@@ -138,16 +138,52 @@
 
 
 
-<meta name="description" content="句">
+<meta name="description" content="题目 003在一个长度为n的数组里的所有数字都在$0$到$n-1$的范围内。 数组中某些数字是重复的，但不知道有几个数字是重复的。也不知道每个数字重复几次。请找出数组中任意一个重复的数字。
+例如，如果输入长度为7的数组${2,3,1,0,2,5,3}$，那么对应的输出是第一个重复的数字$2$。
+
+题目一：可修改输入数组
+题目二：不可修改输入数组
+
+几种解法
+
+
+序号
+方法
+时间复杂度
+空间复杂度">
 <meta property="og:type" content="website">
-<meta property="og:title" content="写啊！少年">
-<meta property="og:url" content="https://abc.hey-world.xyz/mind/index.html">
+<meta property="og:title" content="数组中的重复数字">
+<meta property="og:url" content="https://abc.hey-world.xyz/questions/offer/003_数组中的重复数字.html">
 <meta property="og:site_name" content="安静土">
-<meta property="og:description" content="句">
-<meta property="og:updated_time" content="2019-04-27T08:14:48.231Z">
+<meta property="og:description" content="题目 003在一个长度为n的数组里的所有数字都在$0$到$n-1$的范围内。 数组中某些数字是重复的，但不知道有几个数字是重复的。也不知道每个数字重复几次。请找出数组中任意一个重复的数字。
+例如，如果输入长度为7的数组${2,3,1,0,2,5,3}$，那么对应的输出是第一个重复的数字$2$。
+
+题目一：可修改输入数组
+题目二：不可修改输入数组
+
+几种解法
+
+
+序号
+方法
+时间复杂度
+空间复杂度">
+<meta property="og:updated_time" content="2020-02-11T07:15:50.063Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="写啊！少年">
-<meta name="twitter:description" content="句">
+<meta name="twitter:title" content="数组中的重复数字">
+<meta name="twitter:description" content="题目 003在一个长度为n的数组里的所有数字都在$0$到$n-1$的范围内。 数组中某些数字是重复的，但不知道有几个数字是重复的。也不知道每个数字重复几次。请找出数组中任意一个重复的数字。
+例如，如果输入长度为7的数组${2,3,1,0,2,5,3}$，那么对应的输出是第一个重复的数字$2$。
+
+题目一：可修改输入数组
+题目二：不可修改输入数组
+
+几种解法
+
+
+序号
+方法
+时间复杂度
+空间复杂度">
 
 
 
@@ -177,13 +213,13 @@
 
 
 
-  <link rel="canonical" href="https://abc.hey-world.xyz/mind/"/>
+  <link rel="canonical" href="https://abc.hey-world.xyz/questions/offer/003_数组中的重复数字.html"/>
 
 
 
 
 
-  <title>写啊！少年 | 安静土</title>
+  <title>数组中的重复数字 | 安静土</title>
   
 
 
@@ -377,7 +413,7 @@
     <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">写啊！少年</h1>
+	<h1 class="post-title" itemprop="name headline">数组中的重复数字</h1>
 
 
 
@@ -389,9 +425,55 @@
       <div class="post-body">
         
         
-          <ul>
-<li><a href="./翻完我的简讯我的信-顺便翻翻我的心情.html">句</a></li>
+          <a id="more"></a>
+<h1 id="题目-003"><a href="#题目-003" class="headerlink" title="题目 003"></a>题目 003</h1><p>在一个长度为n的数组里的<strong>所有数字都在$0$到$n-1$的范围内</strong>。 数组中某些数字是重复的，但不知道有几个数字是重复的。也不知道每个数字重复几次。请找出数组中任意一个重复的数字。</p>
+<p>例如，如果输入长度为7的数组${2,3,1,0,2,5,3}$，那么对应的输出是第一个重复的数字$2$。</p>
+<ul>
+<li>题目一：可修改输入数组</li>
+<li>题目二：不可修改输入数组</li>
 </ul>
+<h1 id="几种解法"><a href="#几种解法" class="headerlink" title="几种解法"></a>几种解法</h1><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>方法</th>
+<th>时间复杂度</th>
+<th>空间复杂度</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>题目一_方法1</td>
+<td>排序</td>
+<td>$O(n\text{log}n)$</td>
+<td>$O(1)$</td>
+<td></td>
+</tr>
+<tr>
+<td>题目一_方法2</td>
+<td>哈希</td>
+<td>$O(n)$</td>
+<td>$O(n)$</td>
+<td></td>
+</tr>
+<tr>
+<td>题目一_方法3</td>
+<td>按下标重排数组</td>
+<td>$O(n)$</td>
+<td>$O(1)$</td>
+<td>每个数字最多交换2次</td>
+</tr>
+<tr>
+<td>题目二_方法1</td>
+<td>二分+区间计数</td>
+<td>$O(n\text{log}n)$</td>
+<td>$O(1)$</td>
+<td>不能找出所有重复</td>
+</tr>
+</tbody>
+</table>
+<h1 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h1><p>与方法二类似，布尔类型的哈希表。</p>
 
         
       </div>
@@ -437,8 +519,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -518,6 +609,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-003"><span class="nav-number">1.</span> <span class="nav-text">题目 003</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#几种解法"><span class="nav-number">2.</span> <span class="nav-text">几种解法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#我的解法"><span class="nav-number">3.</span> <span class="nav-text">我的解法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

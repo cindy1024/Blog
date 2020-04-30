@@ -138,16 +138,16 @@
 
 
 
-<meta name="description" content="句">
+<meta name="description" content="有序二维数组中查找一个数字。">
 <meta property="og:type" content="website">
-<meta property="og:title" content="写啊！少年">
-<meta property="og:url" content="https://abc.hey-world.xyz/mind/index.html">
+<meta property="og:title" content="二维数组中的查找">
+<meta property="og:url" content="https://abc.hey-world.xyz/questions/offer/004_二维数组中的查找.html">
 <meta property="og:site_name" content="安静土">
-<meta property="og:description" content="句">
-<meta property="og:updated_time" content="2019-04-27T08:14:48.231Z">
+<meta property="og:description" content="有序二维数组中查找一个数字。">
+<meta property="og:updated_time" content="2020-02-11T07:56:56.612Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="写啊！少年">
-<meta name="twitter:description" content="句">
+<meta name="twitter:title" content="二维数组中的查找">
+<meta name="twitter:description" content="有序二维数组中查找一个数字。">
 
 
 
@@ -177,13 +177,13 @@
 
 
 
-  <link rel="canonical" href="https://abc.hey-world.xyz/mind/"/>
+  <link rel="canonical" href="https://abc.hey-world.xyz/questions/offer/004_二维数组中的查找.html"/>
 
 
 
 
 
-  <title>写啊！少年 | 安静土</title>
+  <title>二维数组中的查找 | 安静土</title>
   
 
 
@@ -377,7 +377,7 @@
     <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">写啊！少年</h1>
+	<h1 class="post-title" itemprop="name headline">二维数组中的查找</h1>
 
 
 
@@ -389,9 +389,66 @@
       <div class="post-body">
         
         
-          <ul>
-<li><a href="./翻完我的简讯我的信-顺便翻翻我的心情.html">句</a></li>
-</ul>
+          <p>有序二维数组中查找一个数字。<a id="more"></a></p>
+<h1 id="题目-004"><a href="#题目-004" class="headerlink" title="题目 004"></a>题目 004</h1><p>在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中<strong>是否含有</strong>该整数。<br>$$<br>\begin{matrix}<br>1&amp;2&amp;8&amp;9\2&amp;4&amp;9&amp;12\4&amp;7&amp;10&amp;13\6&amp;8&amp;11&amp;15<br>\end{matrix}<br>$$</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>矩阵有序，从数组中选取一个数字时，有三种情况：</p>
+<ol>
+<li>$num<em>{select}=num</em>{target}$，返回。</li>
+<li>$num<em>{select}&lt;num</em>{target}$，查找数字的<u>右边<strong>或</strong>下面</u>。</li>
+<li>$num<em>{select}&gt;num</em>{target}$，查找数字的<u>左边<strong>或</strong>上面</u>。</li>
+</ol>
+<h1 id="推荐解法"><a href="#推荐解法" class="headerlink" title="推荐解法"></a>推荐解法</h1><p>情况2和3存在重叠区域，从右上或左下的角点开始查找，可以将情况2和3简化成各一个查找区域。</p>
+<pre class="line-numbers language-c++"><code class="language-c++">bool Find(int* matrix, int rows, int columns, int number)
+{
+    bool found = false;
+
+    if(matrix != nullptr && rows > 0 && columns > 0)
+    {
+        int row = 0;
+        int column = columns - 1;
+        while(row < rows && column >=0)
+        {
+            if(matrix[row * columns + column] == number)
+            {
+                found = true;
+                break;
+            }
+            else if(matrix[row * columns + column] > number)
+                -- column;
+            else
+                ++ row;
+        }
+    }
+
+    return found;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h1><p>对每一行二分查找。（没有充分利用行间的有序性）</p>
+<pre class="line-numbers language-c++"><code class="language-c++">bool Find(int target, vector<vector<int> > array) {
+    if (array.size() == 0 || array[0].size() == 0) return false;
+
+    for (unsigned int i = 0; i < array.size(); i++) {
+        bool sign = FindMid(target, array, i, 0, array[0].size() - 1);
+        if (sign == true)
+            return true;
+    }
+    return false;
+}
+
+bool FindMid(const int target, vector<vector<int>> array, const unsigned int row, unsigned int begin, unsigned int end) {
+    unsigned int mid = (begin + end) / 2;
+    if (array[row][mid] == target) return true;
+    if (end - begin == 1) {
+        if (array[row][end] == target) return true;
+        else return false;
+    }
+    if (array[row][mid] < target)
+        return FindMid(target, array, row, mid, end);
+    else
+        return FindMid(target, array, row, begin, mid);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h2><p>一开始在想这个问题的时候，从二维数组的中间选取一个数字进行比较，只考虑了右下和左上，漏掉了很多区域，没有想清楚。</p>
 
         
       </div>
@@ -437,8 +494,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -518,6 +584,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-004"><span class="nav-number">1.</span> <span class="nav-text">题目 004</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#推荐解法"><span class="nav-number">3.</span> <span class="nav-text">推荐解法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#我的解法"><span class="nav-number">4.</span> <span class="nav-text">我的解法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#记录"><span class="nav-number">4.1.</span> <span class="nav-text">记录</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
