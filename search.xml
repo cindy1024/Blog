@@ -1500,68 +1500,57 @@ Y   I   R
     </entry>
     
     <entry>
-      <title><![CDATA[二维数组中的查找]]></title>
-      <url>/questions/offer/004_%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9F%A5%E6%89%BE.html</url>
-      <content type="html"><![CDATA[<p>有序二维数组中查找一个数字。<a id="more"></a></p>
-<h1 id="题目-004"><a href="#题目-004" class="headerlink" title="题目 004"></a>题目 004</h1><p>在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中<strong>是否含有</strong>该整数。<br>$$<br>\begin{matrix}<br>1&amp;2&amp;8&amp;9\2&amp;4&amp;9&amp;12\4&amp;7&amp;10&amp;13\6&amp;8&amp;11&amp;15<br>\end{matrix}<br>$$</p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>矩阵有序，从数组中选取一个数字时，有三种情况：</p>
-<ol>
-<li>$num<em>{select}=num</em>{target}$，返回。</li>
-<li>$num<em>{select}&lt;num</em>{target}$，查找数字的<u>右边<strong>或</strong>下面</u>。</li>
-<li>$num<em>{select}&gt;num</em>{target}$，查找数字的<u>左边<strong>或</strong>上面</u>。</li>
-</ol>
-<h1 id="推荐解法"><a href="#推荐解法" class="headerlink" title="推荐解法"></a>推荐解法</h1><p>情况2和3存在重叠区域，从右上或左下的角点开始查找，可以将情况2和3简化成各一个查找区域。</p>
-<pre class="line-numbers language-c++"><code class="language-c++">bool Find(int* matrix, int rows, int columns, int number)
-{
-    bool found = false;
-
-    if(matrix != nullptr && rows > 0 && columns > 0)
-    {
-        int row = 0;
-        int column = columns - 1;
-        while(row < rows && column >=0)
-        {
-            if(matrix[row * columns + column] == number)
-            {
-                found = true;
-                break;
-            }
-            else if(matrix[row * columns + column] > number)
-                -- column;
-            else
-                ++ row;
-        }
-    }
-
-    return found;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h1><p>对每一行二分查找。（没有充分利用行间的有序性）</p>
-<pre class="line-numbers language-c++"><code class="language-c++">bool Find(int target, vector<vector<int> > array) {
-    if (array.size() == 0 || array[0].size() == 0) return false;
-
-    for (unsigned int i = 0; i < array.size(); i++) {
-        bool sign = FindMid(target, array, i, 0, array[0].size() - 1);
-        if (sign == true)
-            return true;
-    }
-    return false;
-}
-
-bool FindMid(const int target, vector<vector<int>> array, const unsigned int row, unsigned int begin, unsigned int end) {
-    unsigned int mid = (begin + end) / 2;
-    if (array[row][mid] == target) return true;
-    if (end - begin == 1) {
-        if (array[row][end] == target) return true;
-        else return false;
-    }
-    if (array[row][mid] < target)
-        return FindMid(target, array, row, mid, end);
-    else
-        return FindMid(target, array, row, begin, mid);
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h2><p>一开始在想这个问题的时候，从二维数组的中间选取一个数字进行比较，只考虑了右下和左上，漏掉了很多区域，没有想清楚。</p>
+      <title><![CDATA[数组中的重复数字]]></title>
+      <url>/questions/offer/003_%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E6%95%B0%E5%AD%97.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-003"><a href="#题目-003" class="headerlink" title="题目 003"></a>题目 003</h1><p>在一个长度为n的数组里的<strong>所有数字都在$0$到$n-1$的范围内</strong>。 数组中某些数字是重复的，但不知道有几个数字是重复的。也不知道每个数字重复几次。请找出数组中任意一个重复的数字。</p>
+<p>例如，如果输入长度为7的数组${2,3,1,0,2,5,3}$，那么对应的输出是第一个重复的数字$2$。</p>
+<ul>
+<li>题目一：可修改输入数组</li>
+<li>题目二：不可修改输入数组</li>
+</ul>
+<h1 id="几种解法"><a href="#几种解法" class="headerlink" title="几种解法"></a>几种解法</h1><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>方法</th>
+<th>时间复杂度</th>
+<th>空间复杂度</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>题目一_方法1</td>
+<td>排序</td>
+<td>$O(n\text{log}n)$</td>
+<td>$O(1)$</td>
+<td></td>
+</tr>
+<tr>
+<td>题目一_方法2</td>
+<td>哈希</td>
+<td>$O(n)$</td>
+<td>$O(n)$</td>
+<td></td>
+</tr>
+<tr>
+<td>题目一_方法3</td>
+<td>按下标重排数组</td>
+<td>$O(n)$</td>
+<td>$O(1)$</td>
+<td>每个数字最多交换2次</td>
+</tr>
+<tr>
+<td>题目二_方法1</td>
+<td>二分+区间计数</td>
+<td>$O(n\text{log}n)$</td>
+<td>$O(1)$</td>
+<td>不能找出所有重复</td>
+</tr>
+</tbody>
+</table>
+<h1 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h1><p>与方法二类似，布尔类型的哈希表。</p>
 ]]></content>
     </entry>
     
@@ -1653,57 +1642,138 @@ bool FindMid(const int target, vector<vector<int>> array, const unsigned int row
     </entry>
     
     <entry>
-      <title><![CDATA[数组中的重复数字]]></title>
-      <url>/questions/offer/003_%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E6%95%B0%E5%AD%97.html</url>
-      <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="题目-003"><a href="#题目-003" class="headerlink" title="题目 003"></a>题目 003</h1><p>在一个长度为n的数组里的<strong>所有数字都在$0$到$n-1$的范围内</strong>。 数组中某些数字是重复的，但不知道有几个数字是重复的。也不知道每个数字重复几次。请找出数组中任意一个重复的数字。</p>
-<p>例如，如果输入长度为7的数组${2,3,1,0,2,5,3}$，那么对应的输出是第一个重复的数字$2$。</p>
-<ul>
-<li>题目一：可修改输入数组</li>
-<li>题目二：不可修改输入数组</li>
+      <title><![CDATA[替换空格]]></title>
+      <url>/questions/offer/005_%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC.html</url>
+      <content type="html"><![CDATA[<p>替换字符串中的每个空格。<a id="more"></a></p>
+<h1 id="题目-005"><a href="#题目-005" class="headerlink" title="题目 005"></a>题目 005</h1><p>请实现一个函数，将一个字符串中的每个空格替换成<code>%20</code>。例如，当字符串为​<code>We Are Happy.</code>则经过替换之后的字符串为<code>We%20Are%20Happy.</code>。</p>
+<h1 id="推荐解法"><a href="#推荐解法" class="headerlink" title="推荐解法"></a>推荐解法</h1><p>遍历数组获取长度，可计算新数组长度，<strong>从后向前</strong>复制替换，注意结尾的’\0’。</p>
+<p><a href="https://github.com/zhedahht/CodingInterviewChinese2/blob/master/05_ReplaceSpaces/ReplaceSpaces.cpp" target="_blank" rel="external">https://github.com/zhedahht/CodingInterviewChinese2/blob/master/05_ReplaceSpaces/ReplaceSpaces.cpp</a></p>
+<h1 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h1><p>笨蛋解法，由于空格替换成<code>%20</code>会改变数组长度，借用另一个vector做转换。时间$O(n)$，空间$O(n)$。</p>
+<pre class="line-numbers language-c++"><code class="language-c++">void replaceSpace(char *str,int length) { //length为字符数组的有效长度
+    vector<char> res;
+    int count = 0;
+    int len = 0; //len记录字符数组的实际长度 
+    while(str[len] != '\0'){
+        if (str[len] == ' '){
+            res.push_back('%');
+            res.push_back('2');
+            res.push_back('0');
+            count++;
+        }
+        else
+            res.push_back(str[len]);
+        len++;
+    }
+    if (len + count * 2 > length) return;
+    for (int i = 0; i < len + count * 2; i++)
+        str[i] = res[i];
+    str[len + count * 2] = '\0'; \\字符数组结尾
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>合并两个数组，涉及重复移动元素，可以考虑从后往前。</p>
+<h2 id="字符串与字符数组的长度"><a href="#字符串与字符数组的长度" class="headerlink" title="字符串与字符数组的长度"></a>字符串与字符数组的长度</h2><ul>
+<li><p>字符数组的有效长度$\neq$实际长度</p>
+</li>
+<li><p>数组形参<code>char*</code>等价于<code>char []</code>等价于<code>char[100]</code>， <strong>编译器会忽略任何为数组形参指定的长度</strong> 。64位时，sizeof(形参) = 8；32位时，sizeof(形参) = 4。</p>
+</li>
+<li><p>strlen函数计算到’\0’停止；sizeof计算包含’\0’。</p>
+</li>
+<li><p>字符数组与字符串的区别：字符数组是一个数组，每个元素的值都可以改变。而<strong>字符串指针指向的是一个常量字符串，它被存放在程序的静态数据区</strong>，一旦定义就不能改变。</p>
+</li>
 </ul>
-<h1 id="几种解法"><a href="#几种解法" class="headerlink" title="几种解法"></a>几种解法</h1><table>
-<thead>
-<tr>
-<th>序号</th>
-<th>方法</th>
-<th>时间复杂度</th>
-<th>空间复杂度</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>题目一_方法1</td>
-<td>排序</td>
-<td>$O(n\text{log}n)$</td>
-<td>$O(1)$</td>
-<td></td>
-</tr>
-<tr>
-<td>题目一_方法2</td>
-<td>哈希</td>
-<td>$O(n)$</td>
-<td>$O(n)$</td>
-<td></td>
-</tr>
-<tr>
-<td>题目一_方法3</td>
-<td>按下标重排数组</td>
-<td>$O(n)$</td>
-<td>$O(1)$</td>
-<td>每个数字最多交换2次</td>
-</tr>
-<tr>
-<td>题目二_方法1</td>
-<td>二分+区间计数</td>
-<td>$O(n\text{log}n)$</td>
-<td>$O(1)$</td>
-<td>不能找出所有重复</td>
-</tr>
-</tbody>
-</table>
-<h1 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h1><p>与方法二类似，布尔类型的哈希表。</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#include <string.h> //strlen()头文件
+char str1[] = "hello world";
+strlen(str1);                     //11
+sizeof(str1)/sizeof(char);         //12
+
+char* str2 = "hello world";
+strlen(str2);                     //11
+sizeof(str2)/sizeof(char);         //8
+
+char str3[100] = "hello world";
+strlen(str3);                     //11
+sizeof(str3)/sizeof(char);         //100
+
+//等同于char str4[5]
+char str4[] = {'h','e','l','l','o'}; //字符数组不要求最后一个字符为'\0'
+strlen(str4);                     //5
+sizeof(str3)/sizeof(char);         //8
+
+char str5[6] = {'h','e','l','l','o'}; //其余元素自动复制为空字符'\0'
+strlen(str3);                     //5
+sizeof(str3)/sizeof(char);         //6
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>参考：</p>
+<ul>
+<li><a href="https://www.jianshu.com/p/513d817e87e9" target="_blank" rel="external">https://www.jianshu.com/p/513d817e87e9</a><br>```</li>
+</ul>
+<p>```</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[二维数组中的查找]]></title>
+      <url>/questions/offer/004_%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9F%A5%E6%89%BE.html</url>
+      <content type="html"><![CDATA[<p>有序二维数组中查找一个数字。<a id="more"></a></p>
+<h1 id="题目-004"><a href="#题目-004" class="headerlink" title="题目 004"></a>题目 004</h1><p>在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中<strong>是否含有</strong>该整数。<br>$$<br>\begin{matrix}<br>1&amp;2&amp;8&amp;9\2&amp;4&amp;9&amp;12\4&amp;7&amp;10&amp;13\6&amp;8&amp;11&amp;15<br>\end{matrix}<br>$$</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>矩阵有序，从数组中选取一个数字时，有三种情况：</p>
+<ol>
+<li>$num<em>{select}=num</em>{target}$，返回。</li>
+<li>$num<em>{select}&lt;num</em>{target}$，查找数字的<u>右边<strong>或</strong>下面</u>。</li>
+<li>$num<em>{select}&gt;num</em>{target}$，查找数字的<u>左边<strong>或</strong>上面</u>。</li>
+</ol>
+<h1 id="推荐解法"><a href="#推荐解法" class="headerlink" title="推荐解法"></a>推荐解法</h1><p>情况2和3存在重叠区域，从右上或左下的角点开始查找，可以将情况2和3简化成各一个查找区域。</p>
+<pre class="line-numbers language-c++"><code class="language-c++">bool Find(int* matrix, int rows, int columns, int number)
+{
+    bool found = false;
+
+    if(matrix != nullptr && rows > 0 && columns > 0)
+    {
+        int row = 0;
+        int column = columns - 1;
+        while(row < rows && column >=0)
+        {
+            if(matrix[row * columns + column] == number)
+            {
+                found = true;
+                break;
+            }
+            else if(matrix[row * columns + column] > number)
+                -- column;
+            else
+                ++ row;
+        }
+    }
+
+    return found;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h1><p>对每一行二分查找。（没有充分利用行间的有序性）</p>
+<pre class="line-numbers language-c++"><code class="language-c++">bool Find(int target, vector<vector<int> > array) {
+    if (array.size() == 0 || array[0].size() == 0) return false;
+
+    for (unsigned int i = 0; i < array.size(); i++) {
+        bool sign = FindMid(target, array, i, 0, array[0].size() - 1);
+        if (sign == true)
+            return true;
+    }
+    return false;
+}
+
+bool FindMid(const int target, vector<vector<int>> array, const unsigned int row, unsigned int begin, unsigned int end) {
+    unsigned int mid = (begin + end) / 2;
+    if (array[row][mid] == target) return true;
+    if (end - begin == 1) {
+        if (array[row][end] == target) return true;
+        else return false;
+    }
+    if (array[row][mid] < target)
+        return FindMid(target, array, row, mid, end);
+    else
+        return FindMid(target, array, row, begin, mid);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h2><p>一开始在想这个问题的时候，从二维数组的中间选取一个数字进行比较，只考虑了右下和左上，漏掉了很多区域，没有想清楚。</p>
 ]]></content>
     </entry>
     
@@ -1776,76 +1846,6 @@ bool FindMid(const int target, vector<vector<int>> array, const unsigned int row
     return res;
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[替换空格]]></title>
-      <url>/questions/offer/005_%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC.html</url>
-      <content type="html"><![CDATA[<p>替换字符串中的每个空格。<a id="more"></a></p>
-<h1 id="题目-005"><a href="#题目-005" class="headerlink" title="题目 005"></a>题目 005</h1><p>请实现一个函数，将一个字符串中的每个空格替换成<code>%20</code>。例如，当字符串为​<code>We Are Happy.</code>则经过替换之后的字符串为<code>We%20Are%20Happy.</code>。</p>
-<h1 id="推荐解法"><a href="#推荐解法" class="headerlink" title="推荐解法"></a>推荐解法</h1><p>遍历数组获取长度，可计算新数组长度，<strong>从后向前</strong>复制替换，注意结尾的’\0’。</p>
-<p><a href="https://github.com/zhedahht/CodingInterviewChinese2/blob/master/05_ReplaceSpaces/ReplaceSpaces.cpp" target="_blank" rel="external">https://github.com/zhedahht/CodingInterviewChinese2/blob/master/05_ReplaceSpaces/ReplaceSpaces.cpp</a></p>
-<h1 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h1><p>笨蛋解法，由于空格替换成<code>%20</code>会改变数组长度，借用另一个vector做转换。时间$O(n)$，空间$O(n)$。</p>
-<pre class="line-numbers language-c++"><code class="language-c++">void replaceSpace(char *str,int length) { //length为字符数组的有效长度
-    vector<char> res;
-    int count = 0;
-    int len = 0; //len记录字符数组的实际长度 
-    while(str[len] != '\0'){
-        if (str[len] == ' '){
-            res.push_back('%');
-            res.push_back('2');
-            res.push_back('0');
-            count++;
-        }
-        else
-            res.push_back(str[len]);
-        len++;
-    }
-    if (len + count * 2 > length) return;
-    for (int i = 0; i < len + count * 2; i++)
-        str[i] = res[i];
-    str[len + count * 2] = '\0'; \\字符数组结尾
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>合并两个数组，涉及重复移动元素，可以考虑从后往前。</p>
-<h2 id="字符串与字符数组的长度"><a href="#字符串与字符数组的长度" class="headerlink" title="字符串与字符数组的长度"></a>字符串与字符数组的长度</h2><ul>
-<li><p>字符数组的有效长度$\neq$实际长度</p>
-</li>
-<li><p>数组形参<code>char*</code>等价于<code>char []</code>等价于<code>char[100]</code>， <strong>编译器会忽略任何为数组形参指定的长度</strong> 。64位时，sizeof(形参) = 8；32位时，sizeof(形参) = 4。</p>
-</li>
-<li><p>strlen函数计算到’\0’停止；sizeof计算包含’\0’。</p>
-</li>
-<li><p>字符数组与字符串的区别：字符数组是一个数组，每个元素的值都可以改变。而<strong>字符串指针指向的是一个常量字符串，它被存放在程序的静态数据区</strong>，一旦定义就不能改变。</p>
-</li>
-</ul>
-<pre class="line-numbers language-c++"><code class="language-c++">#include <string.h> //strlen()头文件
-char str1[] = "hello world";
-strlen(str1);                     //11
-sizeof(str1)/sizeof(char);         //12
-
-char* str2 = "hello world";
-strlen(str2);                     //11
-sizeof(str2)/sizeof(char);         //8
-
-char str3[100] = "hello world";
-strlen(str3);                     //11
-sizeof(str3)/sizeof(char);         //100
-
-//等同于char str4[5]
-char str4[] = {'h','e','l','l','o'}; //字符数组不要求最后一个字符为'\0'
-strlen(str4);                     //5
-sizeof(str3)/sizeof(char);         //8
-
-char str5[6] = {'h','e','l','l','o'}; //其余元素自动复制为空字符'\0'
-strlen(str3);                     //5
-sizeof(str3)/sizeof(char);         //6
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>参考：</p>
-<ul>
-<li><a href="https://www.jianshu.com/p/513d817e87e9" target="_blank" rel="external">https://www.jianshu.com/p/513d817e87e9</a><br>```</li>
-</ul>
-<p>```</p>
 ]]></content>
     </entry>
     
