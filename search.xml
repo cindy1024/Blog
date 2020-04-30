@@ -1500,6 +1500,72 @@ Y   I   R
     </entry>
     
     <entry>
+      <title><![CDATA[二维数组中的查找]]></title>
+      <url>/questions/offer/004_%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9F%A5%E6%89%BE.html</url>
+      <content type="html"><![CDATA[<p>有序二维数组中查找一个数字。<a id="more"></a></p>
+<h1 id="题目-004"><a href="#题目-004" class="headerlink" title="题目 004"></a>题目 004</h1><p>在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中<strong>是否含有</strong>该整数。<br>$$<br>\begin{matrix}<br>1&amp;2&amp;8&amp;9\2&amp;4&amp;9&amp;12\4&amp;7&amp;10&amp;13\6&amp;8&amp;11&amp;15<br>\end{matrix}<br>$$</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>矩阵有序，从数组中选取一个数字时，有三种情况：</p>
+<ol>
+<li>$num<em>{select}=num</em>{target}$，返回。</li>
+<li>$num<em>{select}&lt;num</em>{target}$，查找数字的<u>右边<strong>或</strong>下面</u>。</li>
+<li>$num<em>{select}&gt;num</em>{target}$，查找数字的<u>左边<strong>或</strong>上面</u>。</li>
+</ol>
+<h1 id="推荐解法"><a href="#推荐解法" class="headerlink" title="推荐解法"></a>推荐解法</h1><p>情况2和3存在重叠区域，从右上或左下的角点开始查找，可以将情况2和3简化成各一个查找区域。</p>
+<pre class="line-numbers language-c++"><code class="language-c++">bool Find(int* matrix, int rows, int columns, int number)
+{
+    bool found = false;
+
+    if(matrix != nullptr && rows > 0 && columns > 0)
+    {
+        int row = 0;
+        int column = columns - 1;
+        while(row < rows && column >=0)
+        {
+            if(matrix[row * columns + column] == number)
+            {
+                found = true;
+                break;
+            }
+            else if(matrix[row * columns + column] > number)
+                -- column;
+            else
+                ++ row;
+        }
+    }
+
+    return found;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h1><p>对每一行二分查找。（没有充分利用行间的有序性）</p>
+<pre class="line-numbers language-c++"><code class="language-c++">bool Find(int target, vector<vector<int> > array) {
+    if (array.size() == 0 || array[0].size() == 0) return false;
+
+    for (unsigned int i = 0; i < array.size(); i++) {
+        bool sign = FindMid(target, array, i, 0, array[0].size() - 1);
+        if (sign == true)
+            return true;
+    }
+    return false;
+}
+
+bool FindMid(const int target, vector<vector<int>> array, const unsigned int row, unsigned int begin, unsigned int end) {
+    unsigned int mid = (begin + end) / 2;
+    if (array[row][mid] == target) return true;
+    if (end - begin == 1) {
+        if (array[row][end] == target) return true;
+        else return false;
+    }
+    if (array[row][mid] < target)
+        return FindMid(target, array, row, mid, end);
+    else
+        return FindMid(target, array, row, begin, mid);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h2><p>一开始在想这个问题的时候，从二维数组的中间选取一个数字进行比较，只考虑了右下和左上，漏掉了很多区域，没有想清楚。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[实现Singleton模式]]></title>
       <url>/questions/offer/002_%E5%AE%9E%E7%8E%B0Singleton%E6%A8%A1%E5%BC%8F.html</url>
       <content type="html"><![CDATA[<p>c#实现单例模式。<a id="more"></a></p>
@@ -1642,68 +1708,74 @@ Y   I   R
     </entry>
     
     <entry>
-      <title><![CDATA[二维数组中的查找]]></title>
-      <url>/questions/offer/004_%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9F%A5%E6%89%BE.html</url>
-      <content type="html"><![CDATA[<p>有序二维数组中查找一个数字。<a id="more"></a></p>
-<h1 id="题目-004"><a href="#题目-004" class="headerlink" title="题目 004"></a>题目 004</h1><p>在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中<strong>是否含有</strong>该整数。<br>$$<br>\begin{matrix}<br>1&amp;2&amp;8&amp;9\2&amp;4&amp;9&amp;12\4&amp;7&amp;10&amp;13\6&amp;8&amp;11&amp;15<br>\end{matrix}<br>$$</p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>矩阵有序，从数组中选取一个数字时，有三种情况：</p>
-<ol>
-<li>$num<em>{select}=num</em>{target}$，返回。</li>
-<li>$num<em>{select}&lt;num</em>{target}$，查找数字的<u>右边<strong>或</strong>下面</u>。</li>
-<li>$num<em>{select}&gt;num</em>{target}$，查找数字的<u>左边<strong>或</strong>上面</u>。</li>
-</ol>
-<h1 id="推荐解法"><a href="#推荐解法" class="headerlink" title="推荐解法"></a>推荐解法</h1><p>情况2和3存在重叠区域，从右上或左下的角点开始查找，可以将情况2和3简化成各一个查找区域。</p>
-<pre class="line-numbers language-c++"><code class="language-c++">bool Find(int* matrix, int rows, int columns, int number)
+      <title><![CDATA[从尾到头打印链表]]></title>
+      <url>/questions/offer/006_%E4%BB%8E%E5%B0%BE%E5%88%B0%E5%A4%B4%E6%89%93%E5%8D%B0%E9%93%BE%E8%A1%A8.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-006"><a href="#题目-006" class="headerlink" title="题目 006"></a>题目 006</h1><p>输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。</p>
+<h1 id="推荐解法"><a href="#推荐解法" class="headerlink" title="推荐解法"></a>推荐解法</h1><p>打印通常是一个只读操作，不希望改变链表，先遍历链表。</p>
+<h3 id="解法一-【栈】后进先出"><a href="#解法一-【栈】后进先出" class="headerlink" title="解法一 【栈】后进先出"></a>解法一 【栈】后进先出</h3><pre class="line-numbers language-c++"><code class="language-c++">void PrintListReversingly_Iteratively(ListNode* pHead)
 {
-    bool found = false;
+    std::stack<ListNode*> nodes;
 
-    if(matrix != nullptr && rows > 0 && columns > 0)
+    ListNode* pNode = pHead;
+    while(pNode != nullptr)
     {
-        int row = 0;
-        int column = columns - 1;
-        while(row < rows && column >=0)
+        nodes.push(pNode);
+        pNode = pNode->m_pNext;
+    }
+
+    while(!nodes.empty())
+    {
+        pNode = nodes.top();
+        nodes.pop();
+    }
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="解法二：【递归】本质上是一个栈结构"><a href="#解法二：【递归】本质上是一个栈结构" class="headerlink" title="解法二：【递归】本质上是一个栈结构"></a>解法二：【递归】本质上是一个栈结构</h3><p>链表很长时，调用层级深，可能导致调用栈溢出，鲁棒性较解法一稍差。</p>
+<pre class="line-numbers language-c++"><code class="language-c++">void PrintListReversingly_Recursively(ListNode* pHead)
+{
+    if(pHead != nullptr)
+    {
+        if (pHead->m_pNext != nullptr)
         {
-            if(matrix[row * columns + column] == number)
-            {
-                found = true;
-                break;
-            }
-            else if(matrix[row * columns + column] > number)
-                -- column;
-            else
-                ++ row;
+            PrintListReversingly_Recursively(pHead->m_pNext);
         }
     }
-
-    return found;
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h1><p>对每一行二分查找。（没有充分利用行间的有序性）</p>
-<pre class="line-numbers language-c++"><code class="language-c++">bool Find(int target, vector<vector<int> > array) {
-    if (array.size() == 0 || array[0].size() == 0) return false;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h1><ul>
+<li>分别用步长为1、2的指针遍历，当步长为2的指针完成遍历，步长为1的指针走到中间。</li>
+<li>交换对称位置的节点数值。</li>
+<li>时间复杂度$O(n)$，空间复杂度$O(n)$。</li>
+</ul>
+<pre class="line-numbers language-c++"><code class="language-c++">vector<int> reversePrint(ListNode* head) {
+    vector<int> res;
+    if (head == NULL) return res;
 
-    for (unsigned int i = 0; i < array.size(); i++) {
-        bool sign = FindMid(target, array, i, 0, array[0].size() - 1);
-        if (sign == true)
-            return true;
+    ListNode* p = head;
+    ListNode* pp = head;
+    int index = 0;
+    while (pp != NULL && pp->next != NULL) {    //分别用步长为1、2的指针找到中间指针
+        res.push_back(p->val);
+        p = p->next;
+        pp = pp->next->next;
+        index++;
     }
-    return false;
-}
 
-bool FindMid(const int target, vector<vector<int>> array, const unsigned int row, unsigned int begin, unsigned int end) {
-    unsigned int mid = (begin + end) / 2;
-    if (array[row][mid] == target) return true;
-    if (end - begin == 1) {
-        if (array[row][end] == target) return true;
-        else return false;
+    int count = 1;                             //用于交换数字时，index往两侧移动
+    if (pp != NULL && pp->next == NULL) {    //数目为奇数，中间数不用交换，多走一步
+        res.push_back(p->val);
+        p = p->next;
     }
-    if (array[row][mid] < target)
-        return FindMid(target, array, row, mid, end);
-    else
-        return FindMid(target, array, row, begin, mid);
+    while (p != NULL) {        //交换两侧数字
+        res.push_back(res[index - count]);
+        res[index - count] = p->val;
+        p = p->next;
+        count++;
+    }
+    return res;
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h2><p>一开始在想这个问题的时候，从二维数组的中间选取一个数字进行比较，只考虑了右下和左上，漏掉了很多区域，没有想清楚。</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 ]]></content>
     </entry>
     
@@ -1774,78 +1846,6 @@ sizeof(str3)/sizeof(char);         //6
 <li><a href="https://www.jianshu.com/p/513d817e87e9" target="_blank" rel="external">https://www.jianshu.com/p/513d817e87e9</a><br>```</li>
 </ul>
 <p>```</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[从尾到头打印链表]]></title>
-      <url>/questions/offer/006_%E4%BB%8E%E5%B0%BE%E5%88%B0%E5%A4%B4%E6%89%93%E5%8D%B0%E9%93%BE%E8%A1%A8.html</url>
-      <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="题目-006"><a href="#题目-006" class="headerlink" title="题目 006"></a>题目 006</h1><p>输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。</p>
-<h1 id="推荐解法"><a href="#推荐解法" class="headerlink" title="推荐解法"></a>推荐解法</h1><p>打印通常是一个只读操作，不希望改变链表，先遍历链表。</p>
-<h3 id="解法一-【栈】后进先出"><a href="#解法一-【栈】后进先出" class="headerlink" title="解法一 【栈】后进先出"></a>解法一 【栈】后进先出</h3><pre class="line-numbers language-c++"><code class="language-c++">void PrintListReversingly_Iteratively(ListNode* pHead)
-{
-    std::stack<ListNode*> nodes;
-
-    ListNode* pNode = pHead;
-    while(pNode != nullptr)
-    {
-        nodes.push(pNode);
-        pNode = pNode->m_pNext;
-    }
-
-    while(!nodes.empty())
-    {
-        pNode = nodes.top();
-        nodes.pop();
-    }
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="解法二：【递归】本质上是一个栈结构"><a href="#解法二：【递归】本质上是一个栈结构" class="headerlink" title="解法二：【递归】本质上是一个栈结构"></a>解法二：【递归】本质上是一个栈结构</h3><p>链表很长时，调用层级深，可能导致调用栈溢出，鲁棒性较解法一稍差。</p>
-<pre class="line-numbers language-c++"><code class="language-c++">void PrintListReversingly_Recursively(ListNode* pHead)
-{
-    if(pHead != nullptr)
-    {
-        if (pHead->m_pNext != nullptr)
-        {
-            PrintListReversingly_Recursively(pHead->m_pNext);
-        }
-    }
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h1><ul>
-<li>分别用步长为1、2的指针遍历，当步长为2的指针完成遍历，步长为1的指针走到中间。</li>
-<li>交换对称位置的节点数值。</li>
-<li>时间复杂度$O(n)$，空间复杂度$O(n)$。</li>
-</ul>
-<pre class="line-numbers language-c++"><code class="language-c++">vector<int> reversePrint(ListNode* head) {
-    vector<int> res;
-    if (head == NULL) return res;
-
-    ListNode* p = head;
-    ListNode* pp = head;
-    int index = 0;
-    while (pp != NULL && pp->next != NULL) {    //分别用步长为1、2的指针找到中间指针
-        res.push_back(p->val);
-        p = p->next;
-        pp = pp->next->next;
-        index++;
-    }
-
-    int count = 1;                             //用于交换数字时，index往两侧移动
-    if (pp != NULL && pp->next == NULL) {    //数目为奇数，中间数不用交换，多走一步
-        res.push_back(p->val);
-        p = p->next;
-    }
-    while (p != NULL) {        //交换两侧数字
-        res.push_back(res[index - count]);
-        res[index - count] = p->val;
-        p = p->next;
-        count++;
-    }
-    return res;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 ]]></content>
     </entry>
     
