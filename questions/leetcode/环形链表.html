@@ -159,7 +159,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502154012.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502154110.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502161008.png">
-<meta property="og:updated_time" content="2020-05-02T08:56:04.873Z">
+<meta property="og:updated_time" content="2020-05-02T10:31:59.569Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="环形链表">
 <meta name="twitter:description" content="题目 141 是否有环
@@ -461,8 +461,8 @@
 </li>
 </ul>
 <h3 id="（1）有无环"><a href="#（1）有无环" class="headerlink" title="（1）有无环"></a>（1）有无环</h3><p>未来相遇时，从$slow$到达入口点处开始计算，$fast$比$slow$多走$n$圈：</p>
-<p>​    $$(L_1+2t)-t=nC$$</p>
-<p>​    $$L_1+t=nC$$</p>
+<p>$$(L_1+2t)-t=nC$$</p>
+<p>$$L_1+t=nC$$</p>
 <p>因为$L_1&lt;C$，存在$t$使得上述等式成立，$fast$多走一圈即可追上$slow$，即$n=1​$。</p>
 <blockquote>
 <p>$n=0$表示链表是一个完整的环，头结点就是环的入口。</p>
@@ -475,13 +475,13 @@
 <p>注：在$slow$到达入口点这一时刻，$L_1+n’C$表示$fast$已经走过入口点的距离，$2t$表示$fast$还要再走$t$时间才能与$slow$相遇。</p>
 </blockquote>
 <p>到相遇时，$fast​$走过的路程是$slow​$的2倍：</p>
-<p>​    $$2(L_0+t) = L_0 + t + nC+n’C$$</p>
-<p>​    $$L_0 = nC+n’C-t​$$</p>
+<p>$$2(L_0+t) = L_0 + t + nC+n’C​$$</p>
+<p>$$L_0 = nC+n’C-t$$</p>
 <p>由（1）分析知，$fast$多走一圈即可追上$slow$，即$n=1​$。</p>
-<p>​    $$L_0=(C-t)+n’C$$</p>
+<p>$$L_0=(C-t)+n’C$$</p>
 <p>$(C-t)​$就是从相遇点继续向前，走到环的入口点的距离。</p>
 <p>所以，</p>
-<p>​    $$distance_{head_to_entrance} = distance_{cross_to_entrance}$$</p>
+<p>$$distance_{head_to_entrance} = distance_{cross_to_entrance}​$$</p>
 
         
       </div>

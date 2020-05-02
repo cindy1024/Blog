@@ -1220,6 +1220,7 @@ Y   I   R
 <li><a href="./leetcode/合并两个有序链表.html">021 合并两个有序链表</a></li>
 <li><a href="./leetcode/删除排序链表中的重复元素.html">083 删除排序链表中的重复元素</a></li>
 <li><a href="./leetcode/环形链表.html">141/142 环形链表</a></li>
+<li><a href="./leetcode/相交链表.html">160 相交链表</a></li>
 </ul>
 <h2 id="UVa"><a href="#UVa" class="headerlink" title="UVa"></a>UVa</h2><ul>
 <li><a href="./Palindromes.html">0401  Palindromes</a> 判断回文串或镜像串。</li>
@@ -1261,6 +1262,7 @@ Y   I   R
 <li><a href="./leetcode/合并两个有序链表.html">leetcode - 021 合并两个有序链表</a></li>
 <li><a href="./leetcode/删除排序链表中的重复元素.html">leetcode - 083 删除排序链表中的重复元素</a></li>
 <li><a href="./leetcode/环形链表.html">leetcode - 141/142 环形链表</a></li>
+<li><a href="./leetcode/相交链表.html">leetcode - 160 相交链表</a></li>
 </ul>
 <h2 id="Design-pattern"><a href="#Design-pattern" class="headerlink" title="Design pattern"></a>Design pattern</h2><ul>
 <li><a href="./offer/002_实现Singleton模式.html">002 实现Singleton模式</a></li>
@@ -1981,8 +1983,8 @@ sizeof(str3)/sizeof(char);         //6
 </li>
 </ul>
 <h3 id="（1）有无环"><a href="#（1）有无环" class="headerlink" title="（1）有无环"></a>（1）有无环</h3><p>未来相遇时，从$slow$到达入口点处开始计算，$fast$比$slow$多走$n$圈：</p>
-<p>​    $$(L_1+2t)-t=nC$$</p>
-<p>​    $$L_1+t=nC$$</p>
+<p>$$(L_1+2t)-t=nC$$</p>
+<p>$$L_1+t=nC$$</p>
 <p>因为$L_1&lt;C$，存在$t$使得上述等式成立，$fast$多走一圈即可追上$slow$，即$n=1​$。</p>
 <blockquote>
 <p>$n=0$表示链表是一个完整的环，头结点就是环的入口。</p>
@@ -1995,13 +1997,54 @@ sizeof(str3)/sizeof(char);         //6
 <p>注：在$slow$到达入口点这一时刻，$L_1+n’C$表示$fast$已经走过入口点的距离，$2t$表示$fast$还要再走$t$时间才能与$slow$相遇。</p>
 </blockquote>
 <p>到相遇时，$fast​$走过的路程是$slow​$的2倍：</p>
-<p>​    $$2(L_0+t) = L_0 + t + nC+n’C$$</p>
-<p>​    $$L_0 = nC+n’C-t​$$</p>
+<p>$$2(L_0+t) = L_0 + t + nC+n’C​$$</p>
+<p>$$L_0 = nC+n’C-t$$</p>
 <p>由（1）分析知，$fast$多走一圈即可追上$slow$，即$n=1​$。</p>
-<p>​    $$L_0=(C-t)+n’C$$</p>
+<p>$$L_0=(C-t)+n’C$$</p>
 <p>$(C-t)​$就是从相遇点继续向前，走到环的入口点的距离。</p>
 <p>所以，</p>
-<p>​    $$distance_{head_to_entrance} = distance_{cross_to_entrance}$$</p>
+<p>$$distance_{head_to_entrance} = distance_{cross_to_entrance}​$$</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[相交链表]]></title>
+      <url>/questions/leetcode/%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-160"><a href="#题目-160" class="headerlink" title="题目 160"></a>题目 160</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502181124.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502181147.png" alt=""></p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h3 id="暴力法"><a href="#暴力法" class="headerlink" title="暴力法"></a>暴力法</h3><h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><h3 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h3><p>$$a+intersection+b = b+intersection+a​$$</p>
+<blockquote>
+<ul>
+<li><p>当 pA 到达链表的尾部时，将它重定位到链表 B 的头结点 (你没看错，就是链表 B); 类似的，当 pB 到达链表的尾部时，将它重定位到链表 A 的头结点。</p>
+</li>
+<li><p>若在某一时刻 pA 和 pB 相遇，则 pA/pB 为相交结点。</p>
+</li>
+<li><p>如果两个链表存在相交，它们末尾的结点必然相同。因此当 pA/pB到达链表结尾时，记录下链表 <code>A/B</code> 对应的元素。若最后元素不相同，则两个链表不相交。</p>
+</li>
+</ul>
+<ul>
+<li><p>时间复杂度 $O(m+n)$</p>
+</li>
+<li><p>空间复杂度 $O(1)$</p>
+</li>
+</ul>
+</blockquote>
+<p>巧妙地把指针重定向，形成了类似环形链表（没有改变输入链表）。双指针速度一致，必同时走完全程，即找到相交点。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h3 id="双指针-1"><a href="#双指针-1" class="headerlink" title="双指针"></a>双指针</h3><pre class="line-numbers language-c++"><code class="language-c++">    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        if (headA == nullptr || headB == nullptr) return nullptr;
+
+        ListNode *pa, *pb;
+        pa = headA;
+        pb = headB;
+
+        while (pa != pb){
+            pa = (pa == nullptr ? headB : pa->next);
+            pb = (pb == nullptr ? headA : pb->next);
+        }
+        return pa;
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 ]]></content>
     </entry>
     
