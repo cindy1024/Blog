@@ -682,7 +682,8 @@ x<span class="token punctuation">,</span>y <span class="token operator">=</span>
       <content type="html"><![CDATA[<p><br>CS在读，爱好羽毛球</p>
 <p><br></p>
 <h1 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h1><ul>
-<li>2019-03-23：更换域名，更新不蒜子统计，更换图床，添加文章底部<a href="https://juejin.im/post/5c7dd8675188251b6406e7b5" target="_blank" rel="external">版权样式</a>。</li>
+<li>2020-04-30：更换github图床+jsdelivr加速 ；源码同步托管coding和github，智能dns设置境内境外不同访问线路，cloudflare加速；valine评论通知。</li>
+<li>2019-03-23：更换域名，更新不蒜子统计，<del>更换又拍云图床</del>，添加文章底部<a href="https://juejin.im/post/5c7dd8675188251b6406e7b5" target="_blank" rel="external">版权样式</a>。</li>
 <li>2018-07-27：启用Next主题，自定义样式克隆自<a href="qianjiye.de">CHANGE・業・德</a>，表示感谢</li>
 <li>2017-07-24：<del>启用主题Material</del></li>
 <li>2017-02-01：建博</li>
@@ -787,6 +788,56 @@ x<span class="token punctuation">,</span>y <span class="token operator">=</span>
     </entry>
     
     <entry>
+      <title><![CDATA[Palindrome Number]]></title>
+      <url>/questions/Palindrome-Number.html</url>
+      <content type="html"><![CDATA[<p>判断回文数。<a id="more"></a></p>
+<h1 id="题目-9"><a href="#题目-9" class="headerlink" title="题目 9"></a>题目 9</h1><p>Determine whether an integer is a palindrome. Do this without extra space.</p>
+<p>click to show spoilers.</p>
+<hr>
+<p><strong>Some hints:</strong><br>Could negative integers be palindromes? (ie, -1)</p>
+<p>If you are thinking of converting the integer to string, note the restriction of using extra space.</p>
+<p>You could also try reversing an integer. However, if you have solved the problem “Reverse Integer”, you know that the reversed integer might overflow. How would you handle such case?</p>
+<p>There is a more generic way of solving this problem.</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>负号不对称，负数不是回文数。</p>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>用了额外的栈和队列空间。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">    <span class="token keyword">bool</span> <span class="token function">isPalindrome</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        stack<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> s<span class="token punctuation">;</span>
+        queue<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> q<span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>x <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> tmp <span class="token operator">=</span> x <span class="token operator">%</span> <span class="token number">10</span><span class="token punctuation">;</span>
+            s<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            x <span class="token operator">/</span><span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> q<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                s<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span>
+                <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Only reversing till half and then compare. <a href="http://wuxinju.top/2017/08/03/Reverse-Integer/" target="_blank" rel="external">007-Reverse-Integer</a></p>
+<p>空间复杂度O(1)，与问题规模n无关。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">    <span class="token keyword">bool</span> <span class="token function">isPalindrome</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>x<span class="token operator">&lt;</span><span class="token number">0</span><span class="token operator">||</span> <span class="token punctuation">(</span>x<span class="token operator">!=</span><span class="token number">0</span> <span class="token operator">&amp;&amp;</span>x<span class="token operator">%</span><span class="token number">10</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//10的倍数必定不是回文数</span>
+        <span class="token keyword">int</span> sum<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>x<span class="token operator">></span>sum<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            sum <span class="token operator">=</span> sum<span class="token operator">*</span><span class="token number">10</span><span class="token operator">+</span>x<span class="token operator">%</span><span class="token number">10</span><span class="token punctuation">;</span>
+            x <span class="token operator">=</span> x<span class="token operator">/</span><span class="token number">10</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>x<span class="token operator">==</span>sum<span class="token punctuation">)</span><span class="token operator">||</span><span class="token punctuation">(</span>x<span class="token operator">==</span>sum<span class="token operator">/</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//偶数位、奇数位</span>
+    <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Master-Mind Hints]]></title>
       <url>/questions/Master-Mind-Hints.html</url>
       <content type="html"><![CDATA[<p>猜数字游戏的提示。<a id="more"></a></p>
@@ -847,56 +898,6 @@ x<span class="token punctuation">,</span>y <span class="token operator">=</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Palindrome Number]]></title>
-      <url>/questions/Palindrome-Number.html</url>
-      <content type="html"><![CDATA[<p>判断回文数。<a id="more"></a></p>
-<h1 id="题目-9"><a href="#题目-9" class="headerlink" title="题目 9"></a>题目 9</h1><p>Determine whether an integer is a palindrome. Do this without extra space.</p>
-<p>click to show spoilers.</p>
-<hr>
-<p><strong>Some hints:</strong><br>Could negative integers be palindromes? (ie, -1)</p>
-<p>If you are thinking of converting the integer to string, note the restriction of using extra space.</p>
-<p>You could also try reversing an integer. However, if you have solved the problem “Reverse Integer”, you know that the reversed integer might overflow. How would you handle such case?</p>
-<p>There is a more generic way of solving this problem.</p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>负号不对称，负数不是回文数。</p>
-<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>用了额外的栈和队列空间。</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp">    <span class="token keyword">bool</span> <span class="token function">isPalindrome</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        stack<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> s<span class="token punctuation">;</span>
-        queue<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> q<span class="token punctuation">;</span>
-        <span class="token keyword">while</span> <span class="token punctuation">(</span>x <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">int</span> tmp <span class="token operator">=</span> x <span class="token operator">%</span> <span class="token number">10</span><span class="token punctuation">;</span>
-            s<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            x <span class="token operator">/</span><span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">while</span> <span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> q<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                s<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-            <span class="token keyword">else</span>
-                <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Only reversing till half and then compare. <a href="http://wuxinju.top/2017/08/03/Reverse-Integer/" target="_blank" rel="external">007-Reverse-Integer</a></p>
-<p>空间复杂度O(1)，与问题规模n无关。</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp">    <span class="token keyword">bool</span> <span class="token function">isPalindrome</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>x<span class="token operator">&lt;</span><span class="token number">0</span><span class="token operator">||</span> <span class="token punctuation">(</span>x<span class="token operator">!=</span><span class="token number">0</span> <span class="token operator">&amp;&amp;</span>x<span class="token operator">%</span><span class="token number">10</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//10的倍数必定不是回文数</span>
-        <span class="token keyword">int</span> sum<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">while</span><span class="token punctuation">(</span>x<span class="token operator">></span>sum<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            sum <span class="token operator">=</span> sum<span class="token operator">*</span><span class="token number">10</span><span class="token operator">+</span>x<span class="token operator">%</span><span class="token number">10</span><span class="token punctuation">;</span>
-            x <span class="token operator">=</span> x<span class="token operator">/</span><span class="token number">10</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> <span class="token punctuation">(</span>x<span class="token operator">==</span>sum<span class="token punctuation">)</span><span class="token operator">||</span><span class="token punctuation">(</span>x<span class="token operator">==</span>sum<span class="token operator">/</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//偶数位、奇数位</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 ]]></content>
     </entry>
     
@@ -1215,7 +1216,10 @@ Y   I   R
 <li><a href="./Palindrome-Number.html">009  Palindrome Number</a>  判断回文数。</li>
 <li><a href="./container-with-most-water.html">011  Container With Most Water</a> 木桶效应+最大长方形。</li>
 <li><a href="./integer-to-roman.html">012/013  Integer to Roman / Roman to Integer</a> 整型、罗马数字互转。</li>
-<li><a href="./longest-common-prefix.html">014  Longest Common Prefix</a> 最长共同前缀。</li>
+<li><a href="./longest-common-prefix.html">014 Longest Common Prefix</a> 最长共同前缀。</li>
+<li><a href="./leetcode/合并两个有序链表.html">021 合并两个有序链表</a></li>
+<li><a href="./leetcode/删除排序链表中的重复元素.html">083 删除排序链表中的重复元素</a></li>
+<li><a href="./leetcode/环形链表.html">141/142 环形链表</a></li>
 </ul>
 <h2 id="UVa"><a href="#UVa" class="headerlink" title="UVa"></a>UVa</h2><ul>
 <li><a href="./Palindromes.html">0401  Palindromes</a> 判断回文串或镜像串。</li>
@@ -1224,11 +1228,14 @@ Y   I   R
 </ul>
 <h2 id="剑指Offer"><a href="#剑指Offer" class="headerlink" title="剑指Offer"></a>剑指Offer</h2><ul>
 <li><a href="./offer/002_实现Singleton模式.html">002 实现Singleton模式</a> 一个类只产生一个实例。</li>
-<li><a href="./offer/003_数组中的重复数字.html">003_数组中的重复数字</a> 找出数组中任意一个重复的数字。</li>
-<li><a href="./offer/004_二维数组中的查找.html">004_二维数组中的查找</a> 有序二维数组中查找一个数字。</li>
-<li><a href="./offer/005_替换空格.html">005_替换空格 </a>替换字符串中的每个空格。</li>
+<li><a href="./offer/003_数组中的重复数字.html">003 数组中的重复数字</a> 找出数组中任意一个重复的数字。</li>
+<li><a href="./offer/004_二维数组中的查找.html">004 二维数组中的查找</a> 有序二维数组中查找一个数字。</li>
+<li><p><a href="./offer/005_替换空格.html">005 替换空格 </a>替换字符串中的每个空格。</p>
+</li>
+<li><p><a href="./offer/006_从尾到头打印链表.html">006 从尾到头打印链表 </a></p>
+</li>
 </ul>
-<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><h2 id="string"><a href="#string" class="headerlink" title="string"></a>string</h2><ul>
+<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><ul>
 <li><a href="./ZigZag-Conversion.html">leetcode - 006  ZigZag Conversion</a></li>
 <li><a href="./String-to-Integer.html">leetcode - 008  String to Integer</a></li>
 <li><a href="./Palindromes.html">UVa - 0401  Palindromes</a></li>
@@ -1236,7 +1243,7 @@ Y   I   R
 <li><a href="./longest-common-prefix">leetcode - 014  Longest Common Prefix</a> 最长共同前缀。</li>
 <li><a href="./offer/005_替换空格.html">剑指offer - 005_替换空格 </a>替换字符串中的每个空格。</li>
 </ul>
-<h2 id="math"><a href="#math" class="headerlink" title="math"></a>math</h2><ul>
+<h2 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h2><ul>
 <li><a href="./Reverse-Integer.html">leetcode - 007  Reverse Integer</a></li>
 <li><a href="./String-to-Integer.html">leetcode - 008  String to Integer</a></li>
 <li><a href="./Palindrome-Number.html">leetcode - 009  Palindrome Number</a></li>
@@ -1244,12 +1251,18 @@ Y   I   R
 <li><a href="./Digit-Generator.html">UVa - 1583  Digit Generator</a></li>
 <li><a href="./integer-to-roman.html">leetcode - 012  Integer to Roman</a></li>
 </ul>
-<h2 id="array"><a href="#array" class="headerlink" title="array"></a>array</h2><ul>
+<h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><ul>
 <li><a href="./container-with-most-water.html">leetcode - 011  Container With Most Water</a></li>
-<li><a href="./offer/003_数组中的重复数字.html">剑指offer - 003_数组中的重复数字</a> 找出数组中任意一个重复的数字。</li>
-<li><a href="./offer/004_二维数组中的查找.html">剑指offer - 004_二维数组中的查找</a> 有序二维数组中查找一个数字。</li>
+<li><a href="./offer/003_数组中的重复数字.html">剑指offer - 003 数组中的重复数字</a> 找出数组中任意一个重复的数字。</li>
+<li><a href="./offer/004_二维数组中的查找.html">剑指offer - 004 二维数组中的查找</a> 有序二维数组中查找一个数字。</li>
 </ul>
-<h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><ul>
+<h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><ul>
+<li><a href="./offer/006_从尾到头打印链表.html">剑指offer - 006 从尾到头打印链表 </a></li>
+<li><a href="./leetcode/合并两个有序链表.html">leetcode - 021 合并两个有序链表</a></li>
+<li><a href="./leetcode/删除排序链表中的重复元素.html">leetcode - 083 删除排序链表中的重复元素</a></li>
+<li><a href="./leetcode/环形链表.html">leetcode - 141/142 环形链表</a></li>
+</ul>
+<h2 id="Design-pattern"><a href="#Design-pattern" class="headerlink" title="Design pattern"></a>Design pattern</h2><ul>
 <li><a href="./offer/002_实现Singleton模式.html">002 实现Singleton模式</a></li>
 </ul>
 ]]></content>
@@ -1500,61 +1513,6 @@ Y   I   R
     </entry>
     
     <entry>
-      <title><![CDATA[数组中的重复数字]]></title>
-      <url>/questions/offer/003_%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E6%95%B0%E5%AD%97.html</url>
-      <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="题目-003"><a href="#题目-003" class="headerlink" title="题目 003"></a>题目 003</h1><p>在一个长度为n的数组里的<strong>所有数字都在$0$到$n-1$的范围内</strong>。 数组中某些数字是重复的，但不知道有几个数字是重复的。也不知道每个数字重复几次。请找出数组中任意一个重复的数字。</p>
-<p>例如，如果输入长度为7的数组${2,3,1,0,2,5,3}$，那么对应的输出是第一个重复的数字$2$。</p>
-<ul>
-<li>题目一：可修改输入数组</li>
-<li>题目二：不可修改输入数组</li>
-</ul>
-<h1 id="几种解法"><a href="#几种解法" class="headerlink" title="几种解法"></a>几种解法</h1><table>
-<thead>
-<tr>
-<th>序号</th>
-<th>方法</th>
-<th>时间复杂度</th>
-<th>空间复杂度</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>题目一_方法1</td>
-<td>排序</td>
-<td>$O(n\text{log}n)$</td>
-<td>$O(1)$</td>
-<td></td>
-</tr>
-<tr>
-<td>题目一_方法2</td>
-<td>哈希</td>
-<td>$O(n)$</td>
-<td>$O(n)$</td>
-<td></td>
-</tr>
-<tr>
-<td>题目一_方法3</td>
-<td>按下标重排数组</td>
-<td>$O(n)$</td>
-<td>$O(1)$</td>
-<td>每个数字最多交换2次</td>
-</tr>
-<tr>
-<td>题目二_方法1</td>
-<td>二分+区间计数</td>
-<td>$O(n\text{log}n)$</td>
-<td>$O(1)$</td>
-<td>不能找出所有重复</td>
-</tr>
-</tbody>
-</table>
-<h1 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h1><p>与方法二类似，布尔类型的哈希表。</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[实现Singleton模式]]></title>
       <url>/questions/offer/002_%E5%AE%9E%E7%8E%B0Singleton%E6%A8%A1%E5%BC%8F.html</url>
       <content type="html"><![CDATA[<p>c#实现单例模式。<a id="more"></a></p>
@@ -1642,72 +1600,57 @@ Y   I   R
     </entry>
     
     <entry>
-      <title><![CDATA[替换空格]]></title>
-      <url>/questions/offer/005_%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC.html</url>
-      <content type="html"><![CDATA[<p>替换字符串中的每个空格。<a id="more"></a></p>
-<h1 id="题目-005"><a href="#题目-005" class="headerlink" title="题目 005"></a>题目 005</h1><p>请实现一个函数，将一个字符串中的每个空格替换成<code>%20</code>。例如，当字符串为​<code>We Are Happy.</code>则经过替换之后的字符串为<code>We%20Are%20Happy.</code>。</p>
-<h1 id="推荐解法"><a href="#推荐解法" class="headerlink" title="推荐解法"></a>推荐解法</h1><p>遍历数组获取长度，可计算新数组长度，<strong>从后向前</strong>复制替换，注意结尾的’\0’。</p>
-<p><a href="https://github.com/zhedahht/CodingInterviewChinese2/blob/master/05_ReplaceSpaces/ReplaceSpaces.cpp" target="_blank" rel="external">https://github.com/zhedahht/CodingInterviewChinese2/blob/master/05_ReplaceSpaces/ReplaceSpaces.cpp</a></p>
-<h1 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h1><p>笨蛋解法，由于空格替换成<code>%20</code>会改变数组长度，借用另一个vector做转换。时间$O(n)$，空间$O(n)$。</p>
-<pre class="line-numbers language-c++"><code class="language-c++">void replaceSpace(char *str,int length) { //length为字符数组的有效长度
-    vector<char> res;
-    int count = 0;
-    int len = 0; //len记录字符数组的实际长度 
-    while(str[len] != '\0'){
-        if (str[len] == ' '){
-            res.push_back('%');
-            res.push_back('2');
-            res.push_back('0');
-            count++;
-        }
-        else
-            res.push_back(str[len]);
-        len++;
-    }
-    if (len + count * 2 > length) return;
-    for (int i = 0; i < len + count * 2; i++)
-        str[i] = res[i];
-    str[len + count * 2] = '\0'; \\字符数组结尾
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>合并两个数组，涉及重复移动元素，可以考虑从后往前。</p>
-<h2 id="字符串与字符数组的长度"><a href="#字符串与字符数组的长度" class="headerlink" title="字符串与字符数组的长度"></a>字符串与字符数组的长度</h2><ul>
-<li><p>字符数组的有效长度$\neq$实际长度</p>
-</li>
-<li><p>数组形参<code>char*</code>等价于<code>char []</code>等价于<code>char[100]</code>， <strong>编译器会忽略任何为数组形参指定的长度</strong> 。64位时，sizeof(形参) = 8；32位时，sizeof(形参) = 4。</p>
-</li>
-<li><p>strlen函数计算到’\0’停止；sizeof计算包含’\0’。</p>
-</li>
-<li><p>字符数组与字符串的区别：字符数组是一个数组，每个元素的值都可以改变。而<strong>字符串指针指向的是一个常量字符串，它被存放在程序的静态数据区</strong>，一旦定义就不能改变。</p>
-</li>
-</ul>
-<pre class="line-numbers language-c++"><code class="language-c++">#include <string.h> //strlen()头文件
-char str1[] = "hello world";
-strlen(str1);                     //11
-sizeof(str1)/sizeof(char);         //12
-
-char* str2 = "hello world";
-strlen(str2);                     //11
-sizeof(str2)/sizeof(char);         //8
-
-char str3[100] = "hello world";
-strlen(str3);                     //11
-sizeof(str3)/sizeof(char);         //100
-
-//等同于char str4[5]
-char str4[] = {'h','e','l','l','o'}; //字符数组不要求最后一个字符为'\0'
-strlen(str4);                     //5
-sizeof(str3)/sizeof(char);         //8
-
-char str5[6] = {'h','e','l','l','o'}; //其余元素自动复制为空字符'\0'
-strlen(str3);                     //5
-sizeof(str3)/sizeof(char);         //6
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>参考：</p>
+      <title><![CDATA[数组中的重复数字]]></title>
+      <url>/questions/offer/003_%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E6%95%B0%E5%AD%97.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-003"><a href="#题目-003" class="headerlink" title="题目 003"></a>题目 003</h1><p>在一个长度为n的数组里的<strong>所有数字都在$0$到$n-1$的范围内</strong>。 数组中某些数字是重复的，但不知道有几个数字是重复的。也不知道每个数字重复几次。请找出数组中任意一个重复的数字。</p>
+<p>例如，如果输入长度为7的数组${2,3,1,0,2,5,3}$，那么对应的输出是第一个重复的数字$2$。</p>
 <ul>
-<li><a href="https://www.jianshu.com/p/513d817e87e9" target="_blank" rel="external">https://www.jianshu.com/p/513d817e87e9</a><br>```</li>
+<li>题目一：可修改输入数组</li>
+<li>题目二：不可修改输入数组</li>
 </ul>
-<p>```</p>
+<h1 id="几种解法"><a href="#几种解法" class="headerlink" title="几种解法"></a>几种解法</h1><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>方法</th>
+<th>时间复杂度</th>
+<th>空间复杂度</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>题目一_方法1</td>
+<td>排序</td>
+<td>$O(n\text{log}n)$</td>
+<td>$O(1)$</td>
+<td></td>
+</tr>
+<tr>
+<td>题目一_方法2</td>
+<td>哈希</td>
+<td>$O(n)$</td>
+<td>$O(n)$</td>
+<td></td>
+</tr>
+<tr>
+<td>题目一_方法3</td>
+<td>按下标重排数组</td>
+<td>$O(n)$</td>
+<td>$O(1)$</td>
+<td>每个数字最多交换2次</td>
+</tr>
+<tr>
+<td>题目二_方法1</td>
+<td>二分+区间计数</td>
+<td>$O(n\text{log}n)$</td>
+<td>$O(1)$</td>
+<td>不能找出所有重复</td>
+</tr>
+</tbody>
+</table>
+<h1 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h1><p>与方法二类似，布尔类型的哈希表。</p>
 ]]></content>
     </entry>
     
@@ -1774,6 +1717,76 @@ bool FindMid(const int target, vector<vector<int>> array, const unsigned int row
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h2><p>一开始在想这个问题的时候，从二维数组的中间选取一个数字进行比较，只考虑了右下和左上，漏掉了很多区域，没有想清楚。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[替换空格]]></title>
+      <url>/questions/offer/005_%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC.html</url>
+      <content type="html"><![CDATA[<p>替换字符串中的每个空格。<a id="more"></a></p>
+<h1 id="题目-005"><a href="#题目-005" class="headerlink" title="题目 005"></a>题目 005</h1><p>请实现一个函数，将一个字符串中的每个空格替换成<code>%20</code>。例如，当字符串为​<code>We Are Happy.</code>则经过替换之后的字符串为<code>We%20Are%20Happy.</code>。</p>
+<h1 id="推荐解法"><a href="#推荐解法" class="headerlink" title="推荐解法"></a>推荐解法</h1><p>遍历数组获取长度，可计算新数组长度，<strong>从后向前</strong>复制替换，注意结尾的’\0’。</p>
+<p><a href="https://github.com/zhedahht/CodingInterviewChinese2/blob/master/05_ReplaceSpaces/ReplaceSpaces.cpp" target="_blank" rel="external">https://github.com/zhedahht/CodingInterviewChinese2/blob/master/05_ReplaceSpaces/ReplaceSpaces.cpp</a></p>
+<h1 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h1><p>笨蛋解法，由于空格替换成<code>%20</code>会改变数组长度，借用另一个vector做转换。时间$O(n)$，空间$O(n)$。</p>
+<pre class="line-numbers language-c++"><code class="language-c++">void replaceSpace(char *str,int length) { //length为字符数组的有效长度
+    vector<char> res;
+    int count = 0;
+    int len = 0; //len记录字符数组的实际长度 
+    while(str[len] != '\0'){
+        if (str[len] == ' '){
+            res.push_back('%');
+            res.push_back('2');
+            res.push_back('0');
+            count++;
+        }
+        else
+            res.push_back(str[len]);
+        len++;
+    }
+    if (len + count * 2 > length) return;
+    for (int i = 0; i < len + count * 2; i++)
+        str[i] = res[i];
+    str[len + count * 2] = '\0'; \\字符数组结尾
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>合并两个数组，涉及重复移动元素，可以考虑从后往前。</p>
+<h2 id="字符串与字符数组的长度"><a href="#字符串与字符数组的长度" class="headerlink" title="字符串与字符数组的长度"></a>字符串与字符数组的长度</h2><ul>
+<li><p>字符数组的有效长度$\neq$实际长度</p>
+</li>
+<li><p>数组形参<code>char*</code>等价于<code>char []</code>等价于<code>char[100]</code>， <strong>编译器会忽略任何为数组形参指定的长度</strong> 。64位时，sizeof(形参) = 8；32位时，sizeof(形参) = 4。</p>
+</li>
+<li><p>strlen函数计算到’\0’停止；sizeof计算包含’\0’。</p>
+</li>
+<li><p>字符数组与字符串的区别：字符数组是一个数组，每个元素的值都可以改变。而<strong>字符串指针指向的是一个常量字符串，它被存放在程序的静态数据区</strong>，一旦定义就不能改变。</p>
+</li>
+</ul>
+<pre class="line-numbers language-c++"><code class="language-c++">#include <string.h> //strlen()头文件
+char str1[] = "hello world";
+strlen(str1);                     //11
+sizeof(str1)/sizeof(char);         //12
+
+char* str2 = "hello world";
+strlen(str2);                     //11
+sizeof(str2)/sizeof(char);         //8
+
+char str3[100] = "hello world";
+strlen(str3);                     //11
+sizeof(str3)/sizeof(char);         //100
+
+//等同于char str4[5]
+char str4[] = {'h','e','l','l','o'}; //字符数组不要求最后一个字符为'\0'
+strlen(str4);                     //5
+sizeof(str3)/sizeof(char);         //8
+
+char str5[6] = {'h','e','l','l','o'}; //其余元素自动复制为空字符'\0'
+strlen(str3);                     //5
+sizeof(str3)/sizeof(char);         //6
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>参考：</p>
+<ul>
+<li><a href="https://www.jianshu.com/p/513d817e87e9" target="_blank" rel="external">https://www.jianshu.com/p/513d817e87e9</a><br>```</li>
+</ul>
+<p>```</p>
 ]]></content>
     </entry>
     
@@ -1854,6 +1867,142 @@ bool FindMid(const int target, vector<vector<int>> array, const unsigned int row
       <url>/questions/offer/%E6%A8%A1%E6%9D%BF.html</url>
       <content type="html"><![CDATA[<a id="more"></a>
 <h1 id="题目-0"><a href="#题目-0" class="headerlink" title="题目 0"></a>题目 0</h1>]]></content>
+    </entry>
+    
+    <entry>
+      <title></title>
+      <url>/questions/%E6%A8%A1%E6%9D%BF.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-0"><a href="#题目-0" class="headerlink" title="题目 0"></a>题目 0</h1>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[删除排序链表中的重复元素]]></title>
+      <url>/questions/leetcode/%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-83"><a href="#题目-83" class="headerlink" title="题目 83"></a>题目 83</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502152924.png" alt=""></p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>考察链表操作，比较current和next是否相同，相同则跳过next指向next-&gt;next。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><pre class="line-numbers language-c++"><code class="language-c++">    ListNode* deleteDuplicates(ListNode* head) {
+        ListNode* p = head;
+        while (p != nullptr && p->next != nullptr){
+            if(p->val == p->next->val)
+                p->next = p->next->next;
+            else
+                p = p->next;
+        }
+        return head;
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[合并两个有序链表]]></title>
+      <url>/questions/leetcode/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-21"><a href="#题目-21" class="headerlink" title="题目 21"></a>题目 21</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502151923.PNG" alt=""></p>
+<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><p>判断哪个链表的节点更小，依次比较，需要新增一个合并指示指针p。判断完一个链表时，直接把p指向另一个未判断完的链表（更大）即可。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h3 id="迭代-1"><a href="#迭代-1" class="headerlink" title="迭代"></a>迭代</h3><pre class="line-numbers language-c++"><code class="language-c++">    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        if(l1 == nullptr) return l2;
+        if(l2 == nullptr) return l1;
+
+        ListNode* head = new ListNode(-1);
+        ListNode* p;
+        p = head;
+
+        while(l1 != nullptr && l2 != nullptr ){
+            if(l1->val <= l2->val){
+                p->next = l1;
+                l1 = l1->next;
+            }
+            else {
+                p->next = l2;
+                l2 = l2->next;
+            }
+            p = p->next;
+        }
+        p->next = l1 == nullptr ? l2 : l1; //attention
+        return head->next;
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[环形链表]]></title>
+      <url>/questions/leetcode/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-141-是否有环"><a href="#题目-141-是否有环" class="headerlink" title="题目 141 是否有环"></a>题目 141 是否有环</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502154012.png" alt=""></p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><h3 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h3><p>快慢指针同时出发，快指针走2步，慢指针走1步，指针相遇则有环，否则无环。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h3 id="双指针-1"><a href="#双指针-1" class="headerlink" title="双指针"></a>双指针</h3><pre class="line-numbers language-c++"><code class="language-c++">    bool hasCycle(ListNode *head) {
+        if (head == nullptr) return false;
+
+        ListNode *p, *pp;
+        p = pp = head;
+        while (p != nullptr && pp !=nullptr && p->next != nullptr && pp->next != nullptr){ //注意判断一下pp->next
+            p = p->next;
+            pp = pp->next->next;
+            if (p == pp) return true;
+        }
+        return false;
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="题目-142-环的入口"><a href="#题目-142-环的入口" class="headerlink" title="题目 142 环的入口"></a>题目 142 环的入口</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502154110.png" alt=""></p>
+<h1 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h1><h3 id="哈希表-1"><a href="#哈希表-1" class="headerlink" title="哈希表"></a>哈希表</h3><h3 id="双指针（Floyd-算法）"><a href="#双指针（Floyd-算法）" class="headerlink" title="双指针（Floyd 算法）"></a>双指针（<a href="https://leetcode-cn.com/problems/linked-list-cycle-ii/solution/huan-xing-lian-biao-ii-by-leetcode/" target="_blank" rel="external">Floyd 算法</a>）</h3><p>快慢指针相遇后，其一从起点出发，另一从相遇点出发，步速都为1，相遇则为环的入口点。</p>
+<h1 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h1><pre class="line-numbers language-c++"><code class="language-c++">    ListNode *detectCycle(ListNode *head) {
+        if (head == nullptr || head->next == nullptr) return nullptr;  //判断一下head->next，只有一个数的单链表会影响后续判断
+
+        ListNode *p, *pp;
+        p = pp = head;
+        while (p != nullptr && pp !=nullptr && pp->next != nullptr){
+            p = p->next;
+            pp = pp->next->next;
+            if (p == pp) break;
+        }
+
+        if(p == pp) p = head;
+        else return nullptr;  //无环
+
+        while (p != pp){
+            p = p->next;
+            pp = pp->next;
+        }
+        return p;
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>假设现状是：</p>
+<ul>
+<li><p>$slow$到达环的入口处，距离起点$L_0$。</p>
+</li>
+<li><p>$fast$已经进入环，可能已经在环中走了$n’$圈，环长$C$，此时距离​$slow$为​$L_1$。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502161008.png" alt=""></p>
+</li>
+<li><p>未来经过时间$t​$，$fast​$比$slow​$多走$n​$圈，$fast​$追上$slow​$，两指针相遇。</p>
+</li>
+</ul>
+<h3 id="（1）有无环"><a href="#（1）有无环" class="headerlink" title="（1）有无环"></a>（1）有无环</h3><p>未来相遇时，从$slow$到达入口点处开始计算，$fast$比$slow$多走$n$圈：</p>
+<p>​    $$(L_1+2t)-t=nC$$</p>
+<p>​    $$L_1+t=nC$$</p>
+<p>因为$L_1&lt;C$，存在$t$使得上述等式成立，$fast$多走一圈即可追上$slow$，即$n=1​$。</p>
+<blockquote>
+<p>$n=0$表示链表是一个完整的环，头结点就是环的入口。</p>
+</blockquote>
+<h3 id="（2）环的入口"><a href="#（2）环的入口" class="headerlink" title="（2）环的入口"></a>（2）环的入口</h3><p>两指针从起点到相遇点的全部路程为：</p>
+<p>$slow​$: $L_0+t​$</p>
+<p>$fast​$: $L_0+(L_1+n’C)+2t​$    </p>
+<p>​    即$L_0 + t + nC+n’C​$</p>
+<blockquote>
+<p>注：在$slow$到达入口点这一时刻，$L_1+n’C$表示$fast$已经走过入口点的距离，$2t$表示$fast$还要再走$t$时间才能与$slow$相遇。</p>
+</blockquote>
+<p>到相遇时，$fast​$走过的路程是$slow​$的2倍：</p>
+<p>​    $$2(L_0+t) = L_0 + t + nC+n’C$$</p>
+<p>​    $$L_0 = nC+n’C-t​$$</p>
+<p>由（1）分析知，$fast$多走一圈即可追上$slow$，即$n=1​$。</p>
+<p>​    $$L_0=(C-t)+n’C$$</p>
+<p>$(C-t)​$就是从相遇点继续向前，走到环的入口点的距离。</p>
+<p>所以，</p>
+<p>​    $$distance_{head_to_entrance} = distance_{cross_to_entrance}$$</p>
+]]></content>
     </entry>
     
   

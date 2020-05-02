@@ -138,15 +138,30 @@
 
 
 
-<meta name="description" content="一只蘑菇">
+<meta name="description" content="题目 21
+解法递归迭代判断哪个链表的节点更小，依次比较，需要新增一个合并指示指针p。判断完一个链表时，直接把p指向另一个未判断完的链表（更大）即可。
+代码迭代    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        if(l1 == nullptr) return l2;
+        if(l2 == nullptr">
 <meta property="og:type" content="website">
-<meta property="og:title" content="安静土">
-<meta property="og:url" content="https://abc.hey-world.xyz/archives/index.html">
+<meta property="og:title" content="合并两个有序链表">
+<meta property="og:url" content="https://abc.hey-world.xyz/questions/leetcode/合并两个有序链表.html">
 <meta property="og:site_name" content="安静土">
-<meta property="og:description" content="一只蘑菇">
+<meta property="og:description" content="题目 21
+解法递归迭代判断哪个链表的节点更小，依次比较，需要新增一个合并指示指针p。判断完一个链表时，直接把p指向另一个未判断完的链表（更大）即可。
+代码迭代    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        if(l1 == nullptr) return l2;
+        if(l2 == nullptr">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502151923.PNG">
+<meta property="og:updated_time" content="2020-05-02T07:27:49.846Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="安静土">
-<meta name="twitter:description" content="一只蘑菇">
+<meta name="twitter:title" content="合并两个有序链表">
+<meta name="twitter:description" content="题目 21
+解法递归迭代判断哪个链表的节点更小，依次比较，需要新增一个合并指示指针p。判断完一个链表时，直接把p指向另一个未判断完的链表（更大）即可。
+代码迭代    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        if(l1 == nullptr) return l2;
+        if(l2 == nullptr">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502151923.PNG">
 
 
 
@@ -176,13 +191,13 @@
 
 
 
-  <link rel="canonical" href="https://abc.hey-world.xyz/archives/"/>
+  <link rel="canonical" href="https://abc.hey-world.xyz/questions/leetcode/合并两个有序链表.html"/>
 
 
 
 
 
-  <title>归档 | 安静土</title>
+  <title>合并两个有序链表 | 安静土</title>
   
 
 
@@ -221,7 +236,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -369,385 +384,62 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
 
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        嗯..! 目前共计 9 篇日志。 继续努力。
-      </span>
+	<h1 class="post-title" itemprop="name headline">合并两个有序链表</h1>
+
+
+
+</header>
 
       
+      
+      
+      <div class="post-body">
+        
+        
+          <a id="more"></a>
+<h1 id="题目-21"><a href="#题目-21" class="headerlink" title="题目 21"></a>题目 21</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502151923.PNG" alt=""></p>
+<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><p>判断哪个链表的节点更小，依次比较，需要新增一个合并指示指针p。判断完一个链表时，直接把p指向另一个未判断完的链表（更大）即可。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h3 id="迭代-1"><a href="#迭代-1" class="headerlink" title="迭代"></a>迭代</h3><pre class="line-numbers language-c++"><code class="language-c++">    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        if(l1 == nullptr) return l2;
+        if(l2 == nullptr) return l1;
+
+        ListNode* head = new ListNode(-1);
+        ListNode* p;
+        p = head;
+
+        while(l1 != nullptr && l2 != nullptr ){
+            if(l1->val <= l2->val){
+                p->next = l1;
+                l1 = l1->next;
+            }
+            else {
+                p->next = l2;
+                l2 = l2->next;
+            }
+            p = p->next;
+        }
+        p->next = l1 == nullptr ? l2 : l1; //attention
+        return head->next;
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
         
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2020">2020</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/04/30/frp内网渗透实现流畅远程办公/" itemprop="url">
-              
-                <span itemprop="name">frp内网渗透实现流畅远程办公</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-04-30T16:33:34+08:00"
-              content="2020-04-30" >
-          04-30
-        </time>
       </div>
-
-    </header>
-  </article>
-
-
-
       
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/24/不升级解决xftp5：要继续使用此程序，您必须应用最新的更新或使用新版本/" itemprop="url">
-              
-                <span itemprop="name">解决xftp5：要继续使用此程序，您必须应用最新的更新或使用新版本</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-04-24T21:19:08+08:00"
-              content="2019-04-24" >
-          04-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/24/Windows下通过sublime-text批量替换多个文件/" itemprop="url">
-              
-                <span itemprop="name">Windows下通过sublime text批量替换多个文件</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-04-24T20:28:54+08:00"
-              content="2019-04-24" >
-          04-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/28/用python为png图片加上背景色/" itemprop="url">
-              
-                <span itemprop="name">用python为png图片加上背景色</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-28T16:43:19+08:00"
-              content="2018-07-28" >
-          07-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2017">2017</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/04/C-如何判断整型运算溢出/" itemprop="url">
-              
-                <span itemprop="name">C++如何判断整型运算溢出</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-04T16:27:08+08:00"
-              content="2017-08-04" >
-          08-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/01/hexo博客中编辑LaTex公式/" itemprop="url">
-              
-                <span itemprop="name">博客常用</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-01T00:31:28+08:00"
-              content="2017-07-01" >
-          07-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/06/08/决策树之ID3/" itemprop="url">
-              
-                <span itemprop="name">决策树之ID3</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-06-08T16:28:27+08:00"
-              content="2017-06-08" >
-          06-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/06/06/人工神经网络之BP算法/" itemprop="url">
-              
-                <span itemprop="name">人工神经网络之BP算法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-06-06T22:23:21+08:00"
-              content="2017-06-06" >
-          06-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/07/这些电脑小工具/" itemprop="url">
-              
-                <span itemprop="name">这些电脑小工具</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-07T17:38:38+08:00"
-              content="2017-03-07" >
-          03-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
@@ -755,6 +447,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -775,8 +474,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -856,6 +564,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-21"><span class="nav-number">1.</span> <span class="nav-text">题目 21</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解法"><span class="nav-number">2.</span> <span class="nav-text">解法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#递归"><span class="nav-number">2.0.1.</span> <span class="nav-text">递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代"><span class="nav-number">2.0.2.</span> <span class="nav-text">迭代</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代-1"><span class="nav-number">3.0.1.</span> <span class="nav-text">迭代</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1031,6 +755,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
