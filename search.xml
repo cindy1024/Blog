@@ -788,56 +788,6 @@ x<span class="token punctuation">,</span>y <span class="token operator">=</span>
     </entry>
     
     <entry>
-      <title><![CDATA[Palindrome Number]]></title>
-      <url>/questions/Palindrome-Number.html</url>
-      <content type="html"><![CDATA[<p>判断回文数。<a id="more"></a></p>
-<h1 id="题目-9"><a href="#题目-9" class="headerlink" title="题目 9"></a>题目 9</h1><p>Determine whether an integer is a palindrome. Do this without extra space.</p>
-<p>click to show spoilers.</p>
-<hr>
-<p><strong>Some hints:</strong><br>Could negative integers be palindromes? (ie, -1)</p>
-<p>If you are thinking of converting the integer to string, note the restriction of using extra space.</p>
-<p>You could also try reversing an integer. However, if you have solved the problem “Reverse Integer”, you know that the reversed integer might overflow. How would you handle such case?</p>
-<p>There is a more generic way of solving this problem.</p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>负号不对称，负数不是回文数。</p>
-<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>用了额外的栈和队列空间。</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp">    <span class="token keyword">bool</span> <span class="token function">isPalindrome</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        stack<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> s<span class="token punctuation">;</span>
-        queue<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> q<span class="token punctuation">;</span>
-        <span class="token keyword">while</span> <span class="token punctuation">(</span>x <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">int</span> tmp <span class="token operator">=</span> x <span class="token operator">%</span> <span class="token number">10</span><span class="token punctuation">;</span>
-            s<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            x <span class="token operator">/</span><span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">while</span> <span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> q<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                s<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-            <span class="token keyword">else</span>
-                <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Only reversing till half and then compare. <a href="http://wuxinju.top/2017/08/03/Reverse-Integer/" target="_blank" rel="external">007-Reverse-Integer</a></p>
-<p>空间复杂度O(1)，与问题规模n无关。</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp">    <span class="token keyword">bool</span> <span class="token function">isPalindrome</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>x<span class="token operator">&lt;</span><span class="token number">0</span><span class="token operator">||</span> <span class="token punctuation">(</span>x<span class="token operator">!=</span><span class="token number">0</span> <span class="token operator">&amp;&amp;</span>x<span class="token operator">%</span><span class="token number">10</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//10的倍数必定不是回文数</span>
-        <span class="token keyword">int</span> sum<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">while</span><span class="token punctuation">(</span>x<span class="token operator">></span>sum<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            sum <span class="token operator">=</span> sum<span class="token operator">*</span><span class="token number">10</span><span class="token operator">+</span>x<span class="token operator">%</span><span class="token number">10</span><span class="token punctuation">;</span>
-            x <span class="token operator">=</span> x<span class="token operator">/</span><span class="token number">10</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> <span class="token punctuation">(</span>x<span class="token operator">==</span>sum<span class="token punctuation">)</span><span class="token operator">||</span><span class="token punctuation">(</span>x<span class="token operator">==</span>sum<span class="token operator">/</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//偶数位、奇数位</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[Master-Mind Hints]]></title>
       <url>/questions/Master-Mind-Hints.html</url>
       <content type="html"><![CDATA[<p>猜数字游戏的提示。<a id="more"></a></p>
@@ -898,6 +848,56 @@ x<span class="token punctuation">,</span>y <span class="token operator">=</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Palindrome Number]]></title>
+      <url>/questions/Palindrome-Number.html</url>
+      <content type="html"><![CDATA[<p>判断回文数。<a id="more"></a></p>
+<h1 id="题目-9"><a href="#题目-9" class="headerlink" title="题目 9"></a>题目 9</h1><p>Determine whether an integer is a palindrome. Do this without extra space.</p>
+<p>click to show spoilers.</p>
+<hr>
+<p><strong>Some hints:</strong><br>Could negative integers be palindromes? (ie, -1)</p>
+<p>If you are thinking of converting the integer to string, note the restriction of using extra space.</p>
+<p>You could also try reversing an integer. However, if you have solved the problem “Reverse Integer”, you know that the reversed integer might overflow. How would you handle such case?</p>
+<p>There is a more generic way of solving this problem.</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>负号不对称，负数不是回文数。</p>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>用了额外的栈和队列空间。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">    <span class="token keyword">bool</span> <span class="token function">isPalindrome</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        stack<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> s<span class="token punctuation">;</span>
+        queue<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> q<span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>x <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> tmp <span class="token operator">=</span> x <span class="token operator">%</span> <span class="token number">10</span><span class="token punctuation">;</span>
+            s<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            x <span class="token operator">/</span><span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> q<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                s<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span>
+                <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Only reversing till half and then compare. <a href="http://wuxinju.top/2017/08/03/Reverse-Integer/" target="_blank" rel="external">007-Reverse-Integer</a></p>
+<p>空间复杂度O(1)，与问题规模n无关。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">    <span class="token keyword">bool</span> <span class="token function">isPalindrome</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>x<span class="token operator">&lt;</span><span class="token number">0</span><span class="token operator">||</span> <span class="token punctuation">(</span>x<span class="token operator">!=</span><span class="token number">0</span> <span class="token operator">&amp;&amp;</span>x<span class="token operator">%</span><span class="token number">10</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//10的倍数必定不是回文数</span>
+        <span class="token keyword">int</span> sum<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>x<span class="token operator">></span>sum<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            sum <span class="token operator">=</span> sum<span class="token operator">*</span><span class="token number">10</span><span class="token operator">+</span>x<span class="token operator">%</span><span class="token number">10</span><span class="token punctuation">;</span>
+            x <span class="token operator">=</span> x<span class="token operator">/</span><span class="token number">10</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>x<span class="token operator">==</span>sum<span class="token punctuation">)</span><span class="token operator">||</span><span class="token punctuation">(</span>x<span class="token operator">==</span>sum<span class="token operator">/</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//偶数位、奇数位</span>
+    <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 ]]></content>
     </entry>
     
@@ -1503,6 +1503,13 @@ Y   I   R
     </entry>
     
     <entry>
+      <title></title>
+      <url>/questions/%E6%A8%A1%E6%9D%BF.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-0"><a href="#题目-0" class="headerlink" title="题目 0"></a>题目 0</h1>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[tags]]></title>
       <url>/tags/index.html</url>
       <content type="html"></content>
@@ -1512,6 +1519,176 @@ Y   I   R
       <title><![CDATA[timeline]]></title>
       <url>/timeline/index.html</url>
       <content type="html"></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[删除排序链表中的重复元素]]></title>
+      <url>/questions/leetcode/%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-83"><a href="#题目-83" class="headerlink" title="题目 83"></a>题目 83</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502152924.png" alt=""></p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>考察链表操作，比较current和next是否相同，相同则跳过next指向next-&gt;next。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><pre class="line-numbers language-c++"><code class="language-c++">    ListNode* deleteDuplicates(ListNode* head) {
+        ListNode* p = head;
+        while (p != nullptr && p->next != nullptr){
+            if(p->val == p->next->val)
+                p->next = p->next->next;
+            else
+                p = p->next;
+        }
+        return head;
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[合并两个有序链表]]></title>
+      <url>/questions/leetcode/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-21"><a href="#题目-21" class="headerlink" title="题目 21"></a>题目 21</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502151923.PNG" alt=""></p>
+<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><p>判断哪个链表的节点更小，依次比较，需要新增一个合并指示指针p。判断完一个链表时，直接把p指向另一个未判断完的链表（更大）即可。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h3 id="迭代-1"><a href="#迭代-1" class="headerlink" title="迭代"></a>迭代</h3><pre class="line-numbers language-c++"><code class="language-c++">    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        if(l1 == nullptr) return l2;
+        if(l2 == nullptr) return l1;
+
+        ListNode* head = new ListNode(-1);
+        ListNode* p;
+        p = head;
+
+        while(l1 != nullptr && l2 != nullptr ){
+            if(l1->val <= l2->val){
+                p->next = l1;
+                l1 = l1->next;
+            }
+            else {
+                p->next = l2;
+                l2 = l2->next;
+            }
+            p = p->next;
+        }
+        p->next = l1 == nullptr ? l2 : l1; //attention
+        return head->next;
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[环形链表]]></title>
+      <url>/questions/leetcode/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-141-是否有环"><a href="#题目-141-是否有环" class="headerlink" title="题目 141 是否有环"></a>题目 141 是否有环</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502154012.png" alt=""></p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><h3 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h3><p>快慢指针同时出发，快指针走2步，慢指针走1步，指针相遇则有环，否则无环。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h3 id="双指针-1"><a href="#双指针-1" class="headerlink" title="双指针"></a>双指针</h3><pre class="line-numbers language-c++"><code class="language-c++">    bool hasCycle(ListNode *head) {
+        if (head == nullptr) return false;
+
+        ListNode *p, *pp;
+        p = pp = head;
+        while (p != nullptr && pp !=nullptr && p->next != nullptr && pp->next != nullptr){ //注意判断一下pp->next
+            p = p->next;
+            pp = pp->next->next;
+            if (p == pp) return true;
+        }
+        return false;
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="题目-142-环的入口"><a href="#题目-142-环的入口" class="headerlink" title="题目 142 环的入口"></a>题目 142 环的入口</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502154110.png" alt=""></p>
+<h1 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h1><h3 id="哈希表-1"><a href="#哈希表-1" class="headerlink" title="哈希表"></a>哈希表</h3><h3 id="双指针（Floyd-算法）"><a href="#双指针（Floyd-算法）" class="headerlink" title="双指针（Floyd 算法）"></a>双指针（<a href="https://leetcode-cn.com/problems/linked-list-cycle-ii/solution/huan-xing-lian-biao-ii-by-leetcode/" target="_blank" rel="external">Floyd 算法</a>）</h3><p>快慢指针相遇后，其一从起点出发，另一从相遇点出发，步速都为1，相遇则为环的入口点。</p>
+<h1 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h1><pre class="line-numbers language-c++"><code class="language-c++">    ListNode *detectCycle(ListNode *head) {
+        if (head == nullptr || head->next == nullptr) return nullptr;  //判断一下head->next，只有一个数的单链表会影响后续判断
+
+        ListNode *p, *pp;
+        p = pp = head;
+        while (p != nullptr && pp !=nullptr && pp->next != nullptr){
+            p = p->next;
+            pp = pp->next->next;
+            if (p == pp) break;
+        }
+
+        if(p == pp) p = head;
+        else return nullptr;  //无环
+
+        while (p != pp){
+            p = p->next;
+            pp = pp->next;
+        }
+        return p;
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>假设现状是：</p>
+<ul>
+<li><p>$slow$到达环的入口处，距离起点$L_0$。</p>
+</li>
+<li><p>$fast$已经进入环，可能已经在环中走了$n’$圈，环长$C$，此时距离​$slow$为​$L_1$。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502161008.png" alt=""></p>
+</li>
+<li><p>未来经过时间$t​$，$fast​$比$slow​$多走$n​$圈，$fast​$追上$slow​$，两指针相遇。</p>
+</li>
+</ul>
+<h3 id="（1）有无环"><a href="#（1）有无环" class="headerlink" title="（1）有无环"></a>（1）有无环</h3><p>未来相遇时，从$slow$到达入口点处开始计算，$fast$比$slow$多走$n$圈：</p>
+<p>$$(L_1+2t)-t=nC$$</p>
+<p>$$L_1+t=nC$$</p>
+<p>因为$L_1&lt;C$，存在$t$使得上述等式成立，$fast$多走一圈即可追上$slow$，即$n=1​$。</p>
+<blockquote>
+<p>$n=0$表示链表是一个完整的环，头结点就是环的入口。</p>
+</blockquote>
+<h3 id="（2）环的入口"><a href="#（2）环的入口" class="headerlink" title="（2）环的入口"></a>（2）环的入口</h3><p>两指针从起点到相遇点的全部路程为：</p>
+<p>$slow​$: $L_0+t​$</p>
+<p>$fast​$: $L_0+(L_1+n’C)+2t​$    </p>
+<p>​    即$L_0 + t + nC+n’C​$</p>
+<blockquote>
+<p>注：在$slow$到达入口点这一时刻，$L_1+n’C$表示$fast$已经走过入口点的距离，$2t$表示$fast$还要再走$t$时间才能与$slow$相遇。</p>
+</blockquote>
+<p>到相遇时，$fast​$走过的路程是$slow​$的2倍：</p>
+<p>$$2(L_0+t) = L_0 + t + nC+n’C​$$</p>
+<p>$$L_0 = nC+n’C-t$$</p>
+<p>由（1）分析知，$fast$多走一圈即可追上$slow$，即$n=1​$。</p>
+<p>$$L_0=(C-t)+n’C$$</p>
+<p>$(C-t)​$就是从相遇点继续向前，走到环的入口点的距离。</p>
+<p>所以，</p>
+<p>$$distance_{head_to_entrance} = distance_{cross_to_entrance}​$$</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[相交链表]]></title>
+      <url>/questions/leetcode/%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-160"><a href="#题目-160" class="headerlink" title="题目 160"></a>题目 160</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502181124.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502181147.png" alt=""></p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h3 id="暴力法"><a href="#暴力法" class="headerlink" title="暴力法"></a>暴力法</h3><h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><h3 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h3><p>$$a+intersection+b = b+intersection+a​$$</p>
+<blockquote>
+<ul>
+<li><p>当 pA 到达链表的尾部时，将它重定位到链表 B 的头结点 (你没看错，就是链表 B); 类似的，当 pB 到达链表的尾部时，将它重定位到链表 A 的头结点。</p>
+</li>
+<li><p>若在某一时刻 pA 和 pB 相遇，则 pA/pB 为相交结点。</p>
+</li>
+<li><p>如果两个链表存在相交，它们末尾的结点必然相同。因此当 pA/pB到达链表结尾时，记录下链表 <code>A/B</code> 对应的元素。若最后元素不相同，则两个链表不相交。</p>
+</li>
+</ul>
+<ul>
+<li><p>时间复杂度 $O(m+n)$</p>
+</li>
+<li><p>空间复杂度 $O(1)$</p>
+</li>
+</ul>
+</blockquote>
+<p>巧妙地把指针重定向，形成了类似环形链表（没有改变输入链表）。双指针速度一致，必同时走完全程，即找到相交点。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h3 id="双指针-1"><a href="#双指针-1" class="headerlink" title="双指针"></a>双指针</h3><pre class="line-numbers language-c++"><code class="language-c++">    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        if (headA == nullptr || headB == nullptr) return nullptr;
+
+        ListNode *pa, *pb;
+        pa = headA;
+        pb = headB;
+
+        while (pa != pb){
+            pa = (pa == nullptr ? headB : pa->next);
+            pb = (pb == nullptr ? headA : pb->next);
+        }
+        return pa;
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
     </entry>
     
     <entry>
@@ -1869,183 +2046,6 @@ sizeof(str3)/sizeof(char);         //6
       <url>/questions/offer/%E6%A8%A1%E6%9D%BF.html</url>
       <content type="html"><![CDATA[<a id="more"></a>
 <h1 id="题目-0"><a href="#题目-0" class="headerlink" title="题目 0"></a>题目 0</h1>]]></content>
-    </entry>
-    
-    <entry>
-      <title></title>
-      <url>/questions/%E6%A8%A1%E6%9D%BF.html</url>
-      <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="题目-0"><a href="#题目-0" class="headerlink" title="题目 0"></a>题目 0</h1>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[删除排序链表中的重复元素]]></title>
-      <url>/questions/leetcode/%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0.html</url>
-      <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="题目-83"><a href="#题目-83" class="headerlink" title="题目 83"></a>题目 83</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502152924.png" alt=""></p>
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>考察链表操作，比较current和next是否相同，相同则跳过next指向next-&gt;next。</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><pre class="line-numbers language-c++"><code class="language-c++">    ListNode* deleteDuplicates(ListNode* head) {
-        ListNode* p = head;
-        while (p != nullptr && p->next != nullptr){
-            if(p->val == p->next->val)
-                p->next = p->next->next;
-            else
-                p = p->next;
-        }
-        return head;
-    }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[合并两个有序链表]]></title>
-      <url>/questions/leetcode/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8.html</url>
-      <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="题目-21"><a href="#题目-21" class="headerlink" title="题目 21"></a>题目 21</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502151923.PNG" alt=""></p>
-<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><p>判断哪个链表的节点更小，依次比较，需要新增一个合并指示指针p。判断完一个链表时，直接把p指向另一个未判断完的链表（更大）即可。</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h3 id="迭代-1"><a href="#迭代-1" class="headerlink" title="迭代"></a>迭代</h3><pre class="line-numbers language-c++"><code class="language-c++">    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-        if(l1 == nullptr) return l2;
-        if(l2 == nullptr) return l1;
-
-        ListNode* head = new ListNode(-1);
-        ListNode* p;
-        p = head;
-
-        while(l1 != nullptr && l2 != nullptr ){
-            if(l1->val <= l2->val){
-                p->next = l1;
-                l1 = l1->next;
-            }
-            else {
-                p->next = l2;
-                l2 = l2->next;
-            }
-            p = p->next;
-        }
-        p->next = l1 == nullptr ? l2 : l1; //attention
-        return head->next;
-    }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[环形链表]]></title>
-      <url>/questions/leetcode/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8.html</url>
-      <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="题目-141-是否有环"><a href="#题目-141-是否有环" class="headerlink" title="题目 141 是否有环"></a>题目 141 是否有环</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502154012.png" alt=""></p>
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><h3 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h3><p>快慢指针同时出发，快指针走2步，慢指针走1步，指针相遇则有环，否则无环。</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h3 id="双指针-1"><a href="#双指针-1" class="headerlink" title="双指针"></a>双指针</h3><pre class="line-numbers language-c++"><code class="language-c++">    bool hasCycle(ListNode *head) {
-        if (head == nullptr) return false;
-
-        ListNode *p, *pp;
-        p = pp = head;
-        while (p != nullptr && pp !=nullptr && p->next != nullptr && pp->next != nullptr){ //注意判断一下pp->next
-            p = p->next;
-            pp = pp->next->next;
-            if (p == pp) return true;
-        }
-        return false;
-    }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="题目-142-环的入口"><a href="#题目-142-环的入口" class="headerlink" title="题目 142 环的入口"></a>题目 142 环的入口</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502154110.png" alt=""></p>
-<h1 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h1><h3 id="哈希表-1"><a href="#哈希表-1" class="headerlink" title="哈希表"></a>哈希表</h3><h3 id="双指针（Floyd-算法）"><a href="#双指针（Floyd-算法）" class="headerlink" title="双指针（Floyd 算法）"></a>双指针（<a href="https://leetcode-cn.com/problems/linked-list-cycle-ii/solution/huan-xing-lian-biao-ii-by-leetcode/" target="_blank" rel="external">Floyd 算法</a>）</h3><p>快慢指针相遇后，其一从起点出发，另一从相遇点出发，步速都为1，相遇则为环的入口点。</p>
-<h1 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h1><pre class="line-numbers language-c++"><code class="language-c++">    ListNode *detectCycle(ListNode *head) {
-        if (head == nullptr || head->next == nullptr) return nullptr;  //判断一下head->next，只有一个数的单链表会影响后续判断
-
-        ListNode *p, *pp;
-        p = pp = head;
-        while (p != nullptr && pp !=nullptr && pp->next != nullptr){
-            p = p->next;
-            pp = pp->next->next;
-            if (p == pp) break;
-        }
-
-        if(p == pp) p = head;
-        else return nullptr;  //无环
-
-        while (p != pp){
-            p = p->next;
-            pp = pp->next;
-        }
-        return p;
-    }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>假设现状是：</p>
-<ul>
-<li><p>$slow$到达环的入口处，距离起点$L_0$。</p>
-</li>
-<li><p>$fast$已经进入环，可能已经在环中走了$n’$圈，环长$C$，此时距离​$slow$为​$L_1$。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502161008.png" alt=""></p>
-</li>
-<li><p>未来经过时间$t​$，$fast​$比$slow​$多走$n​$圈，$fast​$追上$slow​$，两指针相遇。</p>
-</li>
-</ul>
-<h3 id="（1）有无环"><a href="#（1）有无环" class="headerlink" title="（1）有无环"></a>（1）有无环</h3><p>未来相遇时，从$slow$到达入口点处开始计算，$fast$比$slow$多走$n$圈：</p>
-<p>$$(L_1+2t)-t=nC$$</p>
-<p>$$L_1+t=nC$$</p>
-<p>因为$L_1&lt;C$，存在$t$使得上述等式成立，$fast$多走一圈即可追上$slow$，即$n=1​$。</p>
-<blockquote>
-<p>$n=0$表示链表是一个完整的环，头结点就是环的入口。</p>
-</blockquote>
-<h3 id="（2）环的入口"><a href="#（2）环的入口" class="headerlink" title="（2）环的入口"></a>（2）环的入口</h3><p>两指针从起点到相遇点的全部路程为：</p>
-<p>$slow​$: $L_0+t​$</p>
-<p>$fast​$: $L_0+(L_1+n’C)+2t​$    </p>
-<p>​    即$L_0 + t + nC+n’C​$</p>
-<blockquote>
-<p>注：在$slow$到达入口点这一时刻，$L_1+n’C$表示$fast$已经走过入口点的距离，$2t$表示$fast$还要再走$t$时间才能与$slow$相遇。</p>
-</blockquote>
-<p>到相遇时，$fast​$走过的路程是$slow​$的2倍：</p>
-<p>$$2(L_0+t) = L_0 + t + nC+n’C​$$</p>
-<p>$$L_0 = nC+n’C-t$$</p>
-<p>由（1）分析知，$fast$多走一圈即可追上$slow$，即$n=1​$。</p>
-<p>$$L_0=(C-t)+n’C$$</p>
-<p>$(C-t)​$就是从相遇点继续向前，走到环的入口点的距离。</p>
-<p>所以，</p>
-<p>$$distance_{head_to_entrance} = distance_{cross_to_entrance}​$$</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[相交链表]]></title>
-      <url>/questions/leetcode/%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8.html</url>
-      <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="题目-160"><a href="#题目-160" class="headerlink" title="题目 160"></a>题目 160</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502181124.png" alt=""></p>
-<p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502181147.png" alt=""></p>
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h3 id="暴力法"><a href="#暴力法" class="headerlink" title="暴力法"></a>暴力法</h3><h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><h3 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h3><p>$$a+intersection+b = b+intersection+a​$$</p>
-<blockquote>
-<ul>
-<li><p>当 pA 到达链表的尾部时，将它重定位到链表 B 的头结点 (你没看错，就是链表 B); 类似的，当 pB 到达链表的尾部时，将它重定位到链表 A 的头结点。</p>
-</li>
-<li><p>若在某一时刻 pA 和 pB 相遇，则 pA/pB 为相交结点。</p>
-</li>
-<li><p>如果两个链表存在相交，它们末尾的结点必然相同。因此当 pA/pB到达链表结尾时，记录下链表 <code>A/B</code> 对应的元素。若最后元素不相同，则两个链表不相交。</p>
-</li>
-</ul>
-<ul>
-<li><p>时间复杂度 $O(m+n)$</p>
-</li>
-<li><p>空间复杂度 $O(1)$</p>
-</li>
-</ul>
-</blockquote>
-<p>巧妙地把指针重定向，形成了类似环形链表（没有改变输入链表）。双指针速度一致，必同时走完全程，即找到相交点。</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h3 id="双指针-1"><a href="#双指针-1" class="headerlink" title="双指针"></a>双指针</h3><pre class="line-numbers language-c++"><code class="language-c++">    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        if (headA == nullptr || headB == nullptr) return nullptr;
-
-        ListNode *pa, *pb;
-        pa = headA;
-        pb = headB;
-
-        while (pa != pb){
-            pa = (pa == nullptr ? headB : pa->next);
-            pb = (pb == nullptr ? headA : pb->next);
-        }
-        return pa;
-    }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
     </entry>
     
   
