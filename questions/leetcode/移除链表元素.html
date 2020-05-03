@@ -138,15 +138,66 @@
 
 
 
-<meta name="description" content="一只蘑菇">
+<meta name="description" content="题目 203
+#题解
+tips: 删除节点时，注意防止内存泄露。
+迭代初想很简单：
+
+
+选择要删除节点的前一个结点 prev。
+将 prev 的 next 设置为要删除结点的 next
+
+
+但当要删除的节点位于头结点时，情况会变复杂。因为我们使用头结点指示后面的节点是否需要删除，没有考虑头结点需要删除的情况。可以有以下两种方式：
+
+哨兵节点
+循环判断第一个节点是否要删除
+
+
+可以通过哨兵节点去解">
 <meta property="og:type" content="website">
-<meta property="og:title" content="安静土">
-<meta property="og:url" content="https://abc.hey-world.xyz/archives/2017/07/index.html">
+<meta property="og:title" content="移除链表元素">
+<meta property="og:url" content="https://abc.hey-world.xyz/questions/leetcode/移除链表元素.html">
 <meta property="og:site_name" content="安静土">
-<meta property="og:description" content="一只蘑菇">
+<meta property="og:description" content="题目 203
+#题解
+tips: 删除节点时，注意防止内存泄露。
+迭代初想很简单：
+
+
+选择要删除节点的前一个结点 prev。
+将 prev 的 next 设置为要删除结点的 next
+
+
+但当要删除的节点位于头结点时，情况会变复杂。因为我们使用头结点指示后面的节点是否需要删除，没有考虑头结点需要删除的情况。可以有以下两种方式：
+
+哨兵节点
+循环判断第一个节点是否要删除
+
+
+可以通过哨兵节点去解">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200503104153.png">
+<meta property="og:updated_time" content="2020-05-03T03:17:54.206Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="安静土">
-<meta name="twitter:description" content="一只蘑菇">
+<meta name="twitter:title" content="移除链表元素">
+<meta name="twitter:description" content="题目 203
+#题解
+tips: 删除节点时，注意防止内存泄露。
+迭代初想很简单：
+
+
+选择要删除节点的前一个结点 prev。
+将 prev 的 next 设置为要删除结点的 next
+
+
+但当要删除的节点位于头结点时，情况会变复杂。因为我们使用头结点指示后面的节点是否需要删除，没有考虑头结点需要删除的情况。可以有以下两种方式：
+
+哨兵节点
+循环判断第一个节点是否要删除
+
+
+可以通过哨兵节点去解">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200503104153.png">
 
 
 
@@ -176,13 +227,13 @@
 
 
 
-  <link rel="canonical" href="https://abc.hey-world.xyz/archives/2017/07/"/>
+  <link rel="canonical" href="https://abc.hey-world.xyz/questions/leetcode/移除链表元素.html"/>
 
 
 
 
 
-  <title>归档 | 安静土</title>
+  <title>移除链表元素 | 安静土</title>
   
 
 
@@ -221,7 +272,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -379,74 +430,93 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
 
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        嗯..! 目前共计 9 篇日志。 继续努力。
-      </span>
+	<h1 class="post-title" itemprop="name headline">移除链表元素</h1>
+
+
+
+</header>
 
       
+      
+      
+      <div class="post-body">
+        
+        
+          <a id="more"></a>
+<h1 id="题目-203"><a href="#题目-203" class="headerlink" title="题目 203"></a>题目 203</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200503104153.png" alt=""></p>
+<p>#题解</p>
+<p>tips: 删除节点时，注意防止内存泄露。</p>
+<h2 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h2><p>初想很简单：</p>
+<blockquote>
+<ul>
+<li>选择要删除节点的前一个结点 prev。</li>
+<li>将 prev 的 next 设置为要删除结点的 next</li>
+</ul>
+</blockquote>
+<p>但当要删除的节点位于头结点时，情况会变复杂。因为我们使用头结点指示后面的节点是否需要删除，没有考虑头结点需要删除的情况。可以有以下两种方式：</p>
+<ul>
+<li>哨兵节点</li>
+<li>循环判断第一个节点是否要删除</li>
+</ul>
+<blockquote>
+<p>可以通过<strong>哨兵节点</strong>去解决它，哨兵节点广泛应用于树和链表中，如伪头、伪尾、标记等，它们是纯功能的，通常不保存任何数据，其主要目的是使链表标准化，如使链表永不为空、永不无头、简化插入和删除。</p>
+<pre class="line-numbers language-c++"><code class="language-c++">ListNode* sentinel = new ListNode(0);
+sentinel->next = head;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>最后返回<code>sentinel-&gt;next</code>即可。</p>
+</blockquote>
+<h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><p>简洁有力的实现方式！！</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="迭代-1"><a href="#迭代-1" class="headerlink" title="迭代"></a>迭代</h2><pre class="line-numbers language-c++"><code class="language-c++">    ListNode* removeElements(ListNode* head, int val) {
+        if (head == nullptr) return nullptr;
+
+        ListNode* p = head;
+        while (p != nullptr && p->next != nullptr) {
+            //头结点需删去的情况
+            if(p == head && p->val==val){
+                ListNode* tmp = head;
+                p = head = head->next;
+                delete tmp;
+                continue;
+            }
+            (p->next->val == val)? p->next = p->next->next : p = p->next;
+        }
+        //只有一个结点时，不进入while循环，故需再判断一次
+        if (head->val == val) return nullptr;
+        else return head;
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="递归-1"><a href="#递归-1" class="headerlink" title="递归"></a>递归</h2><pre class="line-numbers language-c++"><code class="language-c++">    ListNode* removeElements(ListNode* head, int val) {
+        //结束标志
+        if (!head) return head;
+        //自上而下
+        head->next = removeElements(head->next, val);
+        //关系，注意防止内存泄露
+        if (head->val == val){
+            ListNode* tmp = head;
+            head = head->next;
+            delete tmp;
+        }
+        return head;
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
         
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2017">2017</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/01/hexo博客中编辑LaTex公式/" itemprop="url">
-              
-                <span itemprop="name">博客常用</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-01T00:31:28+08:00"
-              content="2017-07-01" >
-          07-01
-        </time>
       </div>
-
-    </header>
-  </article>
-
-
-
       
-
+      
+      
     </div>
+    
+    
+    
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
@@ -454,6 +524,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -474,8 +551,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -555,6 +641,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-203"><span class="nav-number">1.</span> <span class="nav-text">题目 203</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代"><span class="nav-number">1.1.</span> <span class="nav-text">迭代</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归"><span class="nav-number">1.2.</span> <span class="nav-text">递归</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代-1"><span class="nav-number">2.1.</span> <span class="nav-text">迭代</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归-1"><span class="nav-number">2.2.</span> <span class="nav-text">递归</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -730,6 +832,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

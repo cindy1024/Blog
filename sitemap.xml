@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://abc.hey-world.xyz/questions/leetcode/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8.html</loc>
+    <loc>https://abc.hey-world.xyz/questions/leetcode/%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0.html</loc>
     
-    <lastmod>2020-05-02T10:31:59.569Z</lastmod>
+    <lastmod>2020-05-03T03:17:54.206Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://abc.hey-world.xyz/questions/index.html</loc>
     
-    <lastmod>2020-05-02T10:24:16.629Z</lastmod>
+    <lastmod>2020-05-03T03:17:34.983Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://abc.hey-world.xyz/questions/leetcode/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8.html</loc>
+    
+    <lastmod>2020-05-02T10:31:59.569Z</lastmod>
     
   </url>
   
