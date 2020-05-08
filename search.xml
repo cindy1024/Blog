@@ -677,6 +677,12 @@ x<span class="token punctuation">,</span>y <span class="token operator">=</span>
   
     
     <entry>
+      <title><![CDATA[categories]]></title>
+      <url>/categories/index.html</url>
+      <content type="html"></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[About me]]></title>
       <url>/about/index.html</url>
       <content type="html"><![CDATA[<p><br>CS在读，爱好羽毛球</p>
@@ -689,12 +695,6 @@ x<span class="token punctuation">,</span>y <span class="token operator">=</span>
 <li>2017-02-01：建博</li>
 </ul>
 ]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[categories]]></title>
-      <url>/categories/index.html</url>
-      <content type="html"></content>
     </entry>
     
     <entry>
@@ -1225,8 +1225,8 @@ Y   I   R
 <li><a href="./leetcode/验证二叉搜索树.html">98 验证二叉搜索树</a></li>
 <li><a href="./leetcode/最低票价.html">983 最低票价</a></li>
 <li><a href="./leetcode/另一个树的子树.html">572 另一个树的子树</a></li>
-<li><a href="./leetcode/最大正方形_统计全为1的正方形子矩阵.html">221/1277 最大正方形/统计全为1的正方形子矩阵</a></li>
-<li><a href="./leetcode/斐波那契数_爬楼梯.html">509/70 斐波那契数/爬楼梯</a></li>
+<li><a href="./leetcode/最大正方形-统计全为1的正方形子矩阵.html">221/1277 最大正方形/统计全为1的正方形子矩阵</a></li>
+<li><a href="./leetcode/斐波那契数-爬楼梯.html">509/70 斐波那契数/爬楼梯</a></li>
 </ul>
 <h2 id="UVa"><a href="#UVa" class="headerlink" title="UVa"></a>UVa</h2><ul>
 <li><a href="./Palindromes.html">0401  Palindromes</a> 判断回文串或镜像串。</li>
@@ -1278,8 +1278,8 @@ Y   I   R
 </ul>
 <h2 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h2><ul>
 <li><a href="./leetcode/最低票价.html">leetcode - 983 最低票价</a></li>
-<li><a href="./leetcode/最大正方形_统计全为1的正方形子矩阵.html">leetcode - 221/1277 最大正方形/统计全为1的正方形子矩阵</a></li>
-<li><a href="./leetcode/斐波那契数_爬楼梯.html">leetcode - 509/70 斐波那契数/爬楼梯</a></li>
+<li><a href="./leetcode/最大正方形-统计全为1的正方形子矩阵.html">leetcode - 221/1277 最大正方形/统计全为1的正方形子矩阵</a></li>
+<li><a href="./leetcode/斐波那契数-爬楼梯.html">leetcode - 509/70 斐波那契数/爬楼梯</a></li>
 </ul>
 ]]></content>
     </entry>
@@ -1536,30 +1536,6 @@ Y   I   R
     </entry>
     
     <entry>
-      <title><![CDATA[另一个树的子树]]></title>
-      <url>/questions/leetcode/%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%A0%91%E7%9A%84%E5%AD%90%E6%A0%91.html</url>
-      <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="题目-572"><a href="#题目-572" class="headerlink" title="题目 572"></a>题目 572</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200508205733.png" alt=""></p>
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="DFS暴力匹配"><a href="#DFS暴力匹配" class="headerlink" title="DFS暴力匹配"></a>DFS暴力匹配</h2><p>DFS枚举s的每个节点，其子树判断与t是否相等。需要有一个指针恒指向t的根，另两个指针在s和t上同步移动。</p>
-<h2 id="DFS序列上做串匹配"><a href="#DFS序列上做串匹配" class="headerlink" title="DFS序列上做串匹配"></a>DFS序列上做串匹配</h2><h2 id="树哈希"><a href="#树哈希" class="headerlink" title="树哈希"></a>树哈希</h2><h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="DFS暴力匹配-1"><a href="#DFS暴力匹配-1" class="headerlink" title="DFS暴力匹配"></a>DFS暴力匹配</h2><pre class="line-numbers language-c++"><code class="language-c++">    bool isSubtree(TreeNode* s, TreeNode* t) {
-        if (!s && !t) return true;
-        if (!s && t) return false;
-        return compareSubtree(s,t) || isSubtree(s->left, t) || isSubtree(s->right, t);
-    }
-
-    bool compareSubtree(TreeNode* s, TreeNode* t) {
-        if (!s && !t) return true;
-        else if (!s || !t) return false;
-        if (s->val == t->val) 
-            if( compareSubtree(s->left, t->left) && compareSubtree(s->right, t->right) ) 
-                return true;
-        return false;
-    }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[删除排序链表中的重复元素]]></title>
       <url>/questions/leetcode/%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0.html</url>
       <content type="html"><![CDATA[<a id="more"></a>
@@ -1580,38 +1556,26 @@ Y   I   R
     </entry>
     
     <entry>
-      <title><![CDATA[斐波那契数_爬楼梯]]></title>
-      <url>/questions/leetcode/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0_%E7%88%AC%E6%A5%BC%E6%A2%AF.html</url>
+      <title><![CDATA[另一个树的子树]]></title>
+      <url>/questions/leetcode/%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%A0%91%E7%9A%84%E5%AD%90%E6%A0%91.html</url>
       <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="题目-509-斐波那契数"><a href="#题目-509-斐波那契数" class="headerlink" title="题目 509 斐波那契数"></a>题目 509 斐波那契数</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200508215026.png" alt=""></p>
-<h1 id="题目-70-爬楼梯"><a href="#题目-70-爬楼梯" class="headerlink" title="题目 70 爬楼梯"></a>题目 70 爬楼梯</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200508215100.png" alt=""></p>
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>暴力法会爆炸，动态规划来一下。</p>
-<p>注意：爬楼梯题目，$n=0$时，有1种爬法，就是不爬……..</p>
-<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="509"><a href="#509" class="headerlink" title="509"></a>509</h2><pre class="line-numbers language-c++"><code class="language-c++">    int fib(int N) {
-        if (N == 0 || N == 1) return N;
-        int* dp = new int[N + 1];
-        dp[0] = 0;
-        dp[1] = 1;
-
-        for(int i = 2; i <= N; i++) 
-            dp[i] = (dp[i -1] + dp[i - 2]);
-
-        int ans = dp[N];
-        delete [] dp;
-        return ans;
+<h1 id="题目-572"><a href="#题目-572" class="headerlink" title="题目 572"></a>题目 572</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200508205733.png" alt=""></p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="DFS暴力匹配"><a href="#DFS暴力匹配" class="headerlink" title="DFS暴力匹配"></a>DFS暴力匹配</h2><p>DFS枚举s的每个节点，其子树判断与t是否相等。需要有一个指针恒指向t的根，另两个指针在s和t上同步移动。</p>
+<h2 id="DFS序列上做串匹配"><a href="#DFS序列上做串匹配" class="headerlink" title="DFS序列上做串匹配"></a>DFS序列上做串匹配</h2><h2 id="树哈希"><a href="#树哈希" class="headerlink" title="树哈希"></a>树哈希</h2><h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="DFS暴力匹配-1"><a href="#DFS暴力匹配-1" class="headerlink" title="DFS暴力匹配"></a>DFS暴力匹配</h2><pre class="line-numbers language-c++"><code class="language-c++">    bool isSubtree(TreeNode* s, TreeNode* t) {
+        if (!s && !t) return true;
+        if (!s && t) return false;
+        return compareSubtree(s,t) || isSubtree(s->left, t) || isSubtree(s->right, t);
     }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="70"><a href="#70" class="headerlink" title="70"></a>70</h2><pre class="line-numbers language-c++"><code class="language-c++">    int climbStairs(int n) {
-        if (n == 0 || n == 1) return 1;
-        int* dp = new int[n + 1];
-        dp[0] = dp[1] = 1;
-        for (int i = 2; i <= n; i++)
-            dp[i] = (dp[i - 1] + dp[i - 2]);
-        int ans = dp[n];
-        delete [] dp;
-        return ans;
+
+    bool compareSubtree(TreeNode* s, TreeNode* t) {
+        if (!s && !t) return true;
+        else if (!s || !t) return false;
+        if (s->val == t->val) 
+            if( compareSubtree(s->left, t->left) && compareSubtree(s->right, t->right) ) 
+                return true;
+        return false;
     }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 ]]></content>
     </entry>
     
@@ -1644,6 +1608,42 @@ Y   I   R
         return head->next;
     }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[斐波那契数_爬楼梯]]></title>
+      <url>/questions/leetcode/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0-%E7%88%AC%E6%A5%BC%E6%A2%AF.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-509-斐波那契数"><a href="#题目-509-斐波那契数" class="headerlink" title="题目 509 斐波那契数"></a>题目 509 斐波那契数</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200508215026.png" alt=""></p>
+<h1 id="题目-70-爬楼梯"><a href="#题目-70-爬楼梯" class="headerlink" title="题目 70 爬楼梯"></a>题目 70 爬楼梯</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200508215100.png" alt=""></p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>暴力法会爆炸，动态规划来一下。</p>
+<p>注意：爬楼梯题目，$n=0$时，有1种爬法，就是不爬……..</p>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="509"><a href="#509" class="headerlink" title="509"></a>509</h2><pre class="line-numbers language-c++"><code class="language-c++">    int fib(int N) {
+        if (N == 0 || N == 1) return N;
+        int* dp = new int[N + 1];
+        dp[0] = 0;
+        dp[1] = 1;
+
+        for(int i = 2; i <= N; i++) 
+            dp[i] = (dp[i -1] + dp[i - 2]);
+
+        int ans = dp[N];
+        delete [] dp;
+        return ans;
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="70"><a href="#70" class="headerlink" title="70"></a>70</h2><pre class="line-numbers language-c++"><code class="language-c++">    int climbStairs(int n) {
+        if (n == 0 || n == 1) return 1;
+        int* dp = new int[n + 1];
+        dp[0] = dp[1] = 1;
+        for (int i = 2; i <= n; i++)
+            dp[i] = (dp[i - 1] + dp[i - 2]);
+        int ans = dp[n];
+        delete [] dp;
+        return ans;
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 ]]></content>
     </entry>
     
@@ -1693,7 +1693,7 @@ Y   I   R
     
     <entry>
       <title><![CDATA[最大正方形_统计全为1的正方形子矩阵]]></title>
-      <url>/questions/leetcode/%E6%9C%80%E5%A4%A7%E6%AD%A3%E6%96%B9%E5%BD%A2_%E7%BB%9F%E8%AE%A1%E5%85%A8%E4%B8%BA1%E7%9A%84%E6%AD%A3%E6%96%B9%E5%BD%A2%E5%AD%90%E7%9F%A9%E9%98%B5.html</url>
+      <url>/questions/leetcode/%E6%9C%80%E5%A4%A7%E6%AD%A3%E6%96%B9%E5%BD%A2-%E7%BB%9F%E8%AE%A1%E5%85%A8%E4%B8%BA1%E7%9A%84%E6%AD%A3%E6%96%B9%E5%BD%A2%E5%AD%90%E7%9F%A9%E9%98%B5.html</url>
       <content type="html"><![CDATA[<a id="more"></a>
 <h1 id="题目-221-最大正方形"><a href="#题目-221-最大正方形" class="headerlink" title="题目 221 最大正方形"></a>题目 221 最大正方形</h1><p><img src="/questions/leetcode/C:/Users\Cindy\AppData\Roaming\Typora\typora-user-images\1588943649408.png" alt="1588943649408"></p>
 <h1 id="题目-1277-统计全为1的正方形子矩阵"><a href="#题目-1277-统计全为1的正方形子矩阵" class="headerlink" title="题目 1277 统计全为1的正方形子矩阵"></a>题目 1277 统计全为1的正方形子矩阵</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200508213212.png" alt=""></p>
@@ -1788,47 +1788,6 @@ Y   I   R
     </entry>
     
     <entry>
-      <title><![CDATA[相交链表]]></title>
-      <url>/questions/leetcode/%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8.html</url>
-      <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="题目-160"><a href="#题目-160" class="headerlink" title="题目 160"></a>题目 160</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502181124.png" alt=""></p>
-<p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502181147.png" alt=""></p>
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h3 id="暴力法"><a href="#暴力法" class="headerlink" title="暴力法"></a>暴力法</h3><h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><h3 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h3><p>$$a+intersection+b = b+intersection+a​$$</p>
-<blockquote>
-<ul>
-<li><p>当 pA 到达链表的尾部时，将它重定位到链表 B 的头结点 (你没看错，就是链表 B); 类似的，当 pB 到达链表的尾部时，将它重定位到链表 A 的头结点。</p>
-</li>
-<li><p>若在某一时刻 pA 和 pB 相遇，则 pA/pB 为相交结点。</p>
-</li>
-<li><p>如果两个链表存在相交，它们末尾的结点必然相同。因此当 pA/pB到达链表结尾时，记录下链表 <code>A/B</code> 对应的元素。若最后元素不相同，则两个链表不相交。</p>
-</li>
-</ul>
-<ul>
-<li><p>时间复杂度 $O(m+n)$</p>
-</li>
-<li><p>空间复杂度 $O(1)$</p>
-</li>
-</ul>
-</blockquote>
-<p>巧妙地把指针重定向，形成了类似环形链表（没有改变输入链表）。双指针速度一致，必同时走完全程，即找到相交点。</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h3 id="双指针-1"><a href="#双指针-1" class="headerlink" title="双指针"></a>双指针</h3><pre class="line-numbers language-c++"><code class="language-c++">    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        if (headA == nullptr || headB == nullptr) return nullptr;
-
-        ListNode *pa, *pb;
-        pa = headA;
-        pb = headB;
-
-        while (pa != pb){
-            pa = (pa == nullptr ? headB : pa->next);
-            pb = (pb == nullptr ? headA : pb->next);
-        }
-        return pa;
-    }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[环形链表]]></title>
       <url>/questions/leetcode/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8.html</url>
       <content type="html"><![CDATA[<a id="more"></a>
@@ -1906,43 +1865,43 @@ Y   I   R
     </entry>
     
     <entry>
-      <title><![CDATA[验证二叉搜索树]]></title>
-      <url>/questions/leetcode/%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91.html</url>
+      <title><![CDATA[相交链表]]></title>
+      <url>/questions/leetcode/%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8.html</url>
       <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="题目-98"><a href="#题目-98" class="headerlink" title="题目 98"></a>题目 98</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200508183142.png" alt=""></p>
-<p>#题解</p>
-<h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><p>注意：二叉搜索树是<strong>左子树</strong>小于当前节点，与<strong>左节点</strong>小于当前节点不同。</p>
-<p>每一个节点都把区间$(min, max)$分割成$(min, val)$和$(val, max)$两部分，成为递归条件（注意是开区间）。</p>
+<h1 id="题目-160"><a href="#题目-160" class="headerlink" title="题目 160"></a>题目 160</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502181124.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502181147.png" alt=""></p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h3 id="暴力法"><a href="#暴力法" class="headerlink" title="暴力法"></a>暴力法</h3><h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><h3 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h3><p>$$a+intersection+b = b+intersection+a​$$</p>
 <blockquote>
-<p>这里有一个坑，$min$和$max$需要一个初始值，int和long类型的范围为$[-2147483648, 2147483647]$。测试条件含有边界值的测试样例，本应为true，由于<code>val = -2147483648</code>或<code>val = 2147483647</code>导致在下面语句中错误输出为false。</p>
-<p><code>if (root-&gt;val &lt;= min || root-&gt;val &gt;= max) return false;</code></p>
-<p>我的写法中偷懒将<code>int</code>改成<code>long long</code>。</p>
-<p>较好的方法是使用递归的中序遍历，见解法二。</p>
+<ul>
+<li><p>当 pA 到达链表的尾部时，将它重定位到链表 B 的头结点 (你没看错，就是链表 B); 类似的，当 pB 到达链表的尾部时，将它重定位到链表 A 的头结点。</p>
+</li>
+<li><p>若在某一时刻 pA 和 pB 相遇，则 pA/pB 为相交结点。</p>
+</li>
+<li><p>如果两个链表存在相交，它们末尾的结点必然相同。因此当 pA/pB到达链表结尾时，记录下链表 <code>A/B</code> 对应的元素。若最后元素不相同，则两个链表不相交。</p>
+</li>
+</ul>
+<ul>
+<li><p>时间复杂度 $O(m+n)$</p>
+</li>
+<li><p>空间复杂度 $O(1)$</p>
+</li>
+</ul>
 </blockquote>
-<h2 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h2><p>中序遍历（左中右）得到的序列是升序的，可以此做判断，可用Stack实现，可递归实现。</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="递归-1"><a href="#递归-1" class="headerlink" title="递归"></a>递归</h2><h3 id="解法一：使用long-long避开边界值"><a href="#解法一：使用long-long避开边界值" class="headerlink" title="解法一：使用long long避开边界值"></a>解法一：使用long long避开边界值</h3><pre class="line-numbers language-c++"><code class="language-c++">    bool isValidBST(TreeNode* root) {
-        return BSTWithMaxMin(root, LONG_MIN, LONG_MAX);
-    }
+<p>巧妙地把指针重定向，形成了类似环形链表（没有改变输入链表）。双指针速度一致，必同时走完全程，即找到相交点。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h3 id="双指针-1"><a href="#双指针-1" class="headerlink" title="双指针"></a>双指针</h3><pre class="line-numbers language-c++"><code class="language-c++">    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        if (headA == nullptr || headB == nullptr) return nullptr;
 
-    bool BSTWithMaxMin (TreeNode* root, long long min, long long max) {
-        if (!root) return true;
-        if (root->val <= min || root->val >= max) return false;
-        return BSTWithMaxMin(root->left, min, root->val) && BSTWithMaxMin(root->right,  root->val, max);
+        ListNode *pa, *pb;
+        pa = headA;
+        pb = headB;
+
+        while (pa != pb){
+            pa = (pa == nullptr ? headB : pa->next);
+            pb = (pb == nullptr ? headA : pb->next);
+        }
+        return pa;
     }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="解法二：中序遍历"><a href="#解法二：中序遍历" class="headerlink" title="解法二：中序遍历"></a><a href="https://leetcode.com/problems/validate-binary-search-tree/discuss/32104/C%2B%2B-in-order-traversal-and-please-do-not-rely-on-buggy-INT_MAX-INT_MIN-solutions-any-more" target="_blank" rel="external">解法二</a>：中序遍历</h3><p>使用节点指针prev记录前一个节点，二叉搜索树中总是<code>prev-&gt;va &lt; node-&gt;val</code>。</p>
-<pre class="line-numbers language-c++"><code class="language-c++">    bool isValidBST(TreeNode* root) {
-        TreeNode* prev = NULL;
-        return validate(root, prev);
-    }
-    bool validate(TreeNode* node, TreeNode* &prev) {
-        if (node == NULL) return true;
-        if (!validate(node->left, prev)) return false;
-        if (prev != NULL && prev->val >= node->val) return false;
-        prev = node;
-        return validate(node->right, prev);
-    }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 ]]></content>
     </entry>
     
@@ -2006,6 +1965,102 @@ sentinel->next = head;
         return head;
     }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[验证二叉搜索树]]></title>
+      <url>/questions/leetcode/%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-98"><a href="#题目-98" class="headerlink" title="题目 98"></a>题目 98</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200508183142.png" alt=""></p>
+<p>#题解</p>
+<h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><p>注意：二叉搜索树是<strong>左子树</strong>小于当前节点，与<strong>左节点</strong>小于当前节点不同。</p>
+<p>每一个节点都把区间$(min, max)$分割成$(min, val)$和$(val, max)$两部分，成为递归条件（注意是开区间）。</p>
+<blockquote>
+<p>这里有一个坑，$min$和$max$需要一个初始值，int和long类型的范围为$[-2147483648, 2147483647]$。测试条件含有边界值的测试样例，本应为true，由于<code>val = -2147483648</code>或<code>val = 2147483647</code>导致在下面语句中错误输出为false。</p>
+<p><code>if (root-&gt;val &lt;= min || root-&gt;val &gt;= max) return false;</code></p>
+<p>我的写法中偷懒将<code>int</code>改成<code>long long</code>。</p>
+<p>较好的方法是使用递归的中序遍历，见解法二。</p>
+</blockquote>
+<h2 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h2><p>中序遍历（左中右）得到的序列是升序的，可以此做判断，可用Stack实现，可递归实现。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="递归-1"><a href="#递归-1" class="headerlink" title="递归"></a>递归</h2><h3 id="解法一：使用long-long避开边界值"><a href="#解法一：使用long-long避开边界值" class="headerlink" title="解法一：使用long long避开边界值"></a>解法一：使用long long避开边界值</h3><pre class="line-numbers language-c++"><code class="language-c++">    bool isValidBST(TreeNode* root) {
+        return BSTWithMaxMin(root, LONG_MIN, LONG_MAX);
+    }
+
+    bool BSTWithMaxMin (TreeNode* root, long long min, long long max) {
+        if (!root) return true;
+        if (root->val <= min || root->val >= max) return false;
+        return BSTWithMaxMin(root->left, min, root->val) && BSTWithMaxMin(root->right,  root->val, max);
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="解法二：中序遍历"><a href="#解法二：中序遍历" class="headerlink" title="解法二：中序遍历"></a><a href="https://leetcode.com/problems/validate-binary-search-tree/discuss/32104/C%2B%2B-in-order-traversal-and-please-do-not-rely-on-buggy-INT_MAX-INT_MIN-solutions-any-more" target="_blank" rel="external">解法二</a>：中序遍历</h3><p>使用节点指针prev记录前一个节点，二叉搜索树中总是<code>prev-&gt;va &lt; node-&gt;val</code>。</p>
+<pre class="line-numbers language-c++"><code class="language-c++">    bool isValidBST(TreeNode* root) {
+        TreeNode* prev = NULL;
+        return validate(root, prev);
+    }
+    bool validate(TreeNode* node, TreeNode* &prev) {
+        if (node == NULL) return true;
+        if (!validate(node->left, prev)) return false;
+        if (prev != NULL && prev->val >= node->val) return false;
+        prev = node;
+        return validate(node->right, prev);
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[数组中的重复数字]]></title>
+      <url>/questions/offer/003_%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E6%95%B0%E5%AD%97.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-003"><a href="#题目-003" class="headerlink" title="题目 003"></a>题目 003</h1><p>在一个长度为n的数组里的<strong>所有数字都在$0$到$n-1$的范围内</strong>。 数组中某些数字是重复的，但不知道有几个数字是重复的。也不知道每个数字重复几次。请找出数组中任意一个重复的数字。</p>
+<p>例如，如果输入长度为7的数组${2,3,1,0,2,5,3}$，那么对应的输出是第一个重复的数字$2$。</p>
+<ul>
+<li>题目一：可修改输入数组</li>
+<li>题目二：不可修改输入数组</li>
+</ul>
+<h1 id="几种解法"><a href="#几种解法" class="headerlink" title="几种解法"></a>几种解法</h1><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>方法</th>
+<th>时间复杂度</th>
+<th>空间复杂度</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>题目一_方法1</td>
+<td>排序</td>
+<td>$O(n\text{log}n)$</td>
+<td>$O(1)$</td>
+<td></td>
+</tr>
+<tr>
+<td>题目一_方法2</td>
+<td>哈希</td>
+<td>$O(n)$</td>
+<td>$O(n)$</td>
+<td></td>
+</tr>
+<tr>
+<td>题目一_方法3</td>
+<td>按下标重排数组</td>
+<td>$O(n)$</td>
+<td>$O(1)$</td>
+<td>每个数字最多交换2次</td>
+</tr>
+<tr>
+<td>题目二_方法1</td>
+<td>二分+区间计数</td>
+<td>$O(n\text{log}n)$</td>
+<td>$O(1)$</td>
+<td>不能找出所有重复</td>
+</tr>
+</tbody>
+</table>
+<h1 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h1><p>与方法二类似，布尔类型的哈希表。</p>
 ]]></content>
     </entry>
     
@@ -2097,57 +2152,68 @@ sentinel->next = head;
     </entry>
     
     <entry>
-      <title><![CDATA[数组中的重复数字]]></title>
-      <url>/questions/offer/003_%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E6%95%B0%E5%AD%97.html</url>
-      <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="题目-003"><a href="#题目-003" class="headerlink" title="题目 003"></a>题目 003</h1><p>在一个长度为n的数组里的<strong>所有数字都在$0$到$n-1$的范围内</strong>。 数组中某些数字是重复的，但不知道有几个数字是重复的。也不知道每个数字重复几次。请找出数组中任意一个重复的数字。</p>
-<p>例如，如果输入长度为7的数组${2,3,1,0,2,5,3}$，那么对应的输出是第一个重复的数字$2$。</p>
-<ul>
-<li>题目一：可修改输入数组</li>
-<li>题目二：不可修改输入数组</li>
-</ul>
-<h1 id="几种解法"><a href="#几种解法" class="headerlink" title="几种解法"></a>几种解法</h1><table>
-<thead>
-<tr>
-<th>序号</th>
-<th>方法</th>
-<th>时间复杂度</th>
-<th>空间复杂度</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>题目一_方法1</td>
-<td>排序</td>
-<td>$O(n\text{log}n)$</td>
-<td>$O(1)$</td>
-<td></td>
-</tr>
-<tr>
-<td>题目一_方法2</td>
-<td>哈希</td>
-<td>$O(n)$</td>
-<td>$O(n)$</td>
-<td></td>
-</tr>
-<tr>
-<td>题目一_方法3</td>
-<td>按下标重排数组</td>
-<td>$O(n)$</td>
-<td>$O(1)$</td>
-<td>每个数字最多交换2次</td>
-</tr>
-<tr>
-<td>题目二_方法1</td>
-<td>二分+区间计数</td>
-<td>$O(n\text{log}n)$</td>
-<td>$O(1)$</td>
-<td>不能找出所有重复</td>
-</tr>
-</tbody>
-</table>
-<h1 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h1><p>与方法二类似，布尔类型的哈希表。</p>
+      <title><![CDATA[二维数组中的查找]]></title>
+      <url>/questions/offer/004_%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9F%A5%E6%89%BE.html</url>
+      <content type="html"><![CDATA[<p>有序二维数组中查找一个数字。<a id="more"></a></p>
+<h1 id="题目-004"><a href="#题目-004" class="headerlink" title="题目 004"></a>题目 004</h1><p>在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中<strong>是否含有</strong>该整数。<br>$$<br>\begin{matrix}<br>1&amp;2&amp;8&amp;9\2&amp;4&amp;9&amp;12\4&amp;7&amp;10&amp;13\6&amp;8&amp;11&amp;15<br>\end{matrix}<br>$$</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>矩阵有序，从数组中选取一个数字时，有三种情况：</p>
+<ol>
+<li>$num<em>{select}=num</em>{target}$，返回。</li>
+<li>$num<em>{select}&lt;num</em>{target}$，查找数字的<u>右边<strong>或</strong>下面</u>。</li>
+<li>$num<em>{select}&gt;num</em>{target}$，查找数字的<u>左边<strong>或</strong>上面</u>。</li>
+</ol>
+<h1 id="推荐解法"><a href="#推荐解法" class="headerlink" title="推荐解法"></a>推荐解法</h1><p>情况2和3存在重叠区域，从右上或左下的角点开始查找，可以将情况2和3简化成各一个查找区域。</p>
+<pre class="line-numbers language-c++"><code class="language-c++">bool Find(int* matrix, int rows, int columns, int number)
+{
+    bool found = false;
+
+    if(matrix != nullptr && rows > 0 && columns > 0)
+    {
+        int row = 0;
+        int column = columns - 1;
+        while(row < rows && column >=0)
+        {
+            if(matrix[row * columns + column] == number)
+            {
+                found = true;
+                break;
+            }
+            else if(matrix[row * columns + column] > number)
+                -- column;
+            else
+                ++ row;
+        }
+    }
+
+    return found;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h1><p>对每一行二分查找。（没有充分利用行间的有序性）</p>
+<pre class="line-numbers language-c++"><code class="language-c++">bool Find(int target, vector<vector<int> > array) {
+    if (array.size() == 0 || array[0].size() == 0) return false;
+
+    for (unsigned int i = 0; i < array.size(); i++) {
+        bool sign = FindMid(target, array, i, 0, array[0].size() - 1);
+        if (sign == true)
+            return true;
+    }
+    return false;
+}
+
+bool FindMid(const int target, vector<vector<int>> array, const unsigned int row, unsigned int begin, unsigned int end) {
+    unsigned int mid = (begin + end) / 2;
+    if (array[row][mid] == target) return true;
+    if (end - begin == 1) {
+        if (array[row][end] == target) return true;
+        else return false;
+    }
+    if (array[row][mid] < target)
+        return FindMid(target, array, row, mid, end);
+    else
+        return FindMid(target, array, row, begin, mid);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h2><p>一开始在想这个问题的时候，从二维数组的中间选取一个数字进行比较，只考虑了右下和左上，漏掉了很多区域，没有想清楚。</p>
 ]]></content>
     </entry>
     
@@ -2218,72 +2284,6 @@ sizeof(str3)/sizeof(char);         //6
 <li><a href="https://www.jianshu.com/p/513d817e87e9" target="_blank" rel="external">https://www.jianshu.com/p/513d817e87e9</a><br>```</li>
 </ul>
 <p>```</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[二维数组中的查找]]></title>
-      <url>/questions/offer/004_%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9F%A5%E6%89%BE.html</url>
-      <content type="html"><![CDATA[<p>有序二维数组中查找一个数字。<a id="more"></a></p>
-<h1 id="题目-004"><a href="#题目-004" class="headerlink" title="题目 004"></a>题目 004</h1><p>在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中<strong>是否含有</strong>该整数。<br>$$<br>\begin{matrix}<br>1&amp;2&amp;8&amp;9\2&amp;4&amp;9&amp;12\4&amp;7&amp;10&amp;13\6&amp;8&amp;11&amp;15<br>\end{matrix}<br>$$</p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>矩阵有序，从数组中选取一个数字时，有三种情况：</p>
-<ol>
-<li>$num<em>{select}=num</em>{target}$，返回。</li>
-<li>$num<em>{select}&lt;num</em>{target}$，查找数字的<u>右边<strong>或</strong>下面</u>。</li>
-<li>$num<em>{select}&gt;num</em>{target}$，查找数字的<u>左边<strong>或</strong>上面</u>。</li>
-</ol>
-<h1 id="推荐解法"><a href="#推荐解法" class="headerlink" title="推荐解法"></a>推荐解法</h1><p>情况2和3存在重叠区域，从右上或左下的角点开始查找，可以将情况2和3简化成各一个查找区域。</p>
-<pre class="line-numbers language-c++"><code class="language-c++">bool Find(int* matrix, int rows, int columns, int number)
-{
-    bool found = false;
-
-    if(matrix != nullptr && rows > 0 && columns > 0)
-    {
-        int row = 0;
-        int column = columns - 1;
-        while(row < rows && column >=0)
-        {
-            if(matrix[row * columns + column] == number)
-            {
-                found = true;
-                break;
-            }
-            else if(matrix[row * columns + column] > number)
-                -- column;
-            else
-                ++ row;
-        }
-    }
-
-    return found;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h1><p>对每一行二分查找。（没有充分利用行间的有序性）</p>
-<pre class="line-numbers language-c++"><code class="language-c++">bool Find(int target, vector<vector<int> > array) {
-    if (array.size() == 0 || array[0].size() == 0) return false;
-
-    for (unsigned int i = 0; i < array.size(); i++) {
-        bool sign = FindMid(target, array, i, 0, array[0].size() - 1);
-        if (sign == true)
-            return true;
-    }
-    return false;
-}
-
-bool FindMid(const int target, vector<vector<int>> array, const unsigned int row, unsigned int begin, unsigned int end) {
-    unsigned int mid = (begin + end) / 2;
-    if (array[row][mid] == target) return true;
-    if (end - begin == 1) {
-        if (array[row][end] == target) return true;
-        else return false;
-    }
-    if (array[row][mid] < target)
-        return FindMid(target, array, row, mid, end);
-    else
-        return FindMid(target, array, row, begin, mid);
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h2><p>一开始在想这个问题的时候，从二维数组的中间选取一个数字进行比较，只考虑了右下和左上，漏掉了很多区域，没有想清楚。</p>
 ]]></content>
     </entry>
     
