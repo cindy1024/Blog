@@ -138,33 +138,43 @@
 
 
 
-<meta name="description" content="题库leetcode
-006  ZigZag Conversion  把字符串转换成之字形，重新读取字串。
-007  Reverse Integer    翻转32位有符号整型数字，注意溢出。
-008  String to Integer  实现atoi函数。
-009  Palindrome Number  判断回文数。
-011  Container With Most Water 木桶效应+最">
+<meta name="description" content="题目 983
+
+题解题目有最大值一词，是动态规划的特点。
+用int dp[366]记录一年中到第i天为止需要花的钱，不出门则当天不需要多花钱。dp[0] = 0作为一个初始状态。
+
+出门，转移方程：$dp(i) = min{cost(index_j)+dp(i-j)}, j\in{1,7,30}$
+
+理解一：反思式买票
+在第10天看我如果在${第9天买1日票，第3天买7日票，直接买30日票}​$">
 <meta property="og:type" content="website">
-<meta property="og:title" content="奋起啊！少年">
-<meta property="og:url" content="https://abc.hey-world.xyz/questions/index.html">
+<meta property="og:title" content="最低票价">
+<meta property="og:url" content="https://abc.hey-world.xyz/questions/leetcode/最低票价.html">
 <meta property="og:site_name" content="安静土">
-<meta property="og:description" content="题库leetcode
-006  ZigZag Conversion  把字符串转换成之字形，重新读取字串。
-007  Reverse Integer    翻转32位有符号整型数字，注意溢出。
-008  String to Integer  实现atoi函数。
-009  Palindrome Number  判断回文数。
-011  Container With Most Water 木桶效应+最">
-<meta property="og:image" content="http://cindy1024-blog.test.upcdn.net/20170811/170142258.PNG">
-<meta property="og:updated_time" content="2020-05-08T14:00:33.446Z">
+<meta property="og:description" content="题目 983
+
+题解题目有最大值一词，是动态规划的特点。
+用int dp[366]记录一年中到第i天为止需要花的钱，不出门则当天不需要多花钱。dp[0] = 0作为一个初始状态。
+
+出门，转移方程：$dp(i) = min{cost(index_j)+dp(i-j)}, j\in{1,7,30}$
+
+理解一：反思式买票
+在第10天看我如果在${第9天买1日票，第3天买7日票，直接买30日票}​$">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200508190417.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200508190446.png">
+<meta property="og:updated_time" content="2020-05-08T11:35:36.210Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="奋起啊！少年">
-<meta name="twitter:description" content="题库leetcode
-006  ZigZag Conversion  把字符串转换成之字形，重新读取字串。
-007  Reverse Integer    翻转32位有符号整型数字，注意溢出。
-008  String to Integer  实现atoi函数。
-009  Palindrome Number  判断回文数。
-011  Container With Most Water 木桶效应+最">
-<meta name="twitter:image" content="http://cindy1024-blog.test.upcdn.net/20170811/170142258.PNG">
+<meta name="twitter:title" content="最低票价">
+<meta name="twitter:description" content="题目 983
+
+题解题目有最大值一词，是动态规划的特点。
+用int dp[366]记录一年中到第i天为止需要花的钱，不出门则当天不需要多花钱。dp[0] = 0作为一个初始状态。
+
+出门，转移方程：$dp(i) = min{cost(index_j)+dp(i-j)}, j\in{1,7,30}$
+
+理解一：反思式买票
+在第10天看我如果在${第9天买1日票，第3天买7日票，直接买30日票}​$">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200508190417.png">
 
 
 
@@ -194,13 +204,13 @@
 
 
 
-  <link rel="canonical" href="https://abc.hey-world.xyz/questions/"/>
+  <link rel="canonical" href="https://abc.hey-world.xyz/questions/leetcode/最低票价.html"/>
 
 
 
 
 
-  <title>奋起啊！少年 | 安静土</title>
+  <title>最低票价 | 安静土</title>
   
 
 
@@ -404,7 +414,7 @@
     <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">奋起啊！少年</h1>
+	<h1 class="post-title" itemprop="name headline">最低票价</h1>
 
 
 
@@ -416,79 +426,44 @@
       <div class="post-body">
         
         
-          <p><img src="http://cindy1024-blog.test.upcdn.net/20170811/170142258.PNG" alt=""></p>
-<h1 id="题库"><a href="#题库" class="headerlink" title="题库"></a>题库</h1><h2 id="leetcode"><a href="#leetcode" class="headerlink" title="leetcode"></a>leetcode</h2><ul>
-<li><a href="./ZigZag-Conversion.html">006  ZigZag Conversion</a>  把字符串转换成之字形，重新读取字串。</li>
-<li><a href="./Reverse-Integer.html">007  Reverse Integer</a>    翻转32位有符号整型数字，注意溢出。</li>
-<li><a href="./String-to-Integer.html">008  String to Integer</a>  实现atoi函数。</li>
-<li><a href="./Palindrome-Number.html">009  Palindrome Number</a>  判断回文数。</li>
-<li><a href="./container-with-most-water.html">011  Container With Most Water</a> 木桶效应+最大长方形。</li>
-<li><a href="./integer-to-roman.html">012/013  Integer to Roman / Roman to Integer</a> 整型、罗马数字互转。</li>
-<li><a href="./longest-common-prefix.html">014 Longest Common Prefix</a> 最长共同前缀。</li>
-<li><a href="./leetcode/合并两个有序链表.html">021 合并两个有序链表</a></li>
-<li><a href="./leetcode/删除排序链表中的重复元素.html">083 删除排序链表中的重复元素</a></li>
-<li><a href="./leetcode/环形链表.html">141/142 环形链表</a></li>
-<li><a href="./leetcode/相交链表.html">160 相交链表</a></li>
-<li><a href="./leetcode/移除链表元素.html">203 移除链表元素</a></li>
-<li><a href="./leetcode/验证二叉搜索树.html">98 验证二叉搜索树</a></li>
-<li><a href="./leetcode/最低票价.html">983 最低票价</a></li>
-<li><a href="./leetcode/另一个树的子树.html">572 另一个树的子树</a></li>
-<li><a href="./leetcode/最大正方形\_统计全为1的正方形子矩阵.html">221/1277 最大正方形/统计全为1的正方形子矩阵</a></li>
-<li><a href="./leetcode/斐波那契数\_爬楼梯.html">509/70 斐波那契数/爬楼梯</a></li>
+          <a id="more"></a>
+<h1 id="题目-983"><a href="#题目-983" class="headerlink" title="题目 983"></a>题目 983</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200508190417.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200508190446.png" alt=""></p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>题目有<code>最大值</code>一词，是<strong>动态规划</strong>的特点。</p>
+<p>用<code>int dp[366]</code>记录一年中到第i天为止需要花的钱，不出门则当天不需要多花钱。<code>dp[0] = 0</code>作为一个初始状态。</p>
+<ul>
+<li><p>出门，转移方程：$dp(i) = min{cost(index_j)+dp(i-j)}, j\in{1,7,30}$</p>
+<ul>
+<li><p>理解一：反思式买票</p>
+<p>在第10天看我如果在${第9天买1日票，第3天买7日票，直接买30日票}​$哪个划算</p>
+</li>
+<li><p>理解二：先旅游后买票</p>
+<p>一张4-10天的票，第10天付款。（from评论区）</p>
+</li>
 </ul>
-<h2 id="UVa"><a href="#UVa" class="headerlink" title="UVa"></a>UVa</h2><ul>
-<li><a href="./Palindromes.html">0401  Palindromes</a> 判断回文串或镜像串。</li>
-<li><a href="./Master-Mind-Hints.html">0340  Master-Mind Hints</a> 猜数字游戏的提示。</li>
-<li><a href="./Digit-Generator.html">1583  Digit Generator</a> 生成元。</li>
+</li>
+<li><p>不出门，则不多花钱：$dp(i) = dp(i-1)​$</p>
+</li>
 </ul>
-<h2 id="剑指Offer"><a href="#剑指Offer" class="headerlink" title="剑指Offer"></a>剑指Offer</h2><ul>
-<li><a href="./offer/002_实现Singleton模式.html">002 实现Singleton模式</a> 一个类只产生一个实例。</li>
-<li><a href="./offer/003_数组中的重复数字.html">003 数组中的重复数字</a> 找出数组中任意一个重复的数字。</li>
-<li><a href="./offer/004_二维数组中的查找.html">004 二维数组中的查找</a> 有序二维数组中查找一个数字。</li>
-<li><a href="./offer/005_替换空格.html">005 替换空格 </a>替换字符串中的每个空格。</li>
-<li><a href="./offer/006_从尾到头打印链表.html">006 从尾到头打印链表 </a></li>
-</ul>
-<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><ul>
-<li><a href="./ZigZag-Conversion.html">leetcode - 006  ZigZag Conversion</a></li>
-<li><a href="./String-to-Integer.html">leetcode - 008  String to Integer</a></li>
-<li><a href="./Palindromes.html">UVa - 0401  Palindromes</a></li>
-<li><a href="./integer-to-roman.html">leetcode - 012/013  Integer to Roman / Roman to Integer</a></li>
-<li><a href="./longest-common-prefix">leetcode - 014  Longest Common Prefix</a> 最长共同前缀。</li>
-<li><a href="./offer/005_替换空格.html">剑指offer - 005_替换空格 </a>替换字符串中的每个空格。</li>
-</ul>
-<h2 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h2><ul>
-<li><a href="./Reverse-Integer.html">leetcode - 007  Reverse Integer</a></li>
-<li><a href="./String-to-Integer.html">leetcode - 008  String to Integer</a></li>
-<li><a href="./Palindrome-Number.html">leetcode - 009  Palindrome Number</a></li>
-<li><a href="./Master-Mind-Hints.html">UVa - 0340  Master-Mind Hints</a></li>
-<li><a href="./Digit-Generator.html">UVa - 1583  Digit Generator</a></li>
-<li><a href="./integer-to-roman.html">leetcode - 012  Integer to Roman</a></li>
-</ul>
-<h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><ul>
-<li><a href="./container-with-most-water.html">leetcode - 011  Container With Most Water</a></li>
-<li><a href="./offer/003_数组中的重复数字.html">剑指offer - 003 数组中的重复数字</a> 找出数组中任意一个重复的数字。</li>
-<li><a href="./offer/004_二维数组中的查找.html">剑指offer - 004 二维数组中的查找</a> 有序二维数组中查找一个数字。</li>
-</ul>
-<h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><ul>
-<li><a href="./offer/006_从尾到头打印链表.html">剑指offer - 006 从尾到头打印链表 </a></li>
-<li><a href="./leetcode/合并两个有序链表.html">leetcode - 021 合并两个有序链表</a></li>
-<li><a href="./leetcode/删除排序链表中的重复元素.html">leetcode - 083 删除排序链表中的重复元素</a></li>
-<li><a href="./leetcode/环形链表.html">leetcode - 141/142 环形链表</a></li>
-<li><a href="./leetcode/相交链表.html">leetcode - 160 相交链表</a></li>
-<li><a href="./leetcode/移除链表元素.html">leetcode - 203 移除链表元素</a></li>
-</ul>
-<h2 id="Design-pattern"><a href="#Design-pattern" class="headerlink" title="Design pattern"></a>Design pattern</h2><ul>
-<li><a href="./offer/002_实现Singleton模式.html">剑指offer - 002 实现Singleton模式</a></li>
-</ul>
-<h2 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a>Tree</h2><ul>
-<li><a href="./leetcode/验证二叉搜索树.html">leetcode - 98 验证二叉搜索树</a></li>
-<li><a href="./leetcode/另一个树的子树.html">leetcode - 572 另一个树的子树</a></li>
-</ul>
-<h2 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h2><ul>
-<li><a href="./leetcode/最低票价.html">leetcode - 983 最低票价</a></li>
-<li><a href="./leetcode/最大正方形\_统计全为1的正方形子矩阵.html">leetcode - 221/1277 最大正方形/统计全为1的正方形子矩阵</a></li>
-<li><a href="./leetcode/斐波那契数\_爬楼梯.html">leetcode - 509/70 斐波那契数/爬楼梯</a></li>
-</ul>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><pre class="line-numbers language-c++"><code class="language-c++">    int mincostTickets(vector<int>& days, vector<int>& costs) {
+        int dp[366] = {0};
+        int a, b, c;
+
+        int j = 0;
+        for (int i = 1; i < 366; i++) {
+            if (j < days.size() && i == days[j]){
+                a = costs[0] + dp[i - 1];
+                b = costs[1] + dp[ i - 7 > 0 ? i - 7 : 0 ];
+                c = costs[2] + dp[ i - 30 > 0 ? i - 30 : 0 ];
+                dp[i] = min( min(a, b), c );
+                j++;
+            }
+            else 
+                dp[i] = dp[i - 1];
+        }
+        return dp[days[days.size() - 1]];
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
         
       </div>
@@ -634,7 +609,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题库"><span class="nav-number">1.</span> <span class="nav-text">题库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#leetcode"><span class="nav-number">1.1.</span> <span class="nav-text">leetcode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UVa"><span class="nav-number">1.2.</span> <span class="nav-text">UVa</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#剑指Offer"><span class="nav-number">1.3.</span> <span class="nav-text">剑指Offer</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分类"><span class="nav-number">2.</span> <span class="nav-text">分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">2.1.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Math"><span class="nav-number">2.2.</span> <span class="nav-text">Math</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array"><span class="nav-number">2.3.</span> <span class="nav-text">Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#List"><span class="nav-number">2.4.</span> <span class="nav-text">List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Design-pattern"><span class="nav-number">2.5.</span> <span class="nav-text">Design pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tree"><span class="nav-number">2.6.</span> <span class="nav-text">Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DP"><span class="nav-number">2.7.</span> <span class="nav-text">DP</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-983"><span class="nav-number">1.</span> <span class="nav-text">题目 983</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
             
 
           </div>
