@@ -677,12 +677,6 @@ x<span class="token punctuation">,</span>y <span class="token operator">=</span>
   
     
     <entry>
-      <title><![CDATA[categories]]></title>
-      <url>/categories/index.html</url>
-      <content type="html"></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[About me]]></title>
       <url>/about/index.html</url>
       <content type="html"><![CDATA[<p><br>CS在读，爱好羽毛球</p>
@@ -698,93 +692,9 @@ x<span class="token punctuation">,</span>y <span class="token operator">=</span>
     </entry>
     
     <entry>
-      <title><![CDATA[写啊！少年]]></title>
-      <url>/mind/index.html</url>
-      <content type="html"><![CDATA[<ul>
-<li><a href="./翻完我的简讯我的信-顺便翻翻我的心情.html">句</a></li>
-</ul>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[翻完我的简讯我的信 顺便翻翻我的心情]]></title>
-      <url>/mind/%E7%BF%BB%E5%AE%8C%E6%88%91%E7%9A%84%E7%AE%80%E8%AE%AF%E6%88%91%E7%9A%84%E4%BF%A1-%E9%A1%BA%E4%BE%BF%E7%BF%BB%E7%BF%BB%E6%88%91%E7%9A%84%E5%BF%83%E6%83%85.html</url>
-      <content type="html"><![CDATA[<ul>
-<li>2017.11.09</li>
-<li>天气 晴</li>
-</ul>
-<p>从网易云转战虾米，开始拾起很久没听的林宥嘉。熟悉的感觉，神游live的每一首歌似乎都那么熟悉。在学校广播听见yoga，开心得可以蹦起来，享受。</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Digit Generator]]></title>
-      <url>/questions/Digit-Generator.html</url>
-      <content type="html"><![CDATA[<p>生成元。<a id="more"></a></p>
-<h1 id="题目-1583"><a href="#题目-1583" class="headerlink" title="题目 1583"></a><a href="https://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;page=show_problem&amp;problem=4458" target="_blank" rel="external">题目 1583</a></h1><p>如果x加上x的各个数字之和等于y，就说x是y的生成元。245是256 (= 245 + 2 + 4 + 5)的生成元。 </p>
-<p>有的数字没有生成元，有的数字不止一个（找到最小的）。</p>
-<h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>Your program is to read from standard input. The input consists of T test cases. The number of test cases T is given in the first line of the input. Each test case takes one line containing an integer N, 1 ≤ N ≤ 100, 000.</p>
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>Your program is to write to standard output. Print exactly one line for each test case. The line is to contain a generator of N for each test case. If N has multiple generators, print the smallest. If N does not have any generators, print ‘0’.</p>
-<h3 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h3><pre><code>3
-216
-121
-2005
-</code></pre><h3 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h3><pre><code>198
-0
-1979
-</code></pre><h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>遍历N-1个数效率低，利用 <strong>y - x数字之和 = x</strong> ，对于y，判断 (y - sum)的数字之和与sum是否相等。首先要求y的位数n，sum的最大可能为 n * 9（x由n个9组成）。</p>
-<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
-<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
-
-<span class="token keyword">int</span> <span class="token function">getDigit</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">int</span> nDigit <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-    <span class="token keyword">while</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        x <span class="token operator">/</span><span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-        nDigit<span class="token operator">++</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">return</span> nDigit<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">int</span> <span class="token function">getSumDigit</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">int</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token keyword">while</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">int</span> tmp <span class="token operator">=</span> x <span class="token operator">%</span> <span class="token number">10</span><span class="token punctuation">;</span>
-        sum <span class="token operator">+</span><span class="token operator">=</span> tmp<span class="token punctuation">;</span>
-        x <span class="token operator">/</span><span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">return</span> sum<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">int</span> c<span class="token punctuation">;</span>
-    <span class="token keyword">while</span> <span class="token punctuation">(</span>cin <span class="token operator">>></span> c<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">int</span> x<span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> k <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>cin <span class="token operator">>></span> x <span class="token operator">&amp;&amp;</span>  k <span class="token operator">&lt;</span> c<span class="token punctuation">;</span> k<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token function">getDigit</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">int</span> res <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-
-            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">9</span> <span class="token operator">*</span> n<span class="token punctuation">;</span> i <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">==</span> <span class="token function">getSumDigit</span><span class="token punctuation">(</span>x <span class="token operator">-</span> i<span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                    res <span class="token operator">=</span> x <span class="token operator">-</span> i<span class="token punctuation">;</span>
-                    <span class="token keyword">break</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span>
-            cout <span class="token operator">&lt;&lt;</span> res <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>刘汝佳的做法：枚举100000内所有正整数x，计算y，生成表。要用时查表</p>
-<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h3 id="快速取得一个整数的最高位"><a href="#快速取得一个整数的最高位" class="headerlink" title="快速取得一个整数的最高位"></a><a href="https://stackoverflow.com/questions/701322/how-can-you-get-the-first-digit-in-an-int-c/701621#701621" target="_blank" rel="external">快速取得一个整数的最高位</a></h3><p>查资料过程看到，只有一点相关，但要记录每一位的情况下还是老办法好。</p>
-<p>最佳：<strong>Unrolled &amp; optimized loop</strong></p>
-<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">>=</span> <span class="token number">100000000</span><span class="token punctuation">)</span> i <span class="token operator">/</span><span class="token operator">=</span> <span class="token number">100000000</span><span class="token punctuation">;</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">>=</span> <span class="token number">10000</span><span class="token punctuation">)</span> i <span class="token operator">/</span><span class="token operator">=</span> <span class="token number">10000</span><span class="token punctuation">;</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">>=</span> <span class="token number">100</span><span class="token punctuation">)</span> i <span class="token operator">/</span><span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">>=</span> <span class="token number">10</span><span class="token punctuation">)</span> i <span class="token operator">/</span><span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
+      <title><![CDATA[categories]]></title>
+      <url>/categories/index.html</url>
+      <content type="html"></content>
     </entry>
     
     <entry>
@@ -852,103 +762,6 @@ x<span class="token punctuation">,</span>y <span class="token operator">=</span>
     </entry>
     
     <entry>
-      <title><![CDATA[Palindrome Number]]></title>
-      <url>/questions/Palindrome-Number.html</url>
-      <content type="html"><![CDATA[<p>判断回文数。<a id="more"></a></p>
-<h1 id="题目-9"><a href="#题目-9" class="headerlink" title="题目 9"></a>题目 9</h1><p>Determine whether an integer is a palindrome. Do this without extra space.</p>
-<p>click to show spoilers.</p>
-<hr>
-<p><strong>Some hints:</strong><br>Could negative integers be palindromes? (ie, -1)</p>
-<p>If you are thinking of converting the integer to string, note the restriction of using extra space.</p>
-<p>You could also try reversing an integer. However, if you have solved the problem “Reverse Integer”, you know that the reversed integer might overflow. How would you handle such case?</p>
-<p>There is a more generic way of solving this problem.</p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>负号不对称，负数不是回文数。</p>
-<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>用了额外的栈和队列空间。</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp">    <span class="token keyword">bool</span> <span class="token function">isPalindrome</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        stack<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> s<span class="token punctuation">;</span>
-        queue<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> q<span class="token punctuation">;</span>
-        <span class="token keyword">while</span> <span class="token punctuation">(</span>x <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">int</span> tmp <span class="token operator">=</span> x <span class="token operator">%</span> <span class="token number">10</span><span class="token punctuation">;</span>
-            s<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            x <span class="token operator">/</span><span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">while</span> <span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> q<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                s<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-            <span class="token keyword">else</span>
-                <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Only reversing till half and then compare. <a href="http://wuxinju.top/2017/08/03/Reverse-Integer/" target="_blank" rel="external">007-Reverse-Integer</a></p>
-<p>空间复杂度O(1)，与问题规模n无关。</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp">    <span class="token keyword">bool</span> <span class="token function">isPalindrome</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>x<span class="token operator">&lt;</span><span class="token number">0</span><span class="token operator">||</span> <span class="token punctuation">(</span>x<span class="token operator">!=</span><span class="token number">0</span> <span class="token operator">&amp;&amp;</span>x<span class="token operator">%</span><span class="token number">10</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//10的倍数必定不是回文数</span>
-        <span class="token keyword">int</span> sum<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">while</span><span class="token punctuation">(</span>x<span class="token operator">></span>sum<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            sum <span class="token operator">=</span> sum<span class="token operator">*</span><span class="token number">10</span><span class="token operator">+</span>x<span class="token operator">%</span><span class="token number">10</span><span class="token punctuation">;</span>
-            x <span class="token operator">=</span> x<span class="token operator">/</span><span class="token number">10</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> <span class="token punctuation">(</span>x<span class="token operator">==</span>sum<span class="token punctuation">)</span><span class="token operator">||</span><span class="token punctuation">(</span>x<span class="token operator">==</span>sum<span class="token operator">/</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//偶数位、奇数位</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Palindrome Number]]></title>
-      <url>/questions/Palindromes.html</url>
-      <content type="html"><![CDATA[<p>判断字符串是否为回文串或镜像串。<a id="more"></a></p>
-<h1 id="题目-401"><a href="#题目-401" class="headerlink" title="题目 401"></a><a href="https://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;page=show_problem&amp;problem=342" target="_blank" rel="external">题目 401</a></h1><h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>Input consists of strings (one per line) each of which will consist of one to twenty valid characters.There will be no invalid characters in any of the strings. Your program should read to the end of file.</p>
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>For each input string, you should print the string starting in column 1 immediately followed by exactly one of the following strings.</p>
-<h3 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h3><p>NOTAPALINDROME<br>ISAPALINILAPASI<br>2A3MEAS<br>ATOYOTA</p>
-<h3 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h3><p>NOTAPALINDROME – is not a palindrome.<br><br>ISAPALINILAPASI – is a regular palindrome.<br><br>2A3MEAS – is a mirrored string.<br><br>ATOYOTA – is a mirrored palindrome.</p>
-<p><strong>Note</strong> </p>
-<ul>
-<li><strong>‘0’ (zero)</strong> and ‘O’ (the letter) are considered the same character and therefore ONLY the letter ‘O’ is a valid character.</li>
-<li>The output line is to include <strong>the ‘-’s and spacing</strong> exactly as shown in the table above and demonstrated in the Sample Output below.</li>
-<li>In addition, after each output line, you must print <strong>an empty line</strong>.</li>
-</ul>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>依次首尾比较。</p>
-<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>用string数组存储输出信息，用p * 2 + m计算标志位来输出信息。</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string></span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
-<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
-
-<span class="token keyword">const</span> string reverse <span class="token operator">=</span> <span class="token string">"A   3  HIL JM O   2TUVWXY51SE Z  8 "</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> string message<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token string">"not a palindrome"</span><span class="token punctuation">,</span><span class="token string">"a mirrored string"</span><span class="token punctuation">,</span><span class="token string">"a regular palindrome"</span><span class="token punctuation">,</span><span class="token string">"a mirrored palindrome"</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token keyword">char</span> <span class="token function">mirror</span><span class="token punctuation">(</span><span class="token keyword">char</span> ch<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>ch <span class="token operator">>=</span> <span class="token string">'A'</span> <span class="token operator">&amp;&amp;</span> ch <span class="token operator">&lt;=</span> <span class="token string">'Z'</span><span class="token punctuation">)</span> <span class="token keyword">return</span> reverse<span class="token punctuation">[</span>ch <span class="token operator">-</span> <span class="token string">'A'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>ch <span class="token operator">>=</span> <span class="token string">'0'</span> <span class="token operator">&amp;&amp;</span> ch <span class="token operator">&lt;=</span> <span class="token string">'9'</span><span class="token punctuation">)</span> <span class="token keyword">return</span> reverse<span class="token punctuation">[</span>ch <span class="token operator">-</span> <span class="token string">'0'</span> <span class="token operator">+</span> <span class="token number">25</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    string s<span class="token punctuation">;</span>
-    <span class="token keyword">while</span><span class="token punctuation">(</span>cin <span class="token operator">>></span> s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">bool</span> p<span class="token punctuation">,</span> m<span class="token punctuation">;</span>
-        p <span class="token operator">=</span> m <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span> len <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> s<span class="token punctuation">[</span>len <span class="token operator">-</span> i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> p <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token function">mirror</span><span class="token punctuation">(</span>s<span class="token punctuation">[</span>len <span class="token operator">-</span> i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> m <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        cout <span class="token operator">&lt;&lt;</span> s <span class="token operator">&lt;&lt;</span> <span class="token string">" -- is "</span> <span class="token operator">&lt;&lt;</span> message<span class="token punctuation">[</span>p <span class="token operator">*</span> <span class="token number">2</span> <span class="token operator">+</span> m<span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> <span class="token string">"."</span> <span class="token operator">&lt;&lt;</span>endl <span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[Reverse Integer]]></title>
       <url>/questions/Reverse-Integer.html</url>
       <content type="html"><![CDATA[<p>翻转32位有符号整型数字，注意溢出。<a id="more"></a></p>
@@ -997,6 +810,65 @@ x<span class="token punctuation">,</span>y <span class="token operator">=</span>
 <li>次方的表示 <code>pow(2,31)</code> =&gt; $2^{31}$  （注：头文件<code>&lt;math.h&gt;</code>）</li>
 </ul>
 <h4 id="如何判断溢出"><a href="#如何判断溢出" class="headerlink" title="如何判断溢出"></a><a href="/2017/08/04/C-如何判断整型运算溢出/">如何判断溢出</a></h4>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[写啊！少年]]></title>
+      <url>/mind/index.html</url>
+      <content type="html"><![CDATA[<ul>
+<li><a href="./翻完我的简讯我的信-顺便翻翻我的心情.html">句</a></li>
+</ul>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Palindrome Number]]></title>
+      <url>/questions/Palindrome-Number.html</url>
+      <content type="html"><![CDATA[<p>判断回文数。<a id="more"></a></p>
+<h1 id="题目-9"><a href="#题目-9" class="headerlink" title="题目 9"></a>题目 9</h1><p>Determine whether an integer is a palindrome. Do this without extra space.</p>
+<p>click to show spoilers.</p>
+<hr>
+<p><strong>Some hints:</strong><br>Could negative integers be palindromes? (ie, -1)</p>
+<p>If you are thinking of converting the integer to string, note the restriction of using extra space.</p>
+<p>You could also try reversing an integer. However, if you have solved the problem “Reverse Integer”, you know that the reversed integer might overflow. How would you handle such case?</p>
+<p>There is a more generic way of solving this problem.</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>负号不对称，负数不是回文数。</p>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>用了额外的栈和队列空间。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">    <span class="token keyword">bool</span> <span class="token function">isPalindrome</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        stack<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> s<span class="token punctuation">;</span>
+        queue<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> q<span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>x <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> tmp <span class="token operator">=</span> x <span class="token operator">%</span> <span class="token number">10</span><span class="token punctuation">;</span>
+            s<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            x <span class="token operator">/</span><span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> q<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                s<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span>
+                <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Only reversing till half and then compare. <a href="http://wuxinju.top/2017/08/03/Reverse-Integer/" target="_blank" rel="external">007-Reverse-Integer</a></p>
+<p>空间复杂度O(1)，与问题规模n无关。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">    <span class="token keyword">bool</span> <span class="token function">isPalindrome</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>x<span class="token operator">&lt;</span><span class="token number">0</span><span class="token operator">||</span> <span class="token punctuation">(</span>x<span class="token operator">!=</span><span class="token number">0</span> <span class="token operator">&amp;&amp;</span>x<span class="token operator">%</span><span class="token number">10</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//10的倍数必定不是回文数</span>
+        <span class="token keyword">int</span> sum<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>x<span class="token operator">></span>sum<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            sum <span class="token operator">=</span> sum<span class="token operator">*</span><span class="token number">10</span><span class="token operator">+</span>x<span class="token operator">%</span><span class="token number">10</span><span class="token punctuation">;</span>
+            x <span class="token operator">=</span> x<span class="token operator">/</span><span class="token number">10</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>x<span class="token operator">==</span>sum<span class="token punctuation">)</span><span class="token operator">||</span><span class="token punctuation">(</span>x<span class="token operator">==</span>sum<span class="token operator">/</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//偶数位、奇数位</span>
+    <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
     </entry>
     
     <entry>
@@ -1206,6 +1078,17 @@ Y   I   R
     </entry>
     
     <entry>
+      <title><![CDATA[翻完我的简讯我的信 顺便翻翻我的心情]]></title>
+      <url>/mind/%E7%BF%BB%E5%AE%8C%E6%88%91%E7%9A%84%E7%AE%80%E8%AE%AF%E6%88%91%E7%9A%84%E4%BF%A1-%E9%A1%BA%E4%BE%BF%E7%BF%BB%E7%BF%BB%E6%88%91%E7%9A%84%E5%BF%83%E6%83%85.html</url>
+      <content type="html"><![CDATA[<ul>
+<li>2017.11.09</li>
+<li>天气 晴</li>
+</ul>
+<p>从网易云转战虾米，开始拾起很久没听的林宥嘉。熟悉的感觉，神游live的每一首歌似乎都那么熟悉。在学校广播听见yoga，开心得可以蹦起来，享受。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[奋起啊！少年]]></title>
       <url>/questions/index.html</url>
       <content type="html"><![CDATA[<p><img src="http://cindy1024-blog.test.upcdn.net/20170811/170142258.PNG" alt=""></p>
@@ -1282,6 +1165,72 @@ Y   I   R
 <li><a href="./leetcode/斐波那契数-爬楼梯.html">leetcode - 509/70 斐波那契数/爬楼梯</a></li>
 </ul>
 ]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[tags]]></title>
+      <url>/tags/index.html</url>
+      <content type="html"></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[timeline]]></title>
+      <url>/timeline/index.html</url>
+      <content type="html"></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Palindrome Number]]></title>
+      <url>/questions/Palindromes.html</url>
+      <content type="html"><![CDATA[<p>判断字符串是否为回文串或镜像串。<a id="more"></a></p>
+<h1 id="题目-401"><a href="#题目-401" class="headerlink" title="题目 401"></a><a href="https://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;page=show_problem&amp;problem=342" target="_blank" rel="external">题目 401</a></h1><h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>Input consists of strings (one per line) each of which will consist of one to twenty valid characters.There will be no invalid characters in any of the strings. Your program should read to the end of file.</p>
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>For each input string, you should print the string starting in column 1 immediately followed by exactly one of the following strings.</p>
+<h3 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h3><p>NOTAPALINDROME<br>ISAPALINILAPASI<br>2A3MEAS<br>ATOYOTA</p>
+<h3 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h3><p>NOTAPALINDROME – is not a palindrome.<br><br>ISAPALINILAPASI – is a regular palindrome.<br><br>2A3MEAS – is a mirrored string.<br><br>ATOYOTA – is a mirrored palindrome.</p>
+<p><strong>Note</strong> </p>
+<ul>
+<li><strong>‘0’ (zero)</strong> and ‘O’ (the letter) are considered the same character and therefore ONLY the letter ‘O’ is a valid character.</li>
+<li>The output line is to include <strong>the ‘-’s and spacing</strong> exactly as shown in the table above and demonstrated in the Sample Output below.</li>
+<li>In addition, after each output line, you must print <strong>an empty line</strong>.</li>
+</ul>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>依次首尾比较。</p>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>用string数组存储输出信息，用p * 2 + m计算标志位来输出信息。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> string reverse <span class="token operator">=</span> <span class="token string">"A   3  HIL JM O   2TUVWXY51SE Z  8 "</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> string message<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token string">"not a palindrome"</span><span class="token punctuation">,</span><span class="token string">"a mirrored string"</span><span class="token punctuation">,</span><span class="token string">"a regular palindrome"</span><span class="token punctuation">,</span><span class="token string">"a mirrored palindrome"</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">char</span> <span class="token function">mirror</span><span class="token punctuation">(</span><span class="token keyword">char</span> ch<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ch <span class="token operator">>=</span> <span class="token string">'A'</span> <span class="token operator">&amp;&amp;</span> ch <span class="token operator">&lt;=</span> <span class="token string">'Z'</span><span class="token punctuation">)</span> <span class="token keyword">return</span> reverse<span class="token punctuation">[</span>ch <span class="token operator">-</span> <span class="token string">'A'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ch <span class="token operator">>=</span> <span class="token string">'0'</span> <span class="token operator">&amp;&amp;</span> ch <span class="token operator">&lt;=</span> <span class="token string">'9'</span><span class="token punctuation">)</span> <span class="token keyword">return</span> reverse<span class="token punctuation">[</span>ch <span class="token operator">-</span> <span class="token string">'0'</span> <span class="token operator">+</span> <span class="token number">25</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    string s<span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>cin <span class="token operator">>></span> s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">bool</span> p<span class="token punctuation">,</span> m<span class="token punctuation">;</span>
+        p <span class="token operator">=</span> m <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> len <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> s<span class="token punctuation">[</span>len <span class="token operator">-</span> i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> p <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token function">mirror</span><span class="token punctuation">(</span>s<span class="token punctuation">[</span>len <span class="token operator">-</span> i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> m <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        cout <span class="token operator">&lt;&lt;</span> s <span class="token operator">&lt;&lt;</span> <span class="token string">" -- is "</span> <span class="token operator">&lt;&lt;</span> message<span class="token punctuation">[</span>p <span class="token operator">*</span> <span class="token number">2</span> <span class="token operator">+</span> m<span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> <span class="token string">"."</span> <span class="token operator">&lt;&lt;</span>endl <span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title></title>
+      <url>/questions/%E6%A8%A1%E6%9D%BF.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-0"><a href="#题目-0" class="headerlink" title="题目 0"></a>题目 0</h1>]]></content>
     </entry>
     
     <entry>
@@ -1517,22 +1466,73 @@ Y   I   R
     </entry>
     
     <entry>
-      <title></title>
-      <url>/questions/%E6%A8%A1%E6%9D%BF.html</url>
-      <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="题目-0"><a href="#题目-0" class="headerlink" title="题目 0"></a>题目 0</h1>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[tags]]></title>
-      <url>/tags/index.html</url>
-      <content type="html"></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[timeline]]></title>
-      <url>/timeline/index.html</url>
-      <content type="html"></content>
+      <title><![CDATA[Digit Generator]]></title>
+      <url>/questions/Digit-Generator.html</url>
+      <content type="html"><![CDATA[<p>生成元。<a id="more"></a></p>
+<h1 id="题目-1583"><a href="#题目-1583" class="headerlink" title="题目 1583"></a><a href="https://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;page=show_problem&amp;problem=4458" target="_blank" rel="external">题目 1583</a></h1><p>如果x加上x的各个数字之和等于y，就说x是y的生成元。245是256 (= 245 + 2 + 4 + 5)的生成元。 </p>
+<p>有的数字没有生成元，有的数字不止一个（找到最小的）。</p>
+<h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>Your program is to read from standard input. The input consists of T test cases. The number of test cases T is given in the first line of the input. Each test case takes one line containing an integer N, 1 ≤ N ≤ 100, 000.</p>
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>Your program is to write to standard output. Print exactly one line for each test case. The line is to contain a generator of N for each test case. If N has multiple generators, print the smallest. If N does not have any generators, print ‘0’.</p>
+<h3 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h3><pre><code>3
+216
+121
+2005
+</code></pre><h3 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h3><pre><code>198
+0
+1979
+</code></pre><h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>遍历N-1个数效率低，利用 <strong>y - x数字之和 = x</strong> ，对于y，判断 (y - sum)的数字之和与sum是否相等。首先要求y的位数n，sum的最大可能为 n * 9（x由n个9组成）。</p>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">getDigit</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> nDigit <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        x <span class="token operator">/</span><span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+        nDigit<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> nDigit<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">getSumDigit</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> tmp <span class="token operator">=</span> x <span class="token operator">%</span> <span class="token number">10</span><span class="token punctuation">;</span>
+        sum <span class="token operator">+</span><span class="token operator">=</span> tmp<span class="token punctuation">;</span>
+        x <span class="token operator">/</span><span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> sum<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> c<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>cin <span class="token operator">>></span> c<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> x<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> k <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>cin <span class="token operator">>></span> x <span class="token operator">&amp;&amp;</span>  k <span class="token operator">&lt;</span> c<span class="token punctuation">;</span> k<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token function">getDigit</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">int</span> res <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">9</span> <span class="token operator">*</span> n<span class="token punctuation">;</span> i <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">==</span> <span class="token function">getSumDigit</span><span class="token punctuation">(</span>x <span class="token operator">-</span> i<span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    res <span class="token operator">=</span> x <span class="token operator">-</span> i<span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            cout <span class="token operator">&lt;&lt;</span> res <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>刘汝佳的做法：枚举100000内所有正整数x，计算y，生成表。要用时查表</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h3 id="快速取得一个整数的最高位"><a href="#快速取得一个整数的最高位" class="headerlink" title="快速取得一个整数的最高位"></a><a href="https://stackoverflow.com/questions/701322/how-can-you-get-the-first-digit-in-an-int-c/701621#701621" target="_blank" rel="external">快速取得一个整数的最高位</a></h3><p>查资料过程看到，只有一点相关，但要记录每一位的情况下还是老办法好。</p>
+<p>最佳：<strong>Unrolled &amp; optimized loop</strong></p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">>=</span> <span class="token number">100000000</span><span class="token punctuation">)</span> i <span class="token operator">/</span><span class="token operator">=</span> <span class="token number">100000000</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">>=</span> <span class="token number">10000</span><span class="token punctuation">)</span> i <span class="token operator">/</span><span class="token operator">=</span> <span class="token number">10000</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">>=</span> <span class="token number">100</span><span class="token punctuation">)</span> i <span class="token operator">/</span><span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">>=</span> <span class="token number">10</span><span class="token punctuation">)</span> i <span class="token operator">/</span><span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
     </entry>
     
     <entry>
@@ -1580,6 +1580,107 @@ Y   I   R
     </entry>
     
     <entry>
+      <title><![CDATA[Pow(x, n)]]></title>
+      <url>/questions/leetcode/Pow(x,n).html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-50"><a href="#题目-50" class="headerlink" title="题目 50"></a>题目 50</h1><p>实现 <a href="https://www.cplusplus.com/reference/valarray/pow/" target="_blank" rel="external">pow(<em>x</em>, <em>n</em>)</a> ，即计算 x 的 n 次幂函数。</p>
+<p><strong>说明:</strong></p>
+<ul>
+<li>-100.0 &lt; <em>x</em> &lt; 100.0</li>
+<li><em>n</em> 是 32 位有符号整数，其数值范围是$ [−2^{31}, 2^{31} − 1]$ 。</li>
+</ul>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="二分法"><a href="#二分法" class="headerlink" title="二分法"></a>二分法</h2><p>这里有两个坑：</p>
+<ul>
+<li>重复递归<code>computePow(x, n / 2)</code>，n较大时会超出时间限制。</li>
+</ul>
+<pre class="line-numbers language-c++"><code class="language-c++">double evenPow = computePow(x, n / 2) * computePow(x, n / 2);
+if (n % 2 == 1) return  evenPow * x;
+else return evenPow;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><p><code>INT_MIN=-2147483648</code>  <code>-INT_MIN = INT_MAX + 1</code></p>
+<p>在输入$x=1.00000, n=-2147483648$时<code>-n</code>会溢出，需要特殊处理。</p>
+</li>
+</ul>
+<h2 id="妙蛙种子法（from评论区）"><a href="#妙蛙种子法（from评论区）" class="headerlink" title="妙蛙种子法（from评论区）"></a>妙蛙种子法（from评论区）</h2><p>原理是：把底数变大，指数变小，res存储损失的值。</p>
+<ul>
+<li><p>for循环的次数即i作减半直到为1的次数，而<code>x *= x</code>相当于对幂作加倍，加倍的次数正好等于减半的次数。</p>
+</li>
+<li><p>但是由于i/2在i为奇数时会造成损失，损失量刚好是<strong>上一次的x值</strong>，需要把这个值乘到res里面做弥补。</p>
+</li>
+<li><p>同时<strong>最后一次i/2必然为1</strong>即奇数，所以最终得到的<strong>x和损失量相乘</strong>得到最终结果。</p>
+</li>
+</ul>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="二分法-1"><a href="#二分法-1" class="headerlink" title="二分法"></a>二分法</h2><pre class="line-numbers language-c++"><code class="language-c++">    double myPow(double x, int n) {
+        if (n == 0 || x == 1) return 1;
+        //处理边界条件
+        if (n == INT_MIN) return 1 / (computePow(x, INT_MAX) * x);
+        if (n > 0) return computePow(x, n);
+        else return 1 / computePow(x, -n);
+    }
+
+    double computePow(double x, int n) {
+        if (n == 1) return x;
+        //只递归一次
+        double halfPow = computePow(x, n / 2);
+        if (n % 2 == 1) return  halfPow * halfPow * x;
+        else return halfPow * halfPow;
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>避开边界条件也可以这样写：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">    double myPow(double x, int n) {
+        if (n == 0) return 1;
+        double half = myPow(x, n / 2);
+        if (n % 2 == 0) return half * half;
+        if (n > 0) return half * half * x;
+        return half * half / x;
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="妙蛙种子法"><a href="#妙蛙种子法" class="headerlink" title="妙蛙种子法"></a>妙蛙种子法</h2><pre class="line-numbers language-c++"><code class="language-c++">    double myPow(double x, int n) {
+        double res = 1.0;
+        for (int i = n; i != 0; i /= 2) {
+            if (i % 2 != 0) res *= x;
+            x *= x;
+        }
+        return n < 0 ? 1 / res : res;
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[二叉树的最近公共祖先]]></title>
+      <url>/questions/leetcode/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-236"><a href="#题目-236" class="headerlink" title="题目 236"></a>题目 236</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200511170027.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200511170101.png" alt=""></p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><blockquote>
+<p>注意，这里<code>commonAncestor</code>，<code>p</code>和<code>q</code>都是在同一棵树上，不是两棵树啊！！</p>
+</blockquote>
+<p>对于一个节点，分别看左右子树是否找到了p或q</p>
+<ul>
+<li><p>左右子树分别找到了p和q，则最近公共祖先为当前节点。</p>
+</li>
+<li><p>左子树找到p和q，则最近公共祖先为左节点。</p>
+</li>
+<li><p>右子树找到p和q，则最近公共祖先为右节点。</p>
+</li>
+</ul>
+<p>递归的边界条件是当前节点为p或q，不用再往下找，祖先一定是自己或再往上。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><pre class="line-numbers language-c++"><code class="language-c++">    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(!root || root == p || root == q) return root;
+        //表示左/右子树是否找到了p或q
+        TreeNode* left = lowestCommonAncestor(root->left, p ,q);
+        TreeNode* right = lowestCommonAncestor(root->right, p ,q); 
+        if (left && right) return root;
+        if (left) return left;
+        else return right;//若左右都没找到，返回right即null     
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[合并两个有序链表]]></title>
       <url>/questions/leetcode/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8.html</url>
       <content type="html"><![CDATA[<a id="more"></a>
@@ -1608,86 +1709,6 @@ Y   I   R
         return head->next;
     }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[斐波那契数_爬楼梯]]></title>
-      <url>/questions/leetcode/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0-%E7%88%AC%E6%A5%BC%E6%A2%AF.html</url>
-      <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="题目-509-斐波那契数"><a href="#题目-509-斐波那契数" class="headerlink" title="题目 509 斐波那契数"></a>题目 509 斐波那契数</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200508215026.png" alt=""></p>
-<h1 id="题目-70-爬楼梯"><a href="#题目-70-爬楼梯" class="headerlink" title="题目 70 爬楼梯"></a>题目 70 爬楼梯</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200508215100.png" alt=""></p>
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>暴力法会爆炸，动态规划来一下。</p>
-<p>注意：爬楼梯题目，$n=0$时，有1种爬法，就是不爬……..</p>
-<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="509"><a href="#509" class="headerlink" title="509"></a>509</h2><pre class="line-numbers language-c++"><code class="language-c++">    int fib(int N) {
-        if (N == 0 || N == 1) return N;
-        int* dp = new int[N + 1];
-        dp[0] = 0;
-        dp[1] = 1;
-
-        for(int i = 2; i <= N; i++) 
-            dp[i] = (dp[i -1] + dp[i - 2]);
-
-        int ans = dp[N];
-        delete [] dp;
-        return ans;
-    }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="70"><a href="#70" class="headerlink" title="70"></a>70</h2><pre class="line-numbers language-c++"><code class="language-c++">    int climbStairs(int n) {
-        if (n == 0 || n == 1) return 1;
-        int* dp = new int[n + 1];
-        dp[0] = dp[1] = 1;
-        for (int i = 2; i <= n; i++)
-            dp[i] = (dp[i - 1] + dp[i - 2]);
-        int ans = dp[n];
-        delete [] dp;
-        return ans;
-    }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[最低票价]]></title>
-      <url>/questions/leetcode/%E6%9C%80%E4%BD%8E%E7%A5%A8%E4%BB%B7.html</url>
-      <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="题目-983"><a href="#题目-983" class="headerlink" title="题目 983"></a>题目 983</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200508190417.png" alt=""></p>
-<p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200508190446.png" alt=""></p>
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>题目有<code>最大值</code>一词，是<strong>动态规划</strong>的特点。</p>
-<p>用<code>int dp[366]</code>记录一年中到第i天为止需要花的钱，不出门则当天不需要多花钱。<code>dp[0] = 0</code>作为一个初始状态。</p>
-<ul>
-<li><p>出门，转移方程：$dp(i) = min{cost(index_j)+dp(i-j)}, j\in{1,7,30}$</p>
-<ul>
-<li><p>理解一：反思式买票</p>
-<p>在第10天看我如果在${第9天买1日票，第3天买7日票，直接买30日票}​$哪个划算</p>
-</li>
-<li><p>理解二：先旅游后买票</p>
-<p>一张4-10天的票，第10天付款。（from评论区）</p>
-</li>
-</ul>
-</li>
-<li><p>不出门，则不多花钱：$dp(i) = dp(i-1)​$</p>
-</li>
-</ul>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><pre class="line-numbers language-c++"><code class="language-c++">    int mincostTickets(vector<int>& days, vector<int>& costs) {
-        int dp[366] = {0};
-        int a, b, c;
-
-        int j = 0;
-        for (int i = 1; i < 366; i++) {
-            if (j < days.size() && i == days[j]){
-                a = costs[0] + dp[i - 1];
-                b = costs[1] + dp[ i - 7 > 0 ? i - 7 : 0 ];
-                c = costs[2] + dp[ i - 30 > 0 ? i - 30 : 0 ];
-                dp[i] = min( min(a, b), c );
-                j++;
-            }
-            else 
-                dp[i] = dp[i - 1];
-        }
-        return dp[days[days.size() - 1]];
-    }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 ]]></content>
     </entry>
     
@@ -1788,6 +1809,50 @@ Y   I   R
     </entry>
     
     <entry>
+      <title><![CDATA[最低票价]]></title>
+      <url>/questions/leetcode/%E6%9C%80%E4%BD%8E%E7%A5%A8%E4%BB%B7.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-983"><a href="#题目-983" class="headerlink" title="题目 983"></a>题目 983</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200508190417.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200508190446.png" alt=""></p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>题目有<code>最大值</code>一词，是<strong>动态规划</strong>的特点。</p>
+<p>用<code>int dp[366]</code>记录一年中到第i天为止需要花的钱，不出门则当天不需要多花钱。<code>dp[0] = 0</code>作为一个初始状态。</p>
+<ul>
+<li><p>出门，转移方程：$dp(i) = min{cost(index_j)+dp(i-j)}, j\in{1,7,30}$</p>
+<ul>
+<li><p>理解一：反思式买票</p>
+<p>在第10天看我如果在${第9天买1日票，第3天买7日票，直接买30日票}​$哪个划算</p>
+</li>
+<li><p>理解二：先旅游后买票</p>
+<p>一张4-10天的票，第10天付款。（from评论区）</p>
+</li>
+</ul>
+</li>
+<li><p>不出门，则不多花钱：$dp(i) = dp(i-1)​$</p>
+</li>
+</ul>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><pre class="line-numbers language-c++"><code class="language-c++">    int mincostTickets(vector<int>& days, vector<int>& costs) {
+        int dp[366] = {0};
+        int a, b, c;
+
+        int j = 0;
+        for (int i = 1; i < 366; i++) {
+            if (j < days.size() && i == days[j]){
+                a = costs[0] + dp[i - 1];
+                b = costs[1] + dp[ i - 7 > 0 ? i - 7 : 0 ];
+                c = costs[2] + dp[ i - 30 > 0 ? i - 30 : 0 ];
+                dp[i] = min( min(a, b), c );
+                j++;
+            }
+            else 
+                dp[i] = dp[i - 1];
+        }
+        return dp[days[days.size() - 1]];
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[环形链表]]></title>
       <url>/questions/leetcode/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8.html</url>
       <content type="html"><![CDATA[<a id="more"></a>
@@ -1861,47 +1926,6 @@ Y   I   R
 <p>$(C-t)​$就是从相遇点继续向前，走到环的入口点的距离。</p>
 <p>所以，</p>
 <p>$$distance_{head_to_entrance} = distance_{cross_to_entrance}​$$</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[相交链表]]></title>
-      <url>/questions/leetcode/%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8.html</url>
-      <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="题目-160"><a href="#题目-160" class="headerlink" title="题目 160"></a>题目 160</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502181124.png" alt=""></p>
-<p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502181147.png" alt=""></p>
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h3 id="暴力法"><a href="#暴力法" class="headerlink" title="暴力法"></a>暴力法</h3><h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><h3 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h3><p>$$a+intersection+b = b+intersection+a​$$</p>
-<blockquote>
-<ul>
-<li><p>当 pA 到达链表的尾部时，将它重定位到链表 B 的头结点 (你没看错，就是链表 B); 类似的，当 pB 到达链表的尾部时，将它重定位到链表 A 的头结点。</p>
-</li>
-<li><p>若在某一时刻 pA 和 pB 相遇，则 pA/pB 为相交结点。</p>
-</li>
-<li><p>如果两个链表存在相交，它们末尾的结点必然相同。因此当 pA/pB到达链表结尾时，记录下链表 <code>A/B</code> 对应的元素。若最后元素不相同，则两个链表不相交。</p>
-</li>
-</ul>
-<ul>
-<li><p>时间复杂度 $O(m+n)$</p>
-</li>
-<li><p>空间复杂度 $O(1)$</p>
-</li>
-</ul>
-</blockquote>
-<p>巧妙地把指针重定向，形成了类似环形链表（没有改变输入链表）。双指针速度一致，必同时走完全程，即找到相交点。</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h3 id="双指针-1"><a href="#双指针-1" class="headerlink" title="双指针"></a>双指针</h3><pre class="line-numbers language-c++"><code class="language-c++">    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        if (headA == nullptr || headB == nullptr) return nullptr;
-
-        ListNode *pa, *pb;
-        pa = headA;
-        pb = headB;
-
-        while (pa != pb){
-            pa = (pa == nullptr ? headB : pa->next);
-            pb = (pb == nullptr ? headA : pb->next);
-        }
-        return pa;
-    }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 ]]></content>
     </entry>
     
@@ -2010,6 +2034,120 @@ sentinel->next = head;
     </entry>
     
     <entry>
+      <title><![CDATA[相交链表]]></title>
+      <url>/questions/leetcode/%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-160"><a href="#题目-160" class="headerlink" title="题目 160"></a>题目 160</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502181124.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200502181147.png" alt=""></p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h3 id="暴力法"><a href="#暴力法" class="headerlink" title="暴力法"></a>暴力法</h3><h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><h3 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h3><p>$$a+intersection+b = b+intersection+a​$$</p>
+<blockquote>
+<ul>
+<li><p>当 pA 到达链表的尾部时，将它重定位到链表 B 的头结点 (你没看错，就是链表 B); 类似的，当 pB 到达链表的尾部时，将它重定位到链表 A 的头结点。</p>
+</li>
+<li><p>若在某一时刻 pA 和 pB 相遇，则 pA/pB 为相交结点。</p>
+</li>
+<li><p>如果两个链表存在相交，它们末尾的结点必然相同。因此当 pA/pB到达链表结尾时，记录下链表 <code>A/B</code> 对应的元素。若最后元素不相同，则两个链表不相交。</p>
+</li>
+</ul>
+<ul>
+<li><p>时间复杂度 $O(m+n)$</p>
+</li>
+<li><p>空间复杂度 $O(1)$</p>
+</li>
+</ul>
+</blockquote>
+<p>巧妙地把指针重定向，形成了类似环形链表（没有改变输入链表）。双指针速度一致，必同时走完全程，即找到相交点。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h3 id="双指针-1"><a href="#双指针-1" class="headerlink" title="双指针"></a>双指针</h3><pre class="line-numbers language-c++"><code class="language-c++">    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        if (headA == nullptr || headB == nullptr) return nullptr;
+
+        ListNode *pa, *pb;
+        pa = headA;
+        pb = headB;
+
+        while (pa != pb){
+            pa = (pa == nullptr ? headB : pa->next);
+            pb = (pb == nullptr ? headA : pb->next);
+        }
+        return pa;
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[斐波那契数_爬楼梯]]></title>
+      <url>/questions/leetcode/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0-%E7%88%AC%E6%A5%BC%E6%A2%AF.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-509-斐波那契数"><a href="#题目-509-斐波那契数" class="headerlink" title="题目 509 斐波那契数"></a>题目 509 斐波那契数</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200508215026.png" alt=""></p>
+<h1 id="题目-70-爬楼梯"><a href="#题目-70-爬楼梯" class="headerlink" title="题目 70 爬楼梯"></a>题目 70 爬楼梯</h1><p><img src="https://cdn.jsdelivr.net/gh/cindy1024/ImgBlog/img/20200508215100.png" alt=""></p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>暴力法会爆炸，动态规划来一下。</p>
+<p>注意：爬楼梯题目，$n=0$时，有1种爬法，就是不爬……..</p>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="509"><a href="#509" class="headerlink" title="509"></a>509</h2><pre class="line-numbers language-c++"><code class="language-c++">    int fib(int N) {
+        if (N == 0 || N == 1) return N;
+        int* dp = new int[N + 1];
+        dp[0] = 0;
+        dp[1] = 1;
+
+        for(int i = 2; i <= N; i++) 
+            dp[i] = (dp[i -1] + dp[i - 2]);
+
+        int ans = dp[N];
+        delete [] dp;
+        return ans;
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="70"><a href="#70" class="headerlink" title="70"></a>70</h2><pre class="line-numbers language-c++"><code class="language-c++">    int climbStairs(int n) {
+        if (n == 0 || n == 1) return 1;
+        int* dp = new int[n + 1];
+        dp[0] = dp[1] = 1;
+        for (int i = 2; i <= n; i++)
+            dp[i] = (dp[i - 1] + dp[i - 2]);
+        int ans = dp[n];
+        delete [] dp;
+        return ans;
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[x的平方根]]></title>
+      <url>/questions/leetcode/x%E7%9A%84%E5%B9%B3%E6%96%B9%E6%A0%B9.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-69"><a href="#题目-69" class="headerlink" title="题目 69"></a>题目 69</h1><p>实现 <code>int sqrt(int x)</code> 函数。</p>
+<p>计算并返回 x 的平方根，其中 x 是非负整数。</p>
+<p>由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。</p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="二分法"><a href="#二分法" class="headerlink" title="二分法"></a>二分法</h2><p>有几个坑：</p>
+<ul>
+<li><figcaption>* mid &lt;= x</code>的写法会导致溢出</p></figcaption><pre class="line-numbers language-mid"><code class="language-mid"><p>改成<code>min <= x/mid</code></p>
+</li>
+<li><p>同理， <code>int mid = (left + right) / 2</code>也会导致溢出</p>
+<p>改成<code>int mid = (float)left / 2 + (float)right / 2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<h2 id="牛顿法"><a href="#牛顿法" class="headerlink" title="牛顿法"></a>牛顿法</h2><h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="二分法-1"><a href="#二分法-1" class="headerlink" title="二分法"></a>二分法</h2><pre class="line-numbers language-c++"><code class="language-c++">    int mySqrt(int x) {
+        if (x == 0 || x == 1) return x;
+        return findHalf(x, 1, x);
+    }
+
+    int findHalf(int x, int left, int right) {
+        int mid = (float)left / 2 + (float)right / 2;
+        if (mid <= x / mid && (mid + 1) > x / (mid + 1)) return mid;
+        if (left < x / left && mid > x / mid) return findHalf(x, left, mid);
+        else return findHalf(x, mid, right);
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="牛顿法-1"><a href="#牛顿法-1" class="headerlink" title="牛顿法"></a>牛顿法</h2>]]></content>
+    </entry>
+    
+    <entry>
+      <title></title>
+      <url>/questions/offer/%E6%A8%A1%E6%9D%BF.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="题目-0"><a href="#题目-0" class="headerlink" title="题目 0"></a>题目 0</h1>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[数组中的重复数字]]></title>
       <url>/questions/offer/003_%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E6%95%B0%E5%AD%97.html</url>
       <content type="html"><![CDATA[<a id="more"></a>
@@ -2061,93 +2199,6 @@ sentinel->next = head;
 </tbody>
 </table>
 <h1 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h1><p>与方法二类似，布尔类型的哈希表。</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[实现Singleton模式]]></title>
-      <url>/questions/offer/002_%E5%AE%9E%E7%8E%B0Singleton%E6%A8%A1%E5%BC%8F.html</url>
-      <content type="html"><![CDATA[<p>c#实现单例模式。<a id="more"></a></p>
-<h1 id="题目-002"><a href="#题目-002" class="headerlink" title="题目 002"></a>题目 002</h1><p>设计一个类，只能生成该类的一个实例。</p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>要求只能生成一个实例，构造函数设为私有，其他类不能直接调用该类生成新的对象。“只能生成一个”，想到static的特性。</p>
-<h1 id="几种解法"><a href="#几种解法" class="headerlink" title="几种解法"></a>几种解法</h1><ul>
-<li><p>方法一：判断静态成员变量是否为空，只适用于单线程。</p>
-</li>
-<li><p>方法二：在方法一的基础上，加同步锁再判断，可用于多线程。</p>
-</li>
-<li><p>方法三：修改方法二，加同步锁前后两次判断，减少加锁操作，提高效率。</p>
-</li>
-<li><p><strong>方法四：</strong>静态构造函数，可能会过早地创建实例。</p>
-<blockquote>
-<p>创建第一个类实例或任何静态成员被引用时，.NET将自动调用静态构造函数来初始化类。</p>
-</blockquote>
-<pre class="line-numbers language-c#"><code class="language-c#">public sealed class Singleton4
-{
-    private Singleton4(){}
-    private static Singleton4 instance = new Singleton4();
-    public static Singleton4 Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p><strong>方法五：</strong>按需创建，嵌套类+静态函数。</p>
-<ul>
-<li>父类的方法用static修饰，是为了绕过类的实例化来调用函数。【必须】</li>
-<li>子类的方法和变量用static修饰，是因为静态方法不能<strong>直接</strong>调用非静态成员。</li>
-</ul>
-<pre class="line-numbers language-c#"><code class="language-c#">public sealed class Singleton5
-{
-  Singleton5(){}
-  public static Singleton5 Instance
-  {
-      get
-      {
-          return Nested.instance;
-      }
-  }
-
-  class Nested
-  {
-      static Nested(){}
-      internal static readonly Singleton5 instance = new Singleton5();
-  }
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>  对方法五做如下修改，使得在Nested类中，不使用静态函数和变量（即方法五中子类不适用static），可达到相同效果：</p>
-<pre class="line-numbers language-c#"><code class="language-c#">public sealed class Singleton5
-{
-  Singleton5(){}
-  public static Singleton5 Instance
-  {
-      get
-      {
-          Nested n = new Nested(); //modified
-          return n.instance;         //modified
-      }
-  }
-
-  public class Nested
-  {
-      internal Nested(){} //modified
-      internal readonly Singleton5 instance = new Singleton5(); //modified
-  }
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-</ul>
-<h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><p>什么时候可以<strong>不用实例化对象就可以调用类中成员函数</strong>？</p>
-<ol>
-<li>类的静态成员函数。</li>
-<li>非静态成员函数没有使用类的非静态数据成员，调用的其他非静态成员函数也不能使用类的非静态数据成员。</li>
-<li>非静态成员函数调用类的静态数据成员。</li>
-</ol>
-<p>（后面两种可以概括为【non-static的东西没有调用non-static的东西】）</p>
-<p>来源：<a href="https://blog.csdn.net/dwb1015/article/details/32933349" target="_blank" rel="external">https://blog.csdn.net/dwb1015/article/details/32933349</a></p>
 ]]></content>
     </entry>
     
@@ -2360,10 +2411,119 @@ sizeof(str3)/sizeof(char);         //6
     </entry>
     
     <entry>
+      <title><![CDATA[实现Singleton模式]]></title>
+      <url>/questions/offer/002_%E5%AE%9E%E7%8E%B0Singleton%E6%A8%A1%E5%BC%8F.html</url>
+      <content type="html"><![CDATA[<p>c#实现单例模式。<a id="more"></a></p>
+<h1 id="题目-002"><a href="#题目-002" class="headerlink" title="题目 002"></a>题目 002</h1><p>设计一个类，只能生成该类的一个实例。</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>要求只能生成一个实例，构造函数设为私有，其他类不能直接调用该类生成新的对象。“只能生成一个”，想到static的特性。</p>
+<h1 id="几种解法"><a href="#几种解法" class="headerlink" title="几种解法"></a>几种解法</h1><ul>
+<li><p>方法一：判断静态成员变量是否为空，只适用于单线程。</p>
+</li>
+<li><p>方法二：在方法一的基础上，加同步锁再判断，可用于多线程。</p>
+</li>
+<li><p>方法三：修改方法二，加同步锁前后两次判断，减少加锁操作，提高效率。</p>
+</li>
+<li><p><strong>方法四：</strong>静态构造函数，可能会过早地创建实例。</p>
+<blockquote>
+<p>创建第一个类实例或任何静态成员被引用时，.NET将自动调用静态构造函数来初始化类。</p>
+</blockquote>
+<pre class="line-numbers language-c#"><code class="language-c#">public sealed class Singleton4
+{
+    private Singleton4(){}
+    private static Singleton4 instance = new Singleton4();
+    public static Singleton4 Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p><strong>方法五：</strong>按需创建，嵌套类+静态函数。</p>
+<ul>
+<li>父类的方法用static修饰，是为了绕过类的实例化来调用函数。【必须】</li>
+<li>子类的方法和变量用static修饰，是因为静态方法不能<strong>直接</strong>调用非静态成员。</li>
+</ul>
+<pre class="line-numbers language-c#"><code class="language-c#">public sealed class Singleton5
+{
+  Singleton5(){}
+  public static Singleton5 Instance
+  {
+      get
+      {
+          return Nested.instance;
+      }
+  }
+
+  class Nested
+  {
+      static Nested(){}
+      internal static readonly Singleton5 instance = new Singleton5();
+  }
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  对方法五做如下修改，使得在Nested类中，不使用静态函数和变量（即方法五中子类不适用static），可达到相同效果：</p>
+<pre class="line-numbers language-c#"><code class="language-c#">public sealed class Singleton5
+{
+  Singleton5(){}
+  public static Singleton5 Instance
+  {
+      get
+      {
+          Nested n = new Nested(); //modified
+          return n.instance;         //modified
+      }
+  }
+
+  public class Nested
+  {
+      internal Nested(){} //modified
+      internal readonly Singleton5 instance = new Singleton5(); //modified
+  }
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><p>什么时候可以<strong>不用实例化对象就可以调用类中成员函数</strong>？</p>
+<ol>
+<li>类的静态成员函数。</li>
+<li>非静态成员函数没有使用类的非静态数据成员，调用的其他非静态成员函数也不能使用类的非静态数据成员。</li>
+<li>非静态成员函数调用类的静态数据成员。</li>
+</ol>
+<p>（后面两种可以概括为【non-static的东西没有调用non-static的东西】）</p>
+<p>来源：<a href="https://blog.csdn.net/dwb1015/article/details/32933349" target="_blank" rel="external">https://blog.csdn.net/dwb1015/article/details/32933349</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title></title>
-      <url>/questions/offer/%E6%A8%A1%E6%9D%BF.html</url>
-      <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="题目-0"><a href="#题目-0" class="headerlink" title="题目 0"></a>题目 0</h1>]]></content>
+      <url>/analytics.js</url>
+      <content type="html"><![CDATA[(function(){/*
+
+ Copyright The Closure Library Authors.
+ SPDX-License-Identifier: Apache-2.0
+*/
+var m=this||self,n=function(a,b){a=a.split(".");var c=m;a[0]in c||"undefined"==typeof c.execScript||c.execScript("var "+a[0]);for(var d;a.length&&(d=a.shift());)a.length||void 0===b?c=c[d]&&c[d]!==Object.prototype[d]?c[d]:c[d]={}:c[d]=b};var p=function(a,b){for(var c in b)b.hasOwnProperty(c)&&(a[c]=b[c])},q=function(a){for(var b in a)if(a.hasOwnProperty(b))return!0;return!1};var r=window,t=document,u=function(a,b){t.addEventListener?t.addEventListener(a,b,!1):t.attachEvent&&t.attachEvent("on"+a,b)};var v=/^(?:(?:https?|mailto|ftp):|[^:/?#]*(?:[/?#]|$))/i;var w={},x=function(){w.TAGGING=w.TAGGING||[];w.TAGGING[1]=!0};var y=/:[0-9]+$/,A=function(a,b){b&&(b=String(b).toLowerCase());if("protocol"===b||"port"===b)a.protocol=z(a.protocol)||z(r.location.protocol);"port"===b?a.port=String(Number(a.hostname?a.port:r.location.port)||("http"==a.protocol?80:"https"==a.protocol?443:"")):"host"===b&&(a.hostname=(a.hostname||r.location.hostname).replace(y,"").toLowerCase());var c=z(a.protocol);b&&(b=String(b).toLowerCase());switch(b){case "url_no_fragment":b="";a&&a.href&&(b=a.href.indexOf("#"),b=0>b?a.href:a.href.substr(0,
+b));a=b;break;case "protocol":a=c;break;case "host":a=a.hostname.replace(y,"").toLowerCase();break;case "port":a=String(Number(a.port)||("http"==c?80:"https"==c?443:""));break;case "path":a.pathname||a.hostname||x();a="/"==a.pathname.substr(0,1)?a.pathname:"/"+a.pathname;a=a.split("/");a:if(b=[],c=a[a.length-1],Array.prototype.indexOf)b=b.indexOf(c),b="number"==typeof b?b:-1;else{for(var d=0;d<b.length;d++)if(b[d]===c){b=d;break a}b="-1}0<=b&&(a[a.length-1]=" ");a="a.join("/");break;case"" "query":a="a.search.replace(" ?","="" "");break;case="" "extension":a="a.pathname.split(" .");a="1<a.length?a[a.length-1]:"";a=a.split("/")[0];break;case"" "fragment":a="a.hash.replace(" #","");break;default:a="a&&a.href}return"" a},z="function(a){return" a?a.replace(":","").tolowercase():""},b="function(a){var" b="t.createElement(" a");a&&(b.href="a);var"" c="b.pathname;" "!="=c[0]&&(a||x(),c="/"+c);a=b.hostname.replace(y,"");return{href:b.href,protocol:b.protocol,host:b.host,hostname:a,pathname:c,search:b.search,hash:b.hash,port:b.port}};function"" c(){for(var="" a="D,b={},c=0;c<a.length;++c)b[a[c]]=c;return" b}function="" e(){var="" ;a+="a.toLowerCase()+" 0123456789-_";return"="" a+"."}var="" d,f;function="" g(a){d="D||E();F=F||C();for(var" d="c+1<a.length,f=c+2<a.length,e=a.charCodeAt(c),g=d?a.charCodeAt(c+1):0,h=f?a.charCodeAt(c+2):0,k=e">>2;e=(e&3)<<4|g>>4;g=(g&15)<<2|h>>6;h&=63;f||(h=64,d||(g=64));b.push(D[k],D[e],D[g],D[h])}return b.join("")}
+function H(a){function b(k){for(;d<a.length;){var l="a.charAt(d++),M=F[l];if(null!=M)return" m;if(!="" ^[\s\xa0]*$="" .test(l))throw="" error("unknown="" base64="" encoding="" at="" char:="" "+l);}return="" k}d="D||E();F=F||C();for(var" c="" ,d="0;;){var" f="b(-1),e=b(0),g=b(64),h=b(64);if(64===h&&-1===f)return" c;c+="String.fromCharCode(f<<2|e">>4);64!=g&&(c+=String.fromCharCode(e<<4&240|g>>2),64!=h&&(c+=String.fromCharCode(g<<6&192|h)))}};var 0="=h&&(h=g.fragment?2:1),h===b&&p(f,g.callback()))}return" 60="" i;var="" n="function(){var" a="J,b=K,c=L(),d=function(g){a(g.target||g.srcElement||{})},f=function(g){b(g.target||g.srcElement||{})};if(!c.init){u(" mousedown",d);u("keyup",d);u("submit",f);var"="" e="HTMLFormElement.prototype.submit;HTMLFormElement.prototype.submit=function(){b(this);e.call(this)};c.init=!0}},O=function(a,b,c){for(var" d="L().decorators,f={},e=0;e<d.length;++e){var" g="d[e],h;if(h=!c||g.forms)a:{h=g.domains;var" k="a;if(h&&(g.sameHost||k!==t.location.hostname))for(var" l="0;l<h.length;l++)if(h[l]instanceof" regexp){if(h[l].test(k)){h="!0;break" a}}else="" if(0<="k.indexOf(h[l])){h=!0;break" a}h="!1}h&&(h=g.placement,void" f},l="function(){var" b="r.google_tag_data;r.google_tag_data=void" b};var="" p="/(.*?)\*(.*?)\*(.*)/,aa=/([^?#]+)(\?[^#]*)?(#.*)?/;function" q(a){return="" new="" regexp("(.*?)(^|&)"+a+"="([^&]*)&?(.*)" )}"="" var="" s="function(a){var" in="" a)if(a.hasownproperty(c)){var="" 0!="=d&&d===d&&null!==d&&" [object"="" object]"!="=d.toString()&&(b.push(c),b.push(G(String(d))))}a=b.join(" *");return["1",r(a),a].join("*")},r="function(a,b){a=[window.navigator.userAgent,(new"" date).gettimezoneoffset(),window.navigator.userlanguage||window.navigator.language,math.floor((new="" date).gettime()="" 1e3)-(void="" c="0;256">c;c++){for(var d=c,f=0;8>f;f++)d=d&1?d>>>1^
+3988292384:d>>>1;b[c]=d}}I=b;b=4294967295;for(c=0;c<a.length;c++)b=b>>>8^I[(b^a.charCodeAt(c))&255];return((b^-1)>>>0).toString(36)},ca=function(a){return function(b){var c=B(r.location.href),d=c.search.replace("?","");a:{var f=d.split("&");for(var e=0;e<f.length;e++){var 0="==b?3:b;try{if(a){a:{for(var" g="f[e].split(" =");if("_gl"="==decodeURIComponent(g[0]).replace(/\+/g,""" ")){f="g.slice(1).join(" =");break"="" a}}f="void" 0}b.query="T(f||" ")||{};f="A(c,"fragment");e=f.match(Q("_gl"));b.fragment=T(e&&e[3]||"")||{};a&&ba(c,d,f)}};"" function="" u(a,b){if(a="Q(a).exec(b)){var" c="a[2],d=a[4];b=a[1];d&&(b=b+c+d)}return" b}="" var="" ba="function(a,b,c){function" d(e,g){e="U(" _gl",e);e.length&&(e="g+e);return"" e}if(r.history&&r.history.replacestate){var="" f="Q(" _gl");if(f.test(b)||f.test(c))a="A(a,"path"),b=d(b,"?"),c=d(c,"#"),r.history.replaceState({},void"" 0,""+a+b+c)}},t="function(a){var" b="void">c;++c){var d=P.exec(a);if(d){var f=d;break a}a=decodeURIComponent(a)}f=void 0}if(f&&"1"===f[1]){var e=f[2],g=f[3];a:{for(f=0;f<b;++f)if(e===r(g,f)){var 0="==d?!1:d;var" h="!0;break" a}h="!1}if(h){b={};var" k="g?g.split(" *"):"="" [];for(g="0;g<k.length;g+=2)b[k[g]]=H(k[g+1]);return" b}}}}catch(l){}};function="" v(a,b,c,d){function="" f(k){k="U(a,k);var" l="k.charAt(k.length-1);k&&" &"!="=l&&(k+="&");return"" k+h}d="void" e="aa.exec(c);if(!e)return" ";c="e[1];var"" g="e[2]||" ";e="e[3]||"";var"" function="" w(a,b){var="" c="FORM" =="=(a.tagName||" ").touppercase(),d="O(b,1,c),f=O(b,2,c);b=O(b,3,c);q(d)&&(d=S(d),c?X("_gl",d,a):Y("_gl",d,a,!1));!c&&q(f)&&(c=S(f),Y("_gl",c,a,!0));for(var"" in="" b)b.hasownproperty(e)&&z(e,b[e],a)}function="" z(a,b,c,d){if(c.tagname){if("a"="==c.tagName.toLowerCase())return" y(a,b,c,d);if("form"="==c.tagName.toLowerCase())return" x(a,b,c)}if("string"="=typeof" c)return="" v(a,b,c,d)}function="" y(a,b,c,d){c.href&&(a="V(a,b,c.href,void" x(a,b,c){if(c&&c.action){var="" d="(c.method||" ").tolowercase();if("get"="==d){d=c.childNodes||[];for(var"" f="!1,e=0;e<d.length;e++){var" var="" j="function(a){try{a:{for(var" b="100;a&&0<b;){if(a.href&&a.nodeName.match(/^a(?:rea)?$/i)){var" a}a="a.parentNode;b--}c=null}if(c){var" z("_gl",a,b,!!c)});n("google_tag_data.glbridge.generate",s);n("google_tag_data.glbridge.get",function(a,b){var="" c});})(window);="" (function(){function="" la(a){var="">>21:b}return b};/*
+
+ Copyright The Closure Library Authors.
+ SPDX-License-Identifier: Apache-2.0
+*/
+var $c=function(a){this.w=a||[]};$c.prototype.set=function(a){this.w[a]=!0};$c.prototype.encode=function(){for(var a=[],b=0;b<this.w.length;b++)this.w[b]&&(a[math.floor(b 0="=a.indexOf(b)},sa=function(a){return" 6)]^="1<<b%6);for(b=0;b<a.length;b++)a[b]=" abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz0123456789-_".charat(a[b]||0);return"="" a.join("")+"~"};var="" ha="window.GoogleAnalyticsObject,F;if(F=void" 0!="ha)F=-1<(ha.constructor+" ").indexof("string");var"="" wa;if(wa="F){var" ea="window.GoogleAnalyticsObject;wa=Ea?Ea.replace(/^[\s\xa0]+|[\s\xa0]+$/g," "):""}var"="" gb="wa||" ga",jd="/^(?:utma\.)?\d+\.\d+$/,kd=/^amp-[\w.-]{22,64}$/,Ba=!1;var"" vd="new" $c;function="" j(a){vd.set(a)}var="" td="function(a){a=Dd(a);a=new" $c(a);for(var="" b="vd.w.slice(),c=0;c<a.w.length;c++)b[c]=b[c]||a.w[c];return(new" $c(b)).encode()},dd="function(a){a=a.get(Gd);ka(a)||(a=[]);return" a};var="" a},ka="function(a){return" [object"="" array]"="=Object.prototype.toString.call(Object(a))},qa=function(a){return" void="" a?a.replace(="" ^[\s\xa0]+|[\s\xa0]+$="" g,""):""},ra="function(){for(var" a="O.navigator.userAgent+(M.cookie?M.cookie:" ")+(m.referrer?m.referrer:""),b="a.length,c=O.history.length;0<c;)a+=c--^b++;return[hd()^La(a)&2147483647,Math.round((new"" date).gettime()="" 1e3)].join(".")},ta="function(a){var" b},ua="function(){},K=function(a){if(encodeURIComponent" instanceof="" function)return="" encodeuricomponent(a);j(28);return="" a},l="function(a,b,c,d){try{a.addEventListener?a.addEventListener(b,c,!!d):a.attachEvent&&a.attachEvent(" on"+b,c)}catch(e){j(27)}},f="/^[\w\-:/.?=&%!\[\]]+$/,Nd=/^[\w+/_-]+[=]{0,2}$/,be=function(a,b){return"" e(m.location[b?"href":"search"],a)},e="function(a,b){return(a=a.match(" (?:&|#|\\?)"+"="" k(b).replace(="" ([.*+?^="!:${}()|\[\]\/\\])/g," \\$1")+"="([^&#]*)"))&&2==a.length?a[1]:""},xa=function(){var"" +m.location.hostname;return="" c="a.indexOf(b);if(5==c||6==c)if(a=a.charAt(c+b.length)," "="=a||"?"==a||""==a||":"==a)return!0;return!1},ya=function(a,b){var"" c;a="//" +m.location.hostname;if(!de(c,a))return="" b&&(b="a.replace(/\./g," -")+".cdn.ampproject.org",de(c,b))?void"="" 0:="" c}},za="function(a,b){if(1==b.length&&null!=b[0]&&" object"="==typeof"" b[0])return="" b[0];for(var="" b[e]){for(var="" g="" in="" b[e])b[e].hasownproperty(g)&&(c[g]="b[e][g]);break}else" e<a.length&&(c[a[e]]="b[e]);return" c};var="" ee="function(){this.keys=[];this.values={};this.m={}};ee.prototype.set=function(a,b,c){this.keys.push(a);c?this.m[" :"+a]="b:this.values[":"+a]=b};ee.prototype.get=function(a){return"" this.m.hasownproperty(":"+a)?this.m[":"+a]:this.values[":"+a]};ee.prototype.map="function(a){for(var" o="window,M=document,va=function(a,b){return" settimeout(a,b)};var="" qa="window,Za=document,G=function(a){var" d="b[c].split(" ="),e="d[0].replace(/^\s*|\s*$/g,"");e&&"AMP_TOKEN"==e&&((d=d.slice(1).join("=").replace(/^\s*|\s*$/g,""))&&(d=decodeURIComponent(d)),a.push(d))}for(b=0;b<a.length;b++)if("$OPT_OUT"==a[b])return!0;return"" za.getelementbyid("__gaoptoutextension")?="" !0:!1};var="" ca="function(a){var" regexp("^\\s*"+a+"="\\s*(.*?)\\s*$" );for(var"="" e="c[d].match(a);e&&b.push(e[1])}return" b},zc="function(a,b,c,d,e,g,ca){e=G(e)?!1:eb.test(M.location.hostname)||" path="+c+" ;="" ";g&&(c+="expires=" +(new="" date((new="" date).gettime()+g)).togmtstring()+";="" ");d&&"none"!="=d&&(c+=" domain="+d+" ;");ca&&(c+="ca+";");d=M.cookie;M.cookie=c;if(!(d=d!=M.cookie))a:{a="" ca(a);for(d="0;d<a.length;d++)if(b==a[d]){d=!0;break" a}d="!1}return" d},cc="function(a){return" encodeuricomponent?encodeuricomponent(a).replace(="" \(="" g,"%28").replace(="" \)="" g,"%29"):a},vc="/^(www\.)?google(\.com?)?(\.[a-z]{2})?$/,eb=/(^|\.)doubleclick\.net$/i;var" oc,id="/^.*Version\/?(\d+)[^\d].*$/i,ne=function(){if(void" o.__ga4__;if(void="" oc="!1}return" oc};var="" fa,ga,fb,ab,ja="/^https?:\/\/[^/]*cdn\.ampproject\.org\//,Ue=/^(?:www\.|m\.|amp\.)+/,Ub=[],da=function(a){if(ye(a[Kd])){if(void" b;if(b="(b=De.get())&&b._ga||void" 0)ab="b,J(81)}if(void" a[q]||(a[q]="Ab),!1}if(a[Kd]){J(67);if(a[ac]&&" cookie"!="a[ac])return!1;if(void"" if(b="Ca(" amp_token"),0="=b.length)b=!0;else{if(1==b.length&&(b=decodeURIComponent(b[0]),"" "$retrieving"="=b||" $opt_out"="=b||"$ERROR"==b||"$NOT_FOUND"==b)){b=!0;break"" a}b="!1}}if(b&&tc(ic,String(a[Na])))return!0}}return!1},ic=function(){Z.D([ua])},tc=function(a,b){var" j(55),!1;c="decodeURIComponent(c[0]||" ");if("$opt_out"="=c||"$ERROR"==c||G(b))return"" j(62),!1;if(!ja.test(m.referrer)&&"$not_found"="=c)return" j(68),!1;if(void="" j(56),va(function(){a(ab)},0),!0;if(fa)return="" ub.push(a),!0;if("$retrieving"="=c)return" j(57),va(function(){tc(a,b)},="" 1e4),!0;fa="!0;c&&" $"!="c[0]||(xc("$RETRIEVING",3E4),setTimeout(Mc,3E4),c="");return"" pc(c,b)?(ub.push(a),!0):!1},pc="function(a,b,c){if(!window.JSON)return" j(58),!1;var="" j(59),!1;var="" d;if(!("withcredentials"in="" e))return="" j(60),!1;e.open("post",(c||"https:="" ampcid.google.com="" v1="" publisher:getclientid")+"?key="AIzaSyA65lEHUEizIsNtlbNo-l2K18dT680nsaM" ,!0);e.withcredentials="!0;e.setRequestHeader("Content-Type","text/plain");e.onload=function(){Fa=!1;if(4==e.readyState){try{200!="" e.status&&(j(61),qc("","$error",3e4));var="" fb){fb="" ;for(var="" c.indexof("xn--")){c="" ;break="" b}(c="c.match(/(.*)\.cdn\.ampproject\.org\/?$/))&&2==c.length&&(d=c[1].replace(/-/g," .").replace(="" \.\.="" g,"-"))}c="d?d.replace(Ue,""):""}(d=b===c)||(c="."+c,d=b.substring(b.length-c.length,b.length)===c);if(d){b=!0;break"" a}else="" j(78)}b="!1}return" b&&!1!="=a};var" bd="function(a){return(a?" https:":ba||"https:"="=M.location.protocol?"https:":"http:")+"//www.google-analytics.com"},Da=function(a){this.name="len";this.message=a+"-8192"},ba=function(a,b,c){c=c||ua;if(2036"">=b.length)wc(a,b,c);else if(8192>=b.length)x(a,b,c)||wd(a,b,c)||wc(a,b,c);else throw ge("len",b.length),new Da(b.length);},pe=function(a,b,c,d){d=d||ua;wd(a+"?"+b,"",d,c)},wc=function(a,b,c){var d=ta(a+"?"+b);d.onload=d.onerror=function(){d.onload=null;d.onerror=null;c()}},wd=function(a,b,c,
+d){var e=O.XMLHttpRequest;if(!e)return!1;var g=new e;if(!("withCredentials"in g))return!1;a=a.replace(/^http:/,"https:");g.open("POST",a,!0);g.withCredentials=!0;g.setRequestHeader("Content-Type","text/plain");g.onreadystatechange=function(){if(4==g.readyState){if(d)try{var ca=g.responseText;if(1>ca.length)ge("xhr","ver","0"),c();else if("1"!=ca.charAt(0))ge("xhr","ver",String(ca.length)),c();else if(3<d.count++)ge("xhr","tmr",""+d.count),c();else if(1="=ca.length)c();else{var" l="ca.charAt(1);if(" d"="="" l)pe("https:="" stats.g.doubleclick.net="" j="" collect",d.u,d,c);else="" if("g"="=l){wc(" https:="" www.google.%="" ads="" ga-audiences".replace("%","com"),d.google,c);var"="" k="ca.substring(2);k&&(/^[a-z.]{1,6}$/.test(k)?wc(" ga-audiences".replace("%",k),d.google,ua):ge("tld","bcc",k))}else"="" ge("xhr","brc",l),c()}}catch(w){ge("xhr","rsp"),c()}else="" c();g="null}};g.send(b);return!0},x=function(a,b,c){return" o.navigator.sendbeacon?o.navigator.sendbeacon(a,b)?(c(),!0):!1:!1},ge="function(a,b,c){1<=100*" math.random()||g("?")||(a="[" t="error","_e="+a,"_v=j82","sr=1"],b&&a.push("_f="+b),c&&a.push("_m="+K(c.substring(0,100))),a.push("aip=1"),a.push("z="+hd()),wc(bd(!0)+"/u/d",a.join("&"),ua))};var"" qc="function(){return" o.gadata="O.gaData||{}},h=function(a){var" b="qc();return" b[a]="b[a]||{}};var" ha="function(){this.M=[]};Ha.prototype.add=function(a){this.M.push(a)};Ha.prototype.D=function(a){try{for(var" c="a.get(this.M[b]);c&&ea(c)&&c.call(O,a)}}catch(d){}b=a.get(Ia);b!=ua&&ea(b)&&(a.set(Ia,ua,!0),setTimeout(b,10))};function" ja(a){if(100!="a.get(Ka)&&La(P(a,Q))%1E4">=100*R(a,Ka))throw"abort";}function Ma(a){if(G(P(a,Na)))throw"abort";}function Oa(){var a=M.location.protocol;if("http:"!=a&&"https:"!=a)throw"abort";}
+function Pa(a){try{O.navigator.sendBeacon?J(42):O.XMLHttpRequest&&"withCredentials"in new O.XMLHttpRequest&&J(40)}catch(c){}a.set(ld,Td(a),!0);a.set(Ac,R(a,Ac)+1);var b=[];ue.map(function(c,d){d.F&&(c=a.get(c),void 0!=c&&c!=d.defaultValue&&("boolean"==typeof c&&(c*=1),b.push(d.F+"="+K(""+c))))});!1===a.get(xe)&&b.push("npa=1");b.push("z="+Bd());a.set(Ra,b.join("&"),!0)}
+function Sa(a){var b=P(a,fa);!b&&a.get(Vd)&&(b="beacon");var c=P(a,gd),d=P(a,oe),e=c||(d||bd(!1)+"")+"/collect";switch(P(a,ad)){case "d":e=c||(d||bd(!1)+"")+"/j/collect";b=a.get(qe)||void 0;pe(e,P(a,Ra),b,a.Z(Ia));break;case "b":e=c||(d||bd(!1)+"")+"/r/collect";default:b?(c=P(a,Ra),d=(d=a.Z(Ia))||ua,"image"==b?wc(e,c,d):"xhr"==b&&wd(e,c,d)||"beacon"==b&&x(e,c,d)||ba(e,c,d)):ba(e,P(a,Ra),a.Z(Ia))}e=P(a,Na);e=h(e);b=e.hitcount;e.hitcount=b?b+1:1;e.first_hit||(e.first_hit=(new Date).getTime());e=P(a,
+Na);delete h(e).pending_experiments;a.set(Ia,ua,!0)}function Hc(a){qc().expId&&a.set(Nc,qc().expId);qc().expVar&&a.set(Oc,qc().expVar);var b=P(a,Na);if(b=h(b).pending_experiments){var c=[];for(d in b)b.hasOwnProperty(d)&&b[d]&&c.push(encodeURIComponent(d)+"."+encodeURIComponent(b[d]));var d=c.join("!")}else d=void 0;d&&a.set(m,d,!0)}function cd(){if(O.navigator&&"preview"==O.navigator.loadPurpose)throw"abort";}
+function yd(a){var b=O.gaDevIds||[];if(ka(b)){var c=a.get("&did");qa(c)&&0<c.length&&(b=b.concat(c.split(",")));c=[];for(var d="0;d<b.length;d++){var" e;a:{for(e="0;e<c.length;e++)if(b[d]==c[e]){e=!0;break" a}e="!1}e||c.push(b[d])}0!=c.length&&a.set(" &did",c.join(","),!0)}}function"="" vb(a){if(!a.get(na))throw"abort";};var="" hd="function(){return" math.round(2147483647*math.random())},bd="function(){try{var" a="new" uint32array(1);o.crypto.getrandomvalues(a);return="" a[0]&2147483647}catch(b){return="" hd()}};function="" ta(a){var="" b="R(a,Ua);500<=b&&J(15);var" c="P(a,Va);if(" transaction"!="c&&"item"!=c){c=R(a,Wa);var"" date).gettime(),e="R(a,Xa);0==e&&a.set(Xa,d);e=Math.round(2*(d-e)/1E3);0<e&&(c=Math.min(c+e,20),a.set(Xa,d));if(0">=c)throw"abort";a.set(Wa,--c)}a.set(Ua,++b)};var Ya=function(){this.data=new ee};Ya.prototype.get=function(a){var b=$a(a),c=this.data.get(a);b&&void 0==c&&(c=ea(b.defaultValue)?b.defaultValue():b.defaultValue);return b&&b.Z?b.Z(this,a,c):c};var P=function(a,b){a=a.get(b);return void 0==a?"":""+a},R=function(a,b){a=a.get(b);return void 0==a||""===a?0:Number(a)};Ya.prototype.Z=function(a){return(a=this.get(a))&&ea(a)?a:ua};
+Ya.prototype.set=function(a,b,c){if(a)if("object"==typeof a)for(var d in a)a.hasOwnProperty(d)&&ab(this,d,a[d],c);else ab(this,a,b,c)};var ab=function(a,b,c,d){if(void 0!=c)switch(b){case Na:wb.test(c)}var e=$a(b);e&&e.o?e.o(a,b,c,d):a.data.set(b,c,d)};var ue=new ee,ve=[],bb=function(a,b,c,d,e){this.name=a;this.F=b;this.Z=d;this.o=e;this.defaultValue=c},$a=function(a){var b=ue.get(a);if(!b)for(var c=0;c<ve.length;c++){var 0="==c&&(c=Bd());return" d="ve[c],e=d[0].exec(a);if(e){b=d[1](e);ue.set(b.name,b);break}}return" b},yc="function(a){var" b;ue.map(function(c,d){d.f="=a&&(b=d)});return" b&&b.name},s="function(a,b,c,d,e){a=new" bb(a,b,c,d,e);ue.set(a.name,a);return="" a.name},cb="function(a,b){ve.push([new" regexp("^"+a+"$"),b])},t="function(a,b,c){return" s(a,b,c,void="" 0,db)},db="function(){};var" hb="T(" apiversion","v"),ib="T("clientVersion","_v");S("anonymizeIp","aip");var"" jb="S(" adsenseid","a"),va="S("hitType","t"),Ia=S("hitCallback"),Ra=S("hitPayload");S("nonInteraction","ni");S("currencyCode","cu");S("dataSource","ds");var"" vd="S(" usebeacon",void"="" 0,!1),fa="S(" transport");s("sessioncontrol","sc","");s("sessiongroup","sg");s("queuetime","qt");var"="" ac="S(" _s","_s");s("screenname","cd");var"="" kb="S(" location","dl",""),lb="S("referrer","dr"),mb=S("page","dp","");S("hostname","dh");"" var="" nb="S(" language","ul"),ob="S("encoding","de");S("title","dt",function(){return"" m.title||void="" 0});cb("contentgroup([0-9]+)",function(a){return="" new="" bb(a[0],"cg"+a[1])});var="" pb="S(" screencolors","sd"),qb="S("screenResolution","sr"),rb=S("viewportSize","vp"),sb=S("javaEnabled","je"),tb=S("flashVersion","fl");S("campaignId","ci");S("campaignName","cn");S("campaignSource","cs");S("campaignMedium","cm");S("campaignKeyword","ck");S("campaignContent","cc");"" ub="S(" eventcategory","ec"),xb="S("eventAction","ea"),yb=S("eventLabel","el"),zb=S("eventValue","ev"),Bb=S("socialNetwork","sn"),Cb=S("socialAction","sa"),Db=S("socialTarget","st"),Eb=S("l1","plt"),Fb=S("l2","pdt"),Gb=S("l3","dns"),Hb=S("l4","rrt"),Ib=S("l5","srt"),Jb=S("l6","tcp"),Kb=S("l7","dit"),Lb=S("l8","clt"),Ve=S("l9","_gst"),We=S("l10","_gbt"),Xe=S("l11","_cst"),Ye=S("l12","_cbt"),Mb=S("timingCategory","utc"),Nb=S("timingVar","utv"),Ob=S("timingLabel","utl"),Pb=S("timingValue","utt");"" s("appname","an");s("appversion","av","");s("appid","aid","");s("appinstallerid","aiid","");s("exdescription","exd");s("exfatal","exf");var="" nc="S(" expid","xid"),oc="S("expVar","xvar"),m=S("exp","exp"),Rc=S("_utma","_utma"),Sc=S("_utmz","_utmz"),Tc=S("_utmht","_utmht"),Ua=S("_hc",void"" 0,0),xa="S(" _ti",void"="" 0,0),wa="S(" _to",void"="" 0,20);cb("dimension([0-9]+)",function(a){return="" bb(a[0],"cd"+a[1])});cb("metric([0-9]+)",function(a){return="" bb(a[0],"cm"+a[1])});s("linkerparam",void="" 0,void="" 0,bc,db);="" ze="T(" _cd2l",void"="" 0,!1),ld="S(" usage","_u"),gd="S("_um");S("forceSSL",void"" 0,function(){return="" ba},function(a,b,c){j(34);ba="!!c});var" ed="S(" _j1","jid"),ia="S("_j2","gjid");cb("\\&(.*)",function(a){var"" b="new" bb(a[0],a[1]),c="yc(a[0].substring(1));c&&(b.Z=function(d){return" d.get(c)},b.o="function(d,e,g,ca){d.set(c,g,ca)},b.F=void" 0);return="" b});="" qb="T(" _oot"),dd="S("previewTask"),Rb=S("checkProtocolTask"),md=S("validationTask"),Sb=S("checkStorageTask"),Uc=S("historyImportTask"),Tb=S("samplerTask"),Vb=S("_rlt"),Wb=S("buildHitTask"),Xb=S("sendHitTask"),Vc=S("ceTask"),zd=S("devIdTask"),Cd=S("timingTask"),Ld=S("displayFeaturesTask"),oa=S("customTask"),ze=S("fpsCrossDomainTask"),V=T("name"),Q=T("clientId","cid"),n=T("clientIdTime"),xd=T("storedClientId"),Ad=S("userId","uid"),Na=T("trackingId","tid"),U=T("cookieName",void"" 0,"_ga"),w="T(" cookiedomain"),"="" yb="T(" cookiepath",void"="" 0,"="" "),zb="T(" cookieexpires",void"="" 0,63072e3),hd="T(" cookieupdate",void"="" 0,!0),be="T(" cookieflags",void"="" 0,""),$b="T(" legacycookiedomain"),wc="T("legacyHistoryImport",void"" 0,!0),ac="T(" storage",void"="" 0,"cookie"),bc="T(" allowlinker",void"="" 0,!1),cc="T(" allowanchor",void"="" 0,!0),ka="T(" samplerate","sf",100),dc="T("siteSpeedSampleRate",void"" 0,1),ec="T(" alwayssendreferrer",void"="" 0,!1),i="T(" _gid","_gid"),la="T("_gcn"),Kd=T("useAmpClientId"),ce=T("_gclid"),fe=T("_gt"),he=T("_ge",void"" 0,7776e6),ie="T(" _gclsrc"),"="" je="T(" storegac",void"="" 0,!0),oe="S(" _x_19"),ae="S("_fplc"),gd=S("transportUrl"),Md=S("_r","_r"),qe=S("_dp"),ad=S("_jt",void"" 0,"n"),ud="S(" allowadfeatures",void"="" 0,!0),xe="S(" allowadpersonalizationsignals",void"="" 0,!0);function="" x(a,b,c,d){b[a]="function(){try{return" d&&j(d),c.apply(this,arguments)}catch(e){throw="" ge("exc",a,e&&e.name),e;}}};var="" od="function(){this.V=100;this.$=this.fa=!1;this.oa=" detourexp";this.groups="1},Ed=function(a){var"" od,c;if(b.fa&&b.$)return="" 0;b.$="!0;if(a){if(b.oa&&void" 0!="=a.get(b.oa))return" r(a,b.oa);if(0="=a.get(dc))return" 0}if(0="=b.V)return" 0;void="" fc(){var="" a,b;if((b="(b=O.navigator)?b.plugins:null)&&b.length)for(var" c="0;c<b.length&&!a;c++){var" flash")&&(a="d.description)}if(!a)try{var" e="new" activexobject("shockwaveflash.shockwaveflash.7");a="e.GetVariable(" $version")}catch(g){}if(!a)try{e="new"" activexobject("shockwaveflash.shockwaveflash.6"),a="WIN 6,0,21,0" ,e.allowscriptaccess="always" ,a="e.GetVariable(" activexobject("shockwaveflash.shockwaveflash"),a="e.GetVariable(" $version")}catch(g){}a&&"="" (e="a.match(/[\d]+/g))&&3<=e.length&&(a=e[0]+" ."+e[1]+""="" r"+e[2]);return="" a||void="" 0};var="" ee="function(){var" a="Ca(" fplc");return"="" 0<a.length?a[0]:void="" 0},fe="function(a){P(a,oe)&&a.get(Ze)&&a.set(Ae,Ee()||" ")};var"="" aa="function(a){var" la(p(a,q))%100="">=b?!1:!0},gc=function(a){var b={};if(Ec(b)||Fc(b)){var c=b[Eb];void 0==c||Infinity==c||isNaN(c)||(0<c?(y(b,gb),y(b,jb),y(b,ib),y(b,fb),y(b,hb),y(b,kb),y(b,lb),y(b,ve),y(b,we),y(b,xe),y(b,ye),va(function(){a(b)},10)):l(o,"load",function(){gc(a)},!1))}},ec=function(a){var 0="=c)return!1;" b="O.performance||O.webkitPerformance;b=b&&b.timing;if(!b)return!1;var" c="b.navigationStart;if(0==c)return!1;a[Eb]=b.loadEventStart-c;a[Gb]=b.domainLookupEnd-b.domainLookupStart;" a[jb]="b.connectEnd-b.connectStart;a[Ib]=b.responseStart-b.requestStart;a[Fb]=b.responseEnd-b.responseStart;a[Hb]=b.fetchStart-c;a[Kb]=b.domInteractive-c;a[Lb]=b.domContentLoadedEventStart-c;a[Ve]=N.L-c;a[We]=N.ya-c;O.google_tag_manager&&O.google_tag_manager._li&&(b=O.google_tag_manager._li,a[Xe]=b.cst,a[Ye]=b.cbt);return!0},Fc=function(a){if(O.top!=O)return!1;var" 0);2147483648<c&&(c="void" 0);0<c&&b.setpagereadytime();if(void="" a[eb]="c;return!0},Y=function(a,b){var">c)a[b]=void 0},Fd=function(a){return function(b){if("pageview"==b.get(Va)&&!a.I){a.I=!0;var c=aa(b),d=0<e(p(b,kb),"gclid").length;(c||d)&&gc(function(e){c&&a.send("timing",e);d&&a.send("adtiming",e)})}}};var hc="!1,mc=function(a){if(" cookie"="=P(a,ac)){if(a.get(Hd)||P(a,xd)!=P(a,Q)){var"" b="1E3*R(a,Zb);ma(a,Q,U,b);a.data.set(xd,P(a,Q))}(a.get(Hd)||uc(a)!=P(a,I))&&ma(a,I,la,864E5);if(a.get(je)){var" c="P(a,ce);if(c){var" d="Math.min(R(a,he),1E3*R(a,Zb));d=Math.min(d,1E3*R(a,fe)+d-(new" date).gettime());a.data.set(he,d);b="{};var" e="P(a,fe),g=P(a,ie),ca=kc(P(a,Yb)),l=lc(P(a,W)),k=P(a,Na),w=P(a,Be);g&&" aw.ds"!="g?b&&(b.ua=!0):(c=["1",e,Cc(c)].join("."),0<d&&(b&&(b.ta=!0),zc("_gac_"+Cc(k),c,ca,l,k,d,w)));le(b)}}else"" j(75);="" (a="P(a,Ae))&&zc(" fplc",a,"="" ","none","",void"="" 0,"secure")}},ma="function(a,b,c,d){var" g="kc(P(a,Yb)),ca=lc(P(a,W)),l=P(a,Be),k=P(a,Na);if(" auto"!="ca)zc(c,e,g,ca,k,d,l)&&(hc=!0);else{J(32);for(var"" w="id(),Ce=0;Ce<w.length;Ce++)if(ca=w[Ce],a.data.set(W,ca),e=nd(a,b),zc(c,e,g,ca,k,d,l)){hc=!0;return}a.data.set(W," auto")}}},uc="function(a){var"" xd(a,b)},nc="function(a){if(" w),c="P(a,$b)||xa(),d=Xc(" __utma",c,b);d&&(j(19),a.set(tc,(new"="" date).gettime(),!0),a.set(rc,d.r),(b="Xc(" __utmz",c,b))&&d.hash="=b.hash&&a.set(Sc,b.R))}},nd=function(a,b){b=Cc(P(a,b));var"" b?["ga1",c,b].join("."):""},xd="function(a,b){return" na(b,p(a,w),p(a,yb))},na="function(a,b,c){if(!a||1">a.length)J(12);else{for(var d=[],e=0;e<a.length;e++){var 0="=g||l.H[c]<g?(e=[l],g=l.H[c]):l.H[c]==g&&e.push(l)}return" 1="=g.length&&(g[1]=" 1"),g[0]*="1,g[1]*=1,ca={H:g,s:ca.join(".")}):ca=kd.test(g)?{H:[0,0],s:g}:void"" g="a[e];var" ca="g.split(" .");var"="" l="ca.shift();(" ga1"="=l||"1"==l)&&1<ca.length?(g=ca.shift().split("-"),"" 0;ca&&d.push(ca)}if(1="=d.length)return" j(13),d[0].s;if(0="=d.length)J(12);else{J(14);d=Gc(d,lc(b).split(" .").length,0);if(1="=d.length)return"" d[0].s;d="Gc(d,jc(c),1);1<d.length&&J(41);return" d[0]&&d[0].s}}},gc="function(a,b,c){for(var" d="[],e=[],g,ca=0;ca<a.length;ca++){var" 0<d.length?d:e},lc="function(a){return" a.indexof(".")?a.substr(1):a},id="function(){var" a="[],b=xa().split(" .");if(4="=b.length){var"" c="b[b.length-1];if(parseInt(c,10)==c)return[" none"]}for(c="b.length-2;0<=c;c--)a.push(b.slice(c).join("."));b=M.location.hostname;eb.test(b)||vc.test(b)||a.push("none");return"" a},kc="function(a){if(!a)return" ";1<a.length&&a.lastindexof("="" ")="=a.length-1&&(a=a.substr(0,a.length-1));0!=a.indexOf("/")&&(a="/"+a);return"" a},jc="function(a){a=kc(a);return" "="=a?1:a.split("/").length},le=function(a){a.ta&&J(77);a.na&&"" j(74);a.pa&&j(73);a.ua&&j(69)};function="" xc(a,b,c){"none"="=b&&(b=" ");var"="">=a&&d.push({hash:ca[0],R:e[g],O:ca})}if(0!=d.length)return 1==d.length?d[0]:Zc(b,d)||Zc(c,d)||Zc(null,d)||d[0]}function Zc(a,b){if(null==a)var c=a=1;else c=La(a),a=La(D(a,".")?a.substring(1):"."+a);for(var d=0;d<b.length;d++)if(b[d].hash==c||b[d].hash==a)return 0="=e||" "="==e?0:Number(e)}var"" b[d]};var="" jc="new" regexp(="" ^https?:\="" \="" ([^\="" :]+)="" ),de="O.google_tag_data.glBridge,Kc=/(.*)([?&#])(?:_ga=[^&#]*)(?:&?)(.*)/,od=/(.*)([?&#])(?:_gac=[^&#]*)(?:&?)(.*)/;function" bc(a){if(a.get(ze))return="" j(35),de.generate($e(a));var="" b="P(a,Q),c=P(a,I)||" ";b="_ga=2." +k(pa(c+b,0)+"."+c+"-"+b);(a="af(a))?(J(44),a="&_gac=1."+K([pa(a.qa,0),a.timestamp,a.qa].join("."))):a="";return"" b+a}="" function="" ic(a,b){var="" c="new" date,d="O.navigator,e=d.plugins||[];a=[a,d.userAgent,c.getTimezoneOffset(),c.getYear(),c.getDate(),c.getHours(),c.getMinutes()+b];for(b=0;b<e.length;++b)a.push(e[b].description);return" la(a.join("."))}function="" pa(a,b){var="" la([a,d.useragent,d.language||"",c.gettimezoneoffset(),c.getyear(),c.getdate()+math.floor(e="" 24),(24+e)%24,(60+c.getminutes()+b)%60].join("."))}="" var="" dc="function(a){J(48);this.target=a;this.T=!1};Dc.prototype.ca=function(a,b){if(a){if(this.target.get(Ze))return" de.decorate($e(this.target),a,b);if(a.tagname){if("a"="=a.tagName.toLowerCase()){a.href&&(a.href=qd(this,a.href,b));return}if(" form"="=a.tagName.toLowerCase())return"" rd(this,a)}if("string"="=typeof" a)return="" qd(this,a,b)}};="" qd="function(a,b,c){var" d="Kc.exec(b);d&&3<=d.length&&(b=d[1]+(d[3]?d[2]+d[3]:" "));(d="od.exec(b))&&3<=d.length&&(b=d[1]+(d[3]?d[2]+d[3]:""));a=a.target.get("linkerParam");var"" e="b.indexOf(" ?");d="b.indexOf("#");c?b+=(-1==d?"#":"&")+a:(c=-1==e?"?":"&",b=-1==d?b+(c+a):b.substring(0,d)+c+a+b.substring(d));b=b.replace(/&+_ga=/,"&_ga=");return"" g="b.childNodes||[],ca=!1,l=0;l<g.length;l++)if(g[l].name==d){g[l].setAttribute(" value",e);ca="!0;break}ca||(g=M.createElement("input"),g.setAttribute("type","hidden"),g.setAttribute("name",d),g.setAttribute("value",e),b.appendChild(g))}}else"post"==b.method.toLowerCase()&&(b.action=qd(a,b.action))};"" dc.prototype.s="function(a,b,c){function" d(g){try{g="g||O.event;a:{var" ca="g.target||g.srcElement;for(g=100;ca&&0<g;){if(ca.href&&ca.nodeName.match(/^a(?:rea)?$/i)){var" l="ca;break" a}ca="ca.parentNode;g--}l={}}(" http:"="=l.protocol||"https:"==l.protocol)&&sd(a,l.hostname||"")&&l.href&&(l.href=qd(e,l.href,b))}catch(k){J(26)}}var"" $e(e.target)},a,b?"fragment":"",c):(this.t||(this.t="!0,L(M," mousedown",d,!1),l(m,"keyup",d,!1)),c&&l(m,"submit",function(g){g=" g||o.event;if((g=" g.target||g.srcelement)&&g.action){var"="" sd(a,b){if(b="=M.location.hostname)return!1;for(var" regexp){if(a[c].test(b))return!0}else="" if(0<="b.indexOf(a[c]))return!0;return!1}function" ke(a,b){return="" b!="Ic(a,0)&&b!=Ic(a,-1)&&b!=Ic(a,-2)&&b!=pa(a,0)&&b!=pa(a,-1)&&b!=pa(a,-2)}" $e(a){var="" c._ga="a.get(Q),c._gid=a.get(I)||void" 0,c._gac="b?[b.qa,b.timestamp].join(" ."):void"="" 0,c._fplc="Ee(),c}function" af(a){function="" b(e){return="" void="" date).gettime())j(76);else="" return{timestamp:d,qa:c}}};var="" p="/^(GTM|OPT)-[A-Z0-9]+$/,q=/;_gaexp=[^;]*/g,r=/;((__utma=)|([^;=]+=GAX?\d+\.))[^;]*/g,Aa=/^https?:\/\/[\w\-.]+\.google.com(:\d+)?\/optimize\/opt-launch\.html\?.*$/,t=function(a){function" b(d,e){e&&(c+="&" +d+"="+K(e))}var c=" https:="" www.google-analytics.com="" gtm="" js?id="+K(a.id);" datalayer"!="a.B&&b(" l",a.b);b("t",a.target);b("cid",a.clientid);b("cidt",a.ka);b("gac",a.la);b("aip",a.ia);a.sync&&b("m","sync");b("cycle",a.g);a.qa&&b("gclid",a.qa);aa.test(m.referrer)&&b("cb",string(hd()));return"="" c};var="" jd="function(a,b,c){this.aa=b;(b=c)||(b=(b=P(a,V))&&" t0"!="b?Wd.test(b)?"_gat_"+Cc(P(a,Na)):"_gat_"+Cc(b):"_gat");this.Y=b;this.ra=null},Rd=function(a,b){var"" g});var="" ta(re(a,e,0));e.set(ed,"",!0)}return="" g})},pd="function(a,b,c){!1===b.get(Ud)||" b.get(c)||("1"="=Ca(a.Y)[0]?b.set(c," ",!0):b.set(c,""+hd(),!0))},qd="function(a,b){se(b)&&zc(a.Y,"1",P(b,Yb),P(b,W),P(b,Na),6E4,P(b,Be))},se=function(a){return!!a.get(ed)&&!1!==a.get(Ud)},re=function(a,b,c){var"" ee,e="function(ca){$a(ca).F&&d.set($a(ca).F,b.get(ca))};e(hb);e(ib);e(Na);e(Q);e(ed);if(0==c||1==c)e(Ad),e(ia),e(I);d.set($a(ld).F,Td(b));var" ;d.map(function(ca,l){g+="K(ca)+" =";g+="K(""+l)+"&"});g+="z="+hd();0==c?g=a.aa+g:1==c?g="t=dc&aip=1&_r=3&"+g:2==c&&(g="t=sr&aip=1&_r=4&slf_rd=1&"+"" g);return="" g},h="function(a,b){null===a.ra&&(a.ra=1===Ed(b),a.ra&&J(33));return" a.ra},wd="/^gtm\d+$/;var" fd="function(a,b){a=a.b;if(!a.get(" dcloaded")){var"="" $c(dd(a));c.set(29);a.set(gd,c.w);b="b||{};var" d;b[u]&&(d="Cc(b[U]));b=new" jd(a,"https:="" stats.g.doubleclick.net="" r="" collect?t="dc&aip=1&_r=3&" ,d);rd(b,a);a.set("dcloaded",!0)}};var"="" sd="function(a){if(!a.get(" dcloaded")&&"cookie"="=a.get(ac)){var"" jd(a);pd(b,a,ed);pd(b,a,ia);qd(b,a);if(se(a)){var="" lc="function(){var" a="O.gaGlobal=O.gaGlobal||{};return" a.hid="a.hid||hd()};var" wb="/^(UA|YT|MO|GP)-(\d+)-(\d+)$/,pc=function(a){function" b(e,g){d.b.data.set(e,g)}function="" c(e,g){b(e,g);d.filters.add(e)}var="" ya;this.filters="new" ha;b(v,a[v]);b(na,sa(a[na]));b(u,a[u]);b(w,a[w]||xa());b(yb,a[yb]);b(zb,a[zb]);b(hd,a[hd]);b(be,a[be]);b($b,a[$b]);b(wc,a[wc]);b(bc,a[bc]);b(cc,a[cc]);b(ka,a[ka]);b(dc,a[dc]);b(ec,a[ec]);b(ac,a[ac]);b(ad,a[ad]);b(n,a[n]);b(kd,a[kd]);b(je,a[je]);b(ze,a[ze]);b(oe,a[oe]);b(hb,1);b(ib,"j82");c(qb,ma);c(oa,ua);c(dd,cd);c(rb,oa);c(md,vb);="" c(sb,nc);c(uc,yc);c(tb,ja);c(vb,ta);c(vc,hc);c(zd,yd);c(ld,sd);c(ze,fe);c(wb,pa);c(xb,sa);c(cd,fd(this));pd(this.b);td(this.b,a[q]);this.b.set(jb,lc())},td="function(a,b){var" 0!="c?(J(10),c=c.O[1]+" ."+c.o[2]):c="void"" 0}c&&(hc="!0);if(d=c&&!a.get(Hd))if(d=c.split(" ."),2!="d.length)d=!1;else"" if(d="Number(d[1])){var" date).gettime()="" 1e3}else="" 0);c&&(a.data.set(xd,c),a.data.set(q,c),(c="uc(a))&&a.data.set(I,c));if(a.get(je)&&(c=a.get(ce),d=a.get(ie),!c||d&&" aw.ds"!="d)){c={};if(M){d=[];e=M.cookie.split(";");for(var"" e[1]));if(d="d._fplc)J(83),a.data.set(Ae,d);if(c)b:if(d=c.indexOf(" ."),-1="=d)J(22);else{e=c.substring(0,d);g=c.substring(d+1);d=g.indexOf(".");c=g.substring(0,d);g=g.substring(d+1);if("1"==e){if(d=g,ke(d,c)){J(23);break"" b}}else="" if("2"="=e){d=g.indexOf(" -");e="" ;0<d?(e="g.substring(0,d),d=g.substring(d+1)):d=g.substring(1);if(ke(e+d,c)){J(53);break"" b}e&&(j(2),a.data.set(i,e))}else{j(22);break="" b}j(11);a.data.set(q,d);if(c="be(" _gac",!!a.get(cc)))c="c.split("."),"1"!=c[0]||4!=c.length?J(72):ke(c[3],c[1])?"" j(71):(a.data.set(ce,c[3]),a.data.set(fe,c[2]),j(70))}}else="" j(21);b&&(j(9),a.data.set(q,k(b)));a.get(q)||(b="(b=O.gaGlobal)&&b.from_cookie&&" cookie"!="=P(a,ac)?void"" 0:(b="b&&b.vid)&&-1!==b.search(jd)?b:void" 0,b?(j(17),a.data.set(q,b)):(j(8),a.data.set(q,ra())));a.get(i)||(j(3),a.data.set(i,ra()));mc(a);b="O.gaGlobal=O.gaGlobal||{};c=P(a,Q);a=c===P(a,xd);if(void" if(d){var="">=ca[0]||0>=ca[1]?"":ca.join("x");a.set(rb,c);a.set(tb,fc());a.set(ob,M.characterSet||M.charset);a.set(sb,b&&
+"function"===typeof b.javaEnabled&&b.javaEnabled()||!1);a.set(nb,(b&&(b.language||b.browserLanguage)||"").toLowerCase());a.data.set(ce,be("gclid",!0));a.data.set(ie,be("gclsrc",!0));a.data.set(fe,Math.round((new Date).getTime()/1E3));if(d&&a.get(cc)&&(b=M.location.hash)){b=b.split(/[?&#]+/);d=[];for(c=0;c<b.length;++c)(d(b[c],"utm_id")||d(b[c],"utm_campaign")||d(b[c],"utm_source")||d(b[c],"utm_medium")||d(b[c],"utm_term")||d(b[c],"utm_content")||d(b[c],"gclid")||d(b[c],"dclid")||d(b[c],"gclsrc"))&& d.push(b[c]);0<d.length&&(b="#" +d.join("&"),a.set(kb,a.get(kb)+b))}};pc.prototype.get="function(a){return" this.b.get(a)};pc.prototype.set="function(a,b){this.b.set(a,b)};var" me="{pageview:[mb],event:[ub,xb,yb,zb],social:[Bb,Cb,Db],timing:[Mb,Nb,Pb,Ob]};" pc.prototype.send="function(a){if(!(1">arguments.length)){if("string"===typeof arguments[0]){var b=arguments[0];var c=[].slice.call(arguments,1)}else b=arguments[0]&&arguments[0][Va],c=arguments;b&&(c=za(me[b]||[],c),c[Va]=b,this.b.set(c,void 0,!0),this.filters.D(this.b),this.b.data.m={})}};pc.prototype.ma=function(a,b){var c=this;u(a,c,b)||(v(a,function(){u(a,c,b)}),y(String(c.get(V)),a,void 0,b,!0))};var rc=function(a){if("prerender"==M.visibilityState)return!1;a();return!0},z=function(a){if(!rc(a)){J(16);var b=!1,c=function(){if(!b&&rc(a)){b=!0;var d=c,e=M;e.removeEventListener?e.removeEventListener("visibilitychange",d,!1):e.detachEvent&&e.detachEvent("onvisibilitychange",d)}};L(M,"visibilitychange",c)}};var te=/^(?:(\w+)\.)?(?:(\w+):)?(\w+)$/,sc=function(a){if(ea(a[0]))this.u=a[0];else{var b=te.exec(a[0]);null!=b&&4==b.length&&(this.c=b[1]||"t0",this.K=b[2]||"",this.methodName=b[3],this.a=[].slice.call(a,1),this.K||(this.A="create"==this.methodName,this.i="require"==this.methodName,this.g="provide"==this.methodName,this.ba="remove"==this.methodName),this.i&&(3<=this.a.length?(this.x=this.a[1],this.w=this.a[2]):this.a[1]&&(qa(this.a[1])?this.x=this.a[1]:this.w=this.a[1])));b=a[1];a=a[2];if(!this.methodname)throw"abort"; if(this.i&&(!qa(b)||""="=b))throw" abort";if(this.g&&(!qa(b)||""="=b||!ea(a)))throw"abort";if(ud(this.c)||ud(this.K))throw"abort";if(this.g&&"t0"!=this.c)throw"abort";}};function"" ud(a){return="" 0<="a.indexOf(" .")||0<="a.indexOf(":")};var"" yd,zd,$d,a;yd="new" ee;$d="new" ee;a="new" ee;zd="{ec:45,ecommerce:46,linkid:47};" var="" u="function(a,b,c){b==N||b.get(V);var" d="Yd.get(a);if(!ea(d))return!1;b.plugins_=b.plugins_||new" ee;if(b.plugins_.get(a))return!0;b.plugins_.set(a,new="" d(b,c||{}));return!0},y="function(a,b,c,d,e){if(!ea(Yd.get(b))&&!$d.get(b)){Zd.hasOwnProperty(b)&&J(Zd[b]);a=N.j(a);if(p.test(b)){J(52);if(!a)return!0;c=d||{};d={id:b,B:c.dataLayer||" datalayer",ia:!!a.get("anonymizeip"),sync:e,g:!1};a.get("&gtm")="=b&&(d.G=!0);var"" g="String(a.get(" name"));"t0"!="g&&(d.target=g);G(String(a.get("trackingId")))||(d.clientId="" string(a.get(q)),d.ka="Number(a.get(n)),c=c.palindrome?r:q,c=(c=M.cookie.replace(/^|(;" +)="" g,";").match(c))?c.sort().join("").substring(1):void="" 0,d.la="c,d.qa=E(a.b.get(kb)||" ","gclid"));c="d.B;g=(new"" date).gettime();o[c]="O[c]||[];g={" gtm.start":g};e||(g.event="gtm.js" );o[c].push(g);c="t(d)}!c&&Zd.hasOwnProperty(b)?(J(39),c=b+".js"):J(43);if(c){if(a){var"" ca="a.get(oe);qa(ca)||(ca=void" 0)}c&&0<="c.indexOf(" ")||(c="(ca||bd(!1))+"/plugins/ua/"+c);ca=ae(c);a=ca.protocol;d=M.location.protocol;if(("https:"==a||"" a="=d||(" http:"!="a?0:"http:"==d))&&B(ca)){if(ca=ca.url)a=(a=M.querySelector&&M.querySelector("script[nonce]")||null)?a.nonce||a.getAttribute&&a.getAttribute("nonce")||"":"",e?(e="",a&&Nd.test(a)&&(e='"" nonce="'+a+'" '),f.test(ca)&&m.write("<script"+e+'="" src="'+ca+'">\x3c/script>')):(e=M.createElement("script"),e.type="text/javascript",e.async=!0,e.src=ca,a&&e.setAttribute("nonce",a),ca=M.getElementsByTagName("script")[0],ca.parentNode.insertBefore(e,ca));$d.set(b,!0)}}}},v=function(a,b){var c=A.get(a)||
+[];c.push(b);A.set(a,c)},C=function(a,b){Yd.set(a,b);b=A.get(a)||[];for(var c=0;c<b.length;c++)b[c]();a.set(a,[])},b=function(a){var b="ae(M.location.href);if(D(a.url," https:="" www.google-analytics.com="" gtm="" js?id="))return!0;if(a.query||0<=a.url.indexOf(" ?")||0<="a.path.indexOf("://"))return!1;if(a.host==b.host&&a.port==b.port)return!0;b="http:"==a.protocol?80:443;return"www.google-analytics.com"==a.host&&(a.port||b)==b&&D(a.path,"/plugins/")?!0:!1},ae=function(a){function"" b(l){var="" k="l.hostname||" ",w=" 0<=" k.indexof("]");k="k.split(w?"]":":")[0].toLowerCase();w&&(k+="]");w=(l.protocol||"").toLowerCase();w=1*l.port||("http:"==w?80:"https:"==w?443:"");l=l.pathname||"";D(l,"/")||(l="/"+l);return[k,""+w,l]}var"" c="M.createElement(" a");c.href="M.location.href;var"" d="(c.protocol||" ").tolowercase(),e="b(c),g=c.search||"",ca=d+"//"+e[0]+(e[1]?":"+e[1]:"");D(a,"//")?a=d+a:D(a,"/")?a=ca+a:!a||D(a,"?")?a=ca+e[2]+(a||g):0"">a.split("/")[0].indexOf(":")&&(a=ca+e[2].substring(0,e[2].lastIndexOf("/"))+"/"+a);c.href=a;
+d=b(c);return{protocol:(c.protocol||"").toLowerCase(),host:d[0],port:d[1],path:d[2],query:c.search||"",url:a||""}};var Z={ga:function(){Z.f=[]}};Z.ga();Z.D=function(a){var b=Z.J.apply(Z,arguments);b=Z.f.concat(b);for(Z.f=[];0<b.length&&!z.v(b[0])&&!(b.shift(),0<z.f.length););z.f=z.f.concat(b)};z.j=function(a){for(var b="[],c=0;c<arguments.length;c++)try{var" d="new" sc(arguments[c]);d.g?c(d.a[0],d.a[1]):(d.i&&(d.ha="y(d.c,d.a[0],d.X,d.W)),b.push(d))}catch(e){}return" b};="" z.v="function(a){try{if(a.u)a.u.call(O,N.j(" t0"));else{var"="" if(a.ba)n.remove(a.c);else="" if(b)if(a.i){if(a.ha&&(a.ha="y(a.c,a.a[0],a.X,a.W)),!u(a.a[0],b,a.W))return!0}else" if(a.k){var="" c="a.methodName,d=a.a,e=b.plugins_.get(a.K);e[c].apply(e,d)}else" b[a.methodname].apply(b,a.a)}}catch(g){}};var="" n="function(a){J(1);Z.D.apply(Z,[arguments])};N.h={};N.P=[];N.L=0;N.ya=0;N.answer=42;var" we="[Na,W,V];N.create=function(a){var" +b[v];if(n.h[c])return="" n.h[c];if(da(b))return="" null;b="new" pc(b);n.h[c]="b;N.P.push(b);c=qc().tracker_created;if(ea(c))try{c(b)}catch(d){}return" b};n.remove="function(a){for(var" n.h[a]};n.getall="function(){return" n.p.slice(0)};="" n.n="function(){" ga"!="gb&&J(49);var"" a="O[gb];if(!a||42!=a.answer){N.L=a&&a.l;N.ya=1*new" date;n.loaded="!0;var">c;c++){var d=b[c].src;if(d&&0==d.indexOf(bd(!0)+
+"/analytics")){b=!0;break a}}b=!1}b&&(Ba=!0)}(O.gaplugins=O.gaplugins||{}).Linker=Dc;b=Dc.prototype;C("linker",Dc);X("decorate",b,b.ca,20);X("autoLink",b,b.S,25);C("displayfeatures",fd);C("adfeatures",fd);a=a&&a.q;ka(a)?Z.D.apply(N,a):J(50)}};N.da=function(){for(var a=N.getAll(),b=0;b</b.length&&!z.v(b[0])&&!(b.shift(),0<z.f.length););z.f=z.f.concat(b)};z.j=function(a){for(var></b.length;c++)b[c]();a.set(a,[])},b=function(a){var></=this.a.length?(this.x=this.a[1],this.w=this.a[2]):this.a[1]&&(qa(this.a[1])?this.x=this.a[1]:this.w=this.a[1])));b=a[1];a=a[2];if(!this.methodname)throw"abort";></b.length;++c)(d(b[c],"utm_id")||d(b[c],"utm_campaign")||d(b[c],"utm_source")||d(b[c],"utm_medium")||d(b[c],"utm_term")||d(b[c],"utm_content")||d(b[c],"gclid")||d(b[c],"dclid")||d(b[c],"gclsrc"))&&></b.length;d++)if(b[d].hash==c||b[d].hash==a)return></a.length;e++){var></e(p(b,kb),"gclid").length;(c||d)&&gc(function(e){c&&a.send("timing",e);d&&a.send("adtiming",e)})}}};var></c?(y(b,gb),y(b,jb),y(b,ib),y(b,fb),y(b,hb),y(b,kb),y(b,lb),y(b,ve),y(b,we),y(b,xe),y(b,ye),va(function(){a(b)},10)):l(o,"load",function(){gc(a)},!1))}},ec=function(a){var></ve.length;c++){var></c.length&&(b=b.concat(c.split(",")));c=[];for(var></d.count++)ge("xhr","tmr",""+d.count),c();else></this.w.length;b++)this.w[b]&&(a[math.floor(b></b;++f)if(e===r(g,f)){var></f.length;e++){var></a.length;c++)b=b></6&192|h)))}};var></4&240|g></a.length;){var></2|h></4|g></b.length;d++)if(b[d]===c){b=d;break>]]></content>
     </entry>
     
   

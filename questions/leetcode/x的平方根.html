@@ -138,15 +138,34 @@
 
 
 
-<meta name="description" content="一只蘑菇">
+<meta name="description" content="题目 69实现 int sqrt(int x) 函数。
+计算并返回 x 的平方根，其中 x 是非负整数。
+由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。
+题解二分法有几个坑：
+
+* mid &amp;lt;= x的写法会导致溢出改成min  x / mid) return findHalf(x, left, mid);
+        else return findHalf(x, mid">
 <meta property="og:type" content="website">
-<meta property="og:title" content="安静土">
-<meta property="og:url" content="https://abc.hey-world.xyz/archives/2018/index.html">
+<meta property="og:title" content="x的平方根">
+<meta property="og:url" content="https://abc.hey-world.xyz/questions/leetcode/x的平方根.html">
 <meta property="og:site_name" content="安静土">
-<meta property="og:description" content="一只蘑菇">
+<meta property="og:description" content="题目 69实现 int sqrt(int x) 函数。
+计算并返回 x 的平方根，其中 x 是非负整数。
+由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。
+题解二分法有几个坑：
+
+* mid &amp;lt;= x的写法会导致溢出改成min  x / mid) return findHalf(x, left, mid);
+        else return findHalf(x, mid">
+<meta property="og:updated_time" content="2020-05-11T10:21:17.952Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="安静土">
-<meta name="twitter:description" content="一只蘑菇">
+<meta name="twitter:title" content="x的平方根">
+<meta name="twitter:description" content="题目 69实现 int sqrt(int x) 函数。
+计算并返回 x 的平方根，其中 x 是非负整数。
+由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。
+题解二分法有几个坑：
+
+* mid &amp;lt;= x的写法会导致溢出改成min  x / mid) return findHalf(x, left, mid);
+        else return findHalf(x, mid">
 
 
 
@@ -176,13 +195,13 @@
 
 
 
-  <link rel="canonical" href="https://abc.hey-world.xyz/archives/2018/"/>
+  <link rel="canonical" href="https://abc.hey-world.xyz/questions/leetcode/x的平方根.html"/>
 
 
 
 
 
-  <title>归档 | 安静土</title>
+  <title>x的平方根 | 安静土</title>
   
 
 
@@ -221,7 +240,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -379,74 +398,60 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
 
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        嗯..! 目前共计 9 篇日志。 继续努力。
-      </span>
+	<h1 class="post-title" itemprop="name headline">x的平方根</h1>
+
+
+
+</header>
 
       
+      
+      
+      <div class="post-body">
+        
+        
+          <a id="more"></a>
+<h1 id="题目-69"><a href="#题目-69" class="headerlink" title="题目 69"></a>题目 69</h1><p>实现 <code>int sqrt(int x)</code> 函数。</p>
+<p>计算并返回 x 的平方根，其中 x 是非负整数。</p>
+<p>由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。</p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="二分法"><a href="#二分法" class="headerlink" title="二分法"></a>二分法</h2><p>有几个坑：</p>
+<ul>
+<li><figcaption>* mid &lt;= x</code>的写法会导致溢出</p></figcaption><pre class="line-numbers language-mid"><code class="language-mid"><p>改成<code>min <= x/mid</code></p>
+</li>
+<li><p>同理， <code>int mid = (left + right) / 2</code>也会导致溢出</p>
+<p>改成<code>int mid = (float)left / 2 + (float)right / 2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<h2 id="牛顿法"><a href="#牛顿法" class="headerlink" title="牛顿法"></a>牛顿法</h2><h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="二分法-1"><a href="#二分法-1" class="headerlink" title="二分法"></a>二分法</h2><pre class="line-numbers language-c++"><code class="language-c++">    int mySqrt(int x) {
+        if (x == 0 || x == 1) return x;
+        return findHalf(x, 1, x);
+    }
 
+    int findHalf(int x, int left, int right) {
+        int mid = (float)left / 2 + (float)right / 2;
+        if (mid <= x / mid && (mid + 1) > x / (mid + 1)) return mid;
+        if (left < x / left && mid > x / mid) return findHalf(x, left, mid);
+        else return findHalf(x, mid, right);
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="牛顿法-1"><a href="#牛顿法-1" class="headerlink" title="牛顿法"></a>牛顿法</h2>
         
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/28/用python为png图片加上背景色/" itemprop="url">
-              
-                <span itemprop="name">用python为png图片加上背景色</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-28T16:43:19+08:00"
-              content="2018-07-28" >
-          07-28
-        </time>
       </div>
-
-    </header>
-  </article>
-
-
-
       
-
+      
+      
     </div>
+    
+    
+    
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
@@ -454,6 +459,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -474,8 +486,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -555,6 +576,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-69"><span class="nav-number">1.</span> <span class="nav-text">题目 69</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#二分法"><span class="nav-number">2.1.</span> <span class="nav-text">二分法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#牛顿法"><span class="nav-number">2.2.</span> <span class="nav-text">牛顿法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#二分法-1"><span class="nav-number">3.1.</span> <span class="nav-text">二分法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#牛顿法-1"><span class="nav-number">3.2.</span> <span class="nav-text">牛顿法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -730,6 +767,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
