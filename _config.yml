@@ -73,8 +73,7 @@ deploy:
   repository:
     #coding: git@e.coding.net:cindy1024/blog_backup/blog_backup.git,master
     github: git@github.com:cindy1024/Blog.git
-  branch: gh-pages
-
+  branch: master
 
 
 server:
