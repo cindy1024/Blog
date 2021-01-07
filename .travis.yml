@@ -25,7 +25,7 @@ after_script:   # 最后执行的命令  
   - git add .    
   - git commit -m "Travis CI Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')"   
   - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages 
-  - git push --force --quiet "https://EBlvrRYUzD:${CD_TOKEN}@${CD_REF}" master:gh-pages
+  - git push --force --quiet "https://${CD_USER_TOKEN}:${CD_TOKEN}@${CD_REF}" master:gh-pages
 branches:   
   only:
     - master # 触发持续集成的分支 
@@ -33,3 +33,4 @@ env:  
   global:    
     - GH_REF: github.com/cindy1024/Blog.git # 就是你github上存放静态博客最终文件的仓库地址末尾加上.git
     - CD_REF: git@e.coding.net:cindy1024/blog_backup/blog_backup.git
+    - CD_USER_TOKEN: abYAgVDqDm
