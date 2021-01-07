@@ -24,14 +24,14 @@ mathjax: false
 
 ## A paper
 
-- a structure for **planning** your research in progress
-- not an archival device
+- A structure for **planning** your research in progress
+- Not an archival device
 
 ## Write and rewrite plans
 
-- beginning: plan
-- end: outline
-- continuous effort
+- Beginning: plan
+- End: outline
+- Continuous effort
     - to  **understand, analyze, summarize, and reformulate hypotheses** on paper
 
 # Outlines
@@ -114,3 +114,5 @@ mathjax: false
 
 # Reference
 [1] G. M. Whitesides, “Whitesides’ Group: Writing a Paper,” Adv. Mater., vol. 16, no. 15, pp. 1375–1377, Aug. 2004, doi: 10.1002/adma.200400767.
+
+
