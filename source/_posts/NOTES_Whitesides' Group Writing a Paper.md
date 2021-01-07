@@ -1,8 +1,10 @@
 ---
-title: 【笔记】 Whitesides' Group: Writing a Paper
+title: 【笔记】 Whitesides' Group | Writing a Paper
 copyright: false
 date: 2021-01-06 22:33:34
-tags: 论文写作 
+tags: 
+    - 论文写作 
+    - 笔记
 categories: 笔记
 mathjax: false
 ---
