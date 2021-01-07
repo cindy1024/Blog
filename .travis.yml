@@ -3,7 +3,10 @@ node_js:
   - stable
 cache:   
   directories:   
-    - node_modules # 要缓存的文件夹 
+    - node_modules # 要缓存的文件夹
+     
+before_install:
+  - npm install -g hexo-cli
 install:   
   - npm install
 install script:   
