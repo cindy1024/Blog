@@ -11,8 +11,8 @@ cache:  
 install:   
   - npm install
 script:   
-  - hexo clean   
-  - hexo g 
+  - sudo hexo clean   
+  - sudo hexo g 
 after_script:   # 最后执行的命令   
   - cd ./public   
   - git init   
