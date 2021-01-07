@@ -76,7 +76,7 @@ deploy:
   #repo: git@github.com:cindy1024/Blog.git
   repo: 
     github: git@github.com:cindy1024/Blog.git
-    coding: git@e.coding.net:cindy1024/blog_backup/blog_backup.git
+    #coding: git@e.coding.net:cindy1024/blog_backup/blog_backup.git
   branch: master
 
 server:
