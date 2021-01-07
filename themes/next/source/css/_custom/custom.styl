@@ -1,0 +1,217 @@
+// Custom styles.
+// 自定义的文章摘要图片样式
+img.img-topic {
+    width: 100%;
+}
+
+// 站点子标题
+.site-subtitle{
+    font-family: EB Garamond;
+    margin: 0px;
+    font-size: 18px;
+    letter-spacing: 1px;
+    padding-bottom: 3px;
+    font-weight: bold;
+    color: black;
+}
+
+// 页面背景色
+.container {
+    background-color: white;
+}
+
+//自定义home
+.post-home-content{
+    font-size: 1.2rem;
+    line-height: 1.8;
+    display: block;
+
+}
+
+.post-home-post{
+    padding: .5em 0em;    
+}
+
+.post-home-listing{
+    line-height: 1.5;
+    margin: 20px 0 0;
+    list-style-position: inside;
+
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+
+}
+
+.post-home-listing-item{
+    list-style-type: none;   
+    padding: .1em 0;
+
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.post-home-listing-item time{
+    color: #999999;
+    word-spacing: 1px;
+    border-radius: 4px;
+    font-family: Marmelad;
+}
+
+.post-home-listing-item a{
+    padding: .2em 1em;
+
+    color: $my-color;
+    text-decoration: none;
+
+    word-spacing: 1px;
+
+    font-family: Marmelad, "Hiragino Sans GB";
+
+    border-bottom: none;
+
+    &:hover{
+        color: black;
+        text-decoration-line: underline;
+    }
+
+}
+
+
+
+@media only screen and (max-width: 800px){
+    .post-home-content {
+        font-size: 83%!important; 
+    }
+    .post-home-listing{
+        -webkit-padding-start: 10px;
+    }
+}
+
+@media only screen and (max-width: 481px){
+    .post-home-content {
+        font-size: 62.5%!important; 
+    }
+    .post-home-listing{
+        -webkit-padding-start: 0px;
+    }
+    .menu .menu-item a{
+        font-size: 80%!important;
+    }
+}
+
+
+
+// 侧栏
+.sidebar-inner {
+    background: white;
+    opacity: 1;
+    box-shadow: none;
+    border-top: 1px solid #cccccc;
+}
+
+//头部栏
+.site-meta {
+    background-color: white; 
+}
+
+//头部栏文字
+.brand {
+    color: $my-color;
+    &:hover{
+        color: black;
+    }
+}
+
+//菜单栏文字
+.menu .menu-item {
+    a{
+        font-size: 1rem;
+        color: black;
+        &:hover{
+            color: $my-color;
+            background: white;
+        }
+    }
+}
+
+//菜单按钮
+.btn-bar {
+    background-color: $my-color;
+}
+
+
+//头部栏 meta下面边框
+.site-brand-wrapper{
+    border-bottom: 1px dashed #cccccc;
+}
+//菜单栏hover
+.menu .menu-item-active a {
+  @extend .menu .menu-item a:hover;
+  color: $my-color;
+
+  &:after {
+    background-color: $my-color;
+  }
+}
+
+//目录栏文字颜色
+.post-toc .nav .active > a {
+  color: $my-color;
+  border-bottom-color: $my-color;
+}
+
+//"文章目录"颜色
+.sidebar-nav .sidebar-nav-active{
+    color: $my-color;
+    border-bottom-color: $my-color;
+}
+
+//分页栏
+.pagination{
+    box-shadow: none;
+    //border-top: 1px solid #cccccc;
+    text-align: center;
+
+    color: #AAAAAA;
+    font-size: 16px;
+    line-height: 150%;
+
+    margin-top: 50%; //tmp
+}
+
+.pagination .prev, .pagination .next, .pagination .page-number{
+    border-top: none;
+    //padding: 0 4px;
+    margin: 2px;
+    text-decoration: none;
+    color: $my-color;
+}
+
+.pagination .page-number.current {
+    color: white;
+    background-color: #ff0000;
+}
+/**/
+.body{
+    word-spacing: 1px;
+}
+
+//footer
+.footer {
+    color: #CCC;
+}
+.copyright{
+    display: contents;
+}
+
+//顶部
+.headband{
+    height: 0px;
+}
+
+
