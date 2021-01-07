@@ -72,7 +72,7 @@ deploy:
   type: git
   repository:
     #coding: git@e.coding.net:cindy1024/blog_backup/blog_backup.git,master
-    github: git@github.com:cindy1024/Blog.git, master
+    github: git@github.com:cindy1024/Blog.git
   branch: master
 
 
