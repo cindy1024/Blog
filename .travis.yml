@@ -7,8 +7,9 @@ cache:  
     - node_modules # 要缓存的文件夹
 
 
-#before_install:
-#  - npm install -g hexo-cli
+before_install:
+  - export TZ='Asia/Shanghai' # 更改时区
+  #- npm install hexo-cli -g
 install:   
   - npm install
 script:   
