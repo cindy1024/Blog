@@ -5,7 +5,7 @@ cache:  
   directories:   
     - node_modules # 要缓存的文件夹 
 install:   
-  - npm 
+  - npm install
 install script:   
   - hexo clean   
   - hexo g 
