@@ -1,18 +1,25 @@
-sudo: false
-language: node_js
-node_js:
-  - 10 # use nodejs v10 LTS
-cache: npm
-branches:
+language: node_js 
+node_js: 
+  - stable
+cache:   
+  directories:   
+    - node_modules # 要缓存的文件夹 
+install:   
+  - npm 
+install script:   
+  - hexo clean   
+  - hexo g 
+after_script:   # 最后执行的命令   
+  - cd ./public   
+  - git init   
+  - git config user.name "cindy1024"  
+  - git config user.email "wxj_1024@163.com"   
+  - git add .    
+  - git commit -m "Travis CI Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')"   
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages 
+branches:   
   only:
-    - master # build master branch only
-script:
-  - hexo generate # generate static files
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GH_TOKEN
-  keep-history: true
-  on:
-    branch: master
-  local-dir: public
+    - master # 触发持续集成的分支 
+env:  
+  global:    
+    - GH_REF: github.com/cindy1024/Blog.git # 就是你github上存放静态博客最终文件的仓库地址末尾加上.git
