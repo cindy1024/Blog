@@ -73,11 +73,14 @@ deploy:
   #repository:
     #coding: git@e.coding.net:cindy1024/blog_backup/blog_backup.git,master
     #github: git@github.com:cindy1024/Blog.git, master
-  repo: git@github.com:cindy1024/Blog.git
+  #repo: git@github.com:cindy1024/Blog.git
+  repo: 
+    github: git@github.com:cindy1024/Blog.git
+    coding: git@e.coding.net:cindy1024/blog_backup/blog_backup.git
   branch: master
 
 server:
-  port: 5012
+  port: 5000
 
 
 #mathjax: 

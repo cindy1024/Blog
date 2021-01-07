@@ -9,7 +9,7 @@ cache:  
 before_install:
   - export TZ='Asia/Shanghai' # 更改时区
   #- npm install hexo-cli -g
-  - npm install hexo-server --save
+  #- npm install hexo-server --save
   - chmod +x ./node_modules/.bin/hexo
 
 install:   
