@@ -32,5 +32,5 @@ branches:  
 env:  
   global:    
     - GH_REF: github.com/cindy1024/Blog.git # 就是你github上存放静态博客最终文件的仓库地址末尾加上.git
-    - CD_REF: git@e.coding.net:cindy1024/blog_backup/blog_backup.git
+    - CD_REF: e.coding.net/cindy1024/blog_backup/blog_backup.git
     - CD_USER_TOKEN: abYAgVDqDm
