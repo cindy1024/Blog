@@ -76,10 +76,10 @@ deploy:
   repo: git@github.com:cindy1024/Blog.git
   branch: master
 
-#server:
-#  port: 5012
+server:
+  port: 5012
 
-  	
+
 #mathjax: 
 #  enable: true
 #  per_page: true
