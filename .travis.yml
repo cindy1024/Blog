@@ -5,6 +5,7 @@ cache:  
   directories:   
     - node_modules # 要缓存的文件夹
 
+
 before_install:
   - npm install -g hexo-cli
 install:   
