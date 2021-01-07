@@ -1,14 +1,15 @@
 language: node_js 
 node_js: 
-  - 6
+  - stable
 cache:   
+  apt: true
   directories:   
     - node_modules # 要缓存的文件夹
 
 
 before_install:
   - export TZ='Asia/Shanghai' # 更改时区
-  #- npm install hexo-cli -g
+  - npm install hexo-cli -g
   #- npm install hexo-server --save
   - chmod +x ./node_modules/.bin/hexo
 
