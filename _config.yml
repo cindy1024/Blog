@@ -70,10 +70,11 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository:
+  #repository:
     #coding: git@e.coding.net:cindy1024/blog_backup/blog_backup.git,master
-    github: git@github.com:cindy1024/Blog.git, master
-  #branch: master
+    #github: git@github.com:cindy1024/Blog.git, master
+  repo: git@github.com:cindy1024/Blog.git
+  branch: master
 
 
 
